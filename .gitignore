@@ -1,0 +1,18 @@
+# Node/PNPM
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+
+# Build outputs
+**/dist/
+**/out/
+remotion-preview.out
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Env
+.env
+.env.*

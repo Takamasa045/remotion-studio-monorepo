@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@studio/*": [
+        "packages/*/src",
+        "packages/@*/*/src"
+      ],
+      "@design/*": [
+        "packages/@design/*/src",
+        "packages/@design/*"
+      ]
+    }
+  }
+}
