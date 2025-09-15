@@ -158,6 +158,18 @@ async function main() {
 
   // Ensure public directory
   await ensureExists(path.join(destDir, 'public'));
+  // Also scaffold public/assets/{images,audio,video}
+  const assetsBase = path.join(destDir, 'public', 'assets');
+  const assetDirs = [
+    path.join(assetsBase, 'images'),
+    path.join(assetsBase, 'audio'),
+    path.join(assetsBase, 'video'),
+  ];
+  for (const d of assetDirs) {
+    await ensureExists(d);
+    // create a .gitkeep so empty folders are kept if user commits their app
+    try { await fsp.writeFile(path.join(d, '.gitkeep'), ''); } catch {}
+  }
 
   // Post-copy placeholder replacement across the project
   await replaceInFiles(destDir, {
