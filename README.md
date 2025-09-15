@@ -47,6 +47,23 @@ pnpm install
   - `pnpm sync:assets`（シンボリックリンク）
   - `pnpm sync:assets --mode copy`（コピー）
 
+### MCP（Model Context Protocol）連携（remotionmcp など）
+- ローカル/外部の MCP サーバを HTTP でアダプトして stdio で利用するランナーを同梱しています。
+- 既定値: `MCP_NAME=remotionmcp`, `MCP_URI=http://localhost:4000`
+
+```
+# そのまま（http://localhost:4000 を想定）
+pnpm mcp:remotion
+
+# 明示的に URI/NAME を指定
+MCP_URI=http://localhost:8787 pnpm mcp:remotion
+MCP_NAME=my-remotion MCP_URI=https://example.com/mcp pnpm mcp:remotion
+```
+
+- ~/.codex/config.toml を利用中の場合は、同等のエントリ（command/args/env）を追加してもOKです。
+- 本リポ内で MCP をパッケージ化したい場合は、`packages/@tools/remotion-mcp` として取り込み、
+  ルートの `scripts` から起動できるようにも構成可能です（要望あれば対応します）。
+
 ## 新規プロジェクト作成
 テンプレ（apps/_template）から対話で生成します。
 ```

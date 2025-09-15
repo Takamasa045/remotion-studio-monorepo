@@ -19,6 +19,7 @@
     "dev": "tsx scripts/dev.ts",
     "preview": "tsx scripts/preview.ts",
     "build:app": "tsx scripts/build-app.ts",
+    "mcp:remotion": "tsx scripts/mcp-remotion.ts",
     "dev:test": "pnpm -F @studio/test run dev"
   },
   "devDependencies": {
