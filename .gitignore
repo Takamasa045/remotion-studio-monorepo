@@ -16,3 +16,10 @@ remotion-preview.out
 # Env
 .env
 .env.*
+# caches
+**/.cache
+**/.parcel-cache
+**/.next
+build/
+# macOS junk
+__MACOSX
