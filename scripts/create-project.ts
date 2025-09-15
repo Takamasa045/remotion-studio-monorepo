@@ -45,6 +45,52 @@ async function copyDir(src: string, dest: string) {
   }
 }
 
+const TEXT_EXTS = new Set([
+  '.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx', '.json', '.jsonc',
+  '.md', '.mdx', '.txt', '.css', '.scss', '.html', '.yml', '.yaml'
+]);
+
+async function replaceInFiles(dir: string, replacements: Record<string, string>) {
+  const entries = await fsp.readdir(dir, {withFileTypes: true});
+  for (const ent of entries) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      if (ent.name === 'node_modules' || ent.name === '.git') continue;
+      await replaceInFiles(full, replacements);
+    } else {
+      const ext = path.extname(ent.name).toLowerCase();
+      if (!TEXT_EXTS.has(ext)) continue;
+      try {
+        let content = await fsp.readFile(full, 'utf8');
+        let changed = false;
+        for (const [from, to] of Object.entries(replacements)) {
+          const before = content;
+          content = content.split(from).join(to);
+          if (content !== before) changed = true;
+        }
+        if (changed) await fsp.writeFile(full, content, 'utf8');
+      } catch {
+        // ignore binary/unreadable files
+      }
+    }
+  }
+}
+
+async function renameIfNeeded(dir: string, oldStr: string, newStr: string) {
+  const entries = await fsp.readdir(dir, {withFileTypes: true});
+  for (const ent of entries) {
+    const oldPath = path.join(dir, ent.name);
+    let newPath = oldPath;
+    if (ent.name.includes(oldStr)) {
+      newPath = path.join(dir, ent.name.replaceAll(oldStr, newStr));
+      await fsp.rename(oldPath, newPath);
+    }
+    if (ent.isDirectory()) {
+      await renameIfNeeded(newPath, oldStr, newStr);
+    }
+  }
+}
+
 async function main() {
   const argName = process.argv[2];
   const defaultName = argName || 'new-app';
@@ -112,6 +158,16 @@ async function main() {
 
   // Ensure public directory
   await ensureExists(path.join(destDir, 'public'));
+
+  // Post-copy placeholder replacement across the project
+  await replaceInFiles(destDir, {
+    '__PACKAGE__': `@studio/${answers.name}`,
+    '__APP_NAME__': answers.name,
+  });
+
+  // Rename files/directories that might contain a concrete name from past templates
+  await renameIfNeeded(destDir, 'toki-mv', answers.name);
+  await renameIfNeeded(destDir, '__APP_NAME__', answers.name);
 
   console.log('Project created successfully.');
 

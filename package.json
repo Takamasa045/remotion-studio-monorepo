@@ -14,12 +14,19 @@
     "format": "prettier --write .",
     "create:project": "tsx scripts/create-project.ts",
     "render:all": "tsx scripts/render-all.ts",
-    "sync:assets": "tsx scripts/sync-assets.ts"
+    "sync:assets": "tsx scripts/sync-assets.ts",
+    "templateize": "node scripts/templateize.js",
+    "dev": "tsx scripts/dev.ts",
+    "preview": "tsx scripts/preview.ts",
+    "build:app": "tsx scripts/build-app.ts",
+    "dev:test": "pnpm -F @studio/test run dev"
   },
   "devDependencies": {
+    "@remotion/cli": "^4.0.347",
     "eslint": "^9.8.0",
     "prettier": "^3.3.3",
-    "typescript": "^5.6.3",
-    "tsx": "^4.16.2"
+    "remotion": "^4.0.347",
+    "tsx": "^4.16.2",
+    "typescript": "^5.6.3"
   }
 }

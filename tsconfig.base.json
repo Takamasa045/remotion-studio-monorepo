@@ -15,8 +15,11 @@
     "baseUrl": ".",
     "paths": {
       "@studio/*": [
-        "packages/*/src",
-        "packages/@*/*/src"
+        "packages/@core/*/src",
+        "packages/@animation/*/src",
+        "packages/@visual/*/src",
+        "packages/@audio/*/src",
+        "packages/@content/*/src"
       ],
       "@design/*": [
         "packages/@design/*/src",

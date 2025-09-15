@@ -1,17 +1,13 @@
 import path from "path";
 import fs from "fs";
 import type {WebpackConfiguration} from "remotion";
-import {Bundling} from "remotion";
+import {Config} from "@remotion/cli/config";
 
-const DIRNAME = (typeof __dirname !== 'undefined')
-  ? __dirname
-  : path.dirname(new URL(import.meta.url).pathname);
-
-Bundling.overrideWebpackConfig((currentConfiguration) => {
+Config.overrideWebpackConfig((currentConfiguration) => {
   const config: WebpackConfiguration = currentConfiguration as WebpackConfiguration;
   const alias = (config.resolve?.alias ?? {}) as Record<string, string>;
   try {
-    const packagesDir = path.resolve(DIRNAME, "../../packages");
+    const packagesDir = path.resolve(process.cwd(), "../../packages");
     const entries: Record<string, string> = {};
     const walk = (dir: string) => {
       for (const entry of fs.readdirSync(dir, {withFileTypes: true})) {
@@ -35,4 +31,3 @@ Bundling.overrideWebpackConfig((currentConfiguration) => {
   } catch {}
   return config;
 });
-
