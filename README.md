@@ -56,7 +56,7 @@ pnpm create:project
 - name: `my-app` → apps/my-app として作成 / package 名は `@studio/my-app`
 - width/height/fps/duration: 数値で指定
 
-生成後:
+生成後（デフォルトでは Composition ID は `Main` に設定されます。対話で変更可）:
 ```
 pnpm dev my-app
 ```

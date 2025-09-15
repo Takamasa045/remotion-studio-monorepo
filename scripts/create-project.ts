@@ -13,6 +13,7 @@ type Answers = {
   fps: number;
   duration: number;
   install: boolean;
+  compositionId: string;
 };
 
 const rl = readline.createInterface({input: process.stdin, output: process.stdout});
@@ -104,6 +105,8 @@ async function main() {
   const height = Number((await question('Height [1080]: ')) || '1080');
   const fps = Number((await question('FPS [30]: ')) || '30');
   const duration = Number((await question('Duration in frames [180]: ')) || '180');
+  const compIdInput = (await question('Composition ID [Main]: ')).trim();
+  const compositionId = (compIdInput === '' ? 'Main' : compIdInput);
   const installAns = (await question('Run pnpm install now? [Y/n]: ')).trim().toLowerCase();
   const answers: Answers = {
     name: normName,
@@ -112,6 +115,7 @@ async function main() {
     fps: Number.isFinite(fps) ? fps : 30,
     duration: Number.isFinite(duration) ? duration : 180,
     install: installAns === '' || installAns === 'y' || installAns === 'yes',
+    compositionId,
   };
 
   rl.close();
@@ -130,7 +134,7 @@ async function main() {
   const pkg = JSON.parse(await fsp.readFile(pkgPath, 'utf8'));
   pkg.name = `@studio/${answers.name}`;
   if (pkg.scripts?.build) {
-    pkg.scripts.build = `remotion render TemplateMain out/${answers.name}.mp4`;
+    pkg.scripts.build = `remotion render ${answers.compositionId} out/${answers.name}.mp4`;
   }
   await fsp.writeFile(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 
@@ -142,6 +146,8 @@ async function main() {
     .replace(/__HEIGHT__/g, String(answers.height))
     .replace(/__FPS__/g, String(answers.fps))
     .replace(/__DURATION__/g, String(answers.duration));
+  // Update first Composition id to the chosen compositionId (default: Main)
+  rootTsx = rootTsx.replace(/id\s*=\s*(["'])[A-Za-z0-9_-]+\1/, `id="${answers.compositionId}"`);
   await fsp.writeFile(rootTsxPath, rootTsx);
 
   // Replace placeholders in project.config.ts if present
