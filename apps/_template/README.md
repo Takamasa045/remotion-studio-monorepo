@@ -28,6 +28,14 @@ This is a minimal Remotion project template.
      - Audio: `/assets/audio/bgm.mp3`
      - Video: `/assets/video/clip.mp4`
 
+   - Lyrics (LRC) placement (recommended):
+     - Put `.lrc` next to the audio file with the same basename.
+     - Example: `/assets/audio/song.mp3` ↔ `/assets/audio/song.lrc`
+     - Fetch example:
+       ```ts
+       const text = await fetch('/assets/audio/song.lrc').then(r => r.text());
+       ```
+
    - To reuse shared design assets, link/copy from the monorepo package `@design/assets/assets`:
      - Symlink: `pnpm -C ../../ sync:assets`
      - Copy: `pnpm -C ../../ sync:assets --mode copy`

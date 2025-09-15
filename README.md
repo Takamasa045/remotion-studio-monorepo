@@ -73,6 +73,15 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
   - 音声: `/assets/audio/bgm.mp3`
   - 動画: `/assets/video/clip.mp4`
 
+- リリック（LRC）の配置ルール（標準）
+  - 音声ファイルと同じディレクトリ（assets/audio）に、同じベース名で `.lrc` を置きます。
+  - 例: `/assets/audio/song.mp3` に対して `/assets/audio/song.lrc`
+  - コード例（取得）:
+    ```ts
+    const lrc = await fetch('/assets/audio/song.lrc').then(r => r.text());
+    // 必要に応じて LRC をパースして [{timeMs, text}] などに変換
+    ```
+
 - 共通アセットを使う場合（推奨）
   - 共有パッケージ `@design/assets/assets` を各アプリの `public/assets` にリンク/コピーできます。
   - シンボリックリンク: `pnpm sync:assets`
