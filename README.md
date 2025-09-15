@@ -61,6 +61,27 @@ pnpm create:project
 pnpm dev my-app
 ```
 
+### アセット（動画・音楽・画像）の配置について
+- 各アプリは `public/` が公開ルートです。新規作成直後は空なので、必要に応じて以下のようなディレクトリを作成してください。
+
+```bash
+mkdir -p apps/<your-app>/public/assets/{images,audio,video}
+```
+
+- 使い方の例
+  - 画像: `/assets/images/logo.png`
+  - 音声: `/assets/audio/bgm.mp3`
+  - 動画: `/assets/video/clip.mp4`
+
+- 共通アセットを使う場合（推奨）
+  - 共有パッケージ `@design/assets/assets` を各アプリの `public/assets` にリンク/コピーできます。
+  - シンボリックリンク: `pnpm sync:assets`
+  - コピー: `pnpm sync:assets --mode copy`
+
+- バージョン管理の注意
+  - 大きなバイナリ（長尺の動画・音源）は Git LFS などの利用を推奨します。
+  - プロジェクト固有のストレージ/CDN を使う場合は、`public/` ではなく実行時に取得する運用でもOKです。
+
 ### テンプレのプレースホルダ
 - `__PACKAGE__` → `@studio/<slug>` に置換
 - `__APP_NAME__` → `<slug>` に置換
