@@ -1,121 +1,114 @@
 # Remotion Studio Monorepo
 
-Remotion + React で動画制作を行うためのモノレポです。共通ユーティリティ、アニメーション、ビジュアル表現、テンプレート、デモを含みます。
+Remotion + React で動画制作を行うためのモノレポです。タイムライン、アニメーション、ビジュアル、テンプレート、スクリプト、CI を一式同梱し、素早く制作〜レンダリングまで回せます。
 
-## 主な特徴
+## 特徴
+- pnpm workspaces を用いた堅牢なモノレポ運用
+- 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
+- タイムライン（@studio/timing）、Anime.js ブリッジ、トランジション、R3F、Pixi/Konva、WebGL エフェクト
+- 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
+- CI（lint / build / デモ自動レンダリング）
 
-- pnpm workspaces によるモノレポ管理
-- Remotion Studio/CLI 対応のデモとテンプレート
-- タイムライン管理、Anime.js ブリッジ、トランジション、Three.js/R3F、Pixi/Konva、WebGL シェーダ、各種ユーティリティ
-- まとめてレンダリング・アセット同期などのスクリプト
-- CI（lint/ビルド/デモの自動レンダリング）
-
-## ディレクトリ構成
-
+## 構成
 ```
 remotion-studio/
   apps/
-    _template/        # 新規プロジェクト用テンプレート
-    demo-showcase/    # サンプル/ショーケース
+    _template/        # 新規プロジェクト用テンプレ
+    demo-showcase/    # デモ・ショーケース
   packages/
-    @core/            # 基盤層（タイミング/フック/型）
-    @animation/       # アニメーション層（Animeブリッジ/トランジション/イージング）
-    @visual/          # ビジュアル層（Canvas2D/Three/Effects/Shaders）
+    @core/            # 基盤層（timing/hooks/types）
+    @animation/       # アニメーション層（anime-bridge/transitions/easings）
+    @visual/          # ビジュアル層（canvas2d/three/shaders/effects）
     @audio/           # オーディオ層（雛形）
     @content/         # コンテンツ層（雛形）
-    @design/          # デザインシステム（assets/tokens/themes）
+    @design/          # デザイン（assets/tokens/themes）
   scripts/            # CLI スクリプト群
   docs/               # ドキュメント
 ```
 
-## 必要要件
-
+## 要件
 - Node.js 18+（推奨: 20）
-- pnpm 8+
-- ffmpeg（レンダリング時に必要）
+- pnpm 8+（推奨: 最新）
+- ffmpeg（レンダリングに必要）
 
-## セットアップ & 起動
-
-1) 依存関係インストール
-
+## セットアップ
 ```
 pnpm install
 ```
 
-2) デモを Remotion Studio で起動
-
-```
-pnpm -F @studio/demo-showcase run dev
-```
-
-3) プレビューサーバー（任意）
-
-```
-pnpm -F @studio/demo-showcase run preview
-```
-
-4) デモを一括レンダリング
-
-```
-pnpm -F @studio/demo-showcase run build
-```
+## よく使うコマンド（ルート）
+- 任意アプリを起動（汎用ランナー）
+  - `pnpm dev <app>` 例: `pnpm dev demo-showcase`
+  - `pnpm preview <app>` 例: `pnpm preview test`
+  - `pnpm build:app <app>` 例: `pnpm build:app demo-showcase`
+- 一括レンダリング
+  - `pnpm render:all --parallel 4 --out out`
+- 共通アセット同期
+  - `pnpm sync:assets`（シンボリックリンク）
+  - `pnpm sync:assets --mode copy`（コピー）
 
 ## 新規プロジェクト作成
-
-テンプレート（apps/_template）から対話形式で生成します。
-
+テンプレ（apps/_template）から対話で生成します。
 ```
 pnpm create:project
 ```
+入力例:
+- name: `my-app` → apps/my-app として作成 / package 名は `@studio/my-app`
+- width/height/fps/duration: 数値で指定
 
-作成後:
-
+生成後:
 ```
-pnpm -F @studio/<your-app> run dev
-```
-
-## 便利スクリプト
-
-- 全アプリ/指定アプリの一括レンダリング（並列実行対応）
-
-```
-pnpm render:all --parallel 4 --out out
+pnpm dev my-app
 ```
 
-- 共通アセットを各アプリの public/assets へ同期
+### テンプレのプレースホルダ
+- `__PACKAGE__` → `@studio/<slug>` に置換
+- `__APP_NAME__` → `<slug>` に置換
+- （必要なら）`pnpm templateize` でテンプレ自体をプレースホルダ化
 
-```
-pnpm sync:assets              # シンボリックリンク
-pnpm sync:assets --mode copy  # コピー
-```
-
-## 主なパッケージ
-
+## パッケージ一覧（要点）
 - 基盤
-  - @studio/timing（タイムライン、進捗、frame<->ms）
-  - @studio/core-hooks（共通フック: useAnimationFrame/useMediaTiming）
-  - @studio/core-types（共通型）
+  - `@studio/timing`: タイムライン/進捗/フレーム換算
+  - `@studio/core-hooks`: `useAnimationFrame`, `useMediaTiming`
+  - `@studio/core-types`: 共有型
 - アニメーション
-  - @studio/anime-bridge（Anime.js ブリッジと useAnime）
-  - @studio/transitions（Fade/CrossFade/Slide/Wipe など）
-  - @studio/easings（イージング関数, cubicBezier, Anime 変換）
+  - `@studio/anime-bridge`: Anime.js ブリッジ + `useAnime`
+  - `@studio/transitions`: `FadeIn/FadeOut/CrossFade/SlideIn/Wipe`
+  - `@studio/easings`: cubicBezier/各種 Easing + Anime 変換
 - ビジュアル
-  - @studio/visual-canvas2d（Pixi/Konva 連携）
-  - @studio/visual-three（R3F ラッパー、カメラ/ライト）
-  - @studio/visual-shaders（ShaderCanvas コンポーネント）
-  - @studio/visual-effects（グリッチ/ブラー/グロー 等）
-- デザイン/アセット
-  - @design/assets（共通アセット。sync-assets で各アプリへリンク/コピー）
+  - `@studio/visual-canvas2d`: Pixi/Konva 連携
+  - `@studio/visual-three`: R3F ラッパー、カメラ/ライトプリセット
+  - `@studio/visual-shaders`: ShaderCanvas（WebGL）
+  - `@studio/visual-effects`: グリッチ/ブラー/グロー等（シェーダベース）
+- デザイン
+  - `@design/assets`: 共通アセット（`pnpm sync:assets`で各アプリへ）
 
-注: 一部は peerDependencies（react/three/@react-three/fiber/animejs/pixi.js/konva 等）です。使用するアプリ側の package.json に追加してください。
+注: 一部は peerDependencies（react/three/@react-three/fiber/animejs/pixi.js/konva 等）です。必要なアプリで追加してください。
+
+## Remotion 設定
+- 新API: `@remotion/cli/config` の `Config.overrideWebpackConfig`
+- remotion.config.ts はモノレポの `packages/**/src` を再帰走査して `{pkg.name → src}` の alias を自動生成
+
+## TypeScript 設定
+- ルート `tsconfig.base.json` の `paths`:
+  - `@studio/*` → `packages/@core/*/src`, `@animation/*/src`, `@visual/*/src`, `@audio/*/src`, `@content/*/src`
+  - `@design/*` → `packages/@design/*/src`, `packages/@design/*`
+- 各アプリの `tsconfig.json` も同様の設定
 
 ## CI
+- `.github/workflows/ci.yml`：依存→ビルド→Prettier チェック
+- `.github/workflows/render-demo.yml`：ffmpeg セットアップ→デモ自動レンダリング→成果物アップロード
 
-.github/workflows/
-- ci.yml: 依存インストール → パッケージビルド → Prettier チェック
-- render-demo.yml: デモの自動レンダリング（ffmpeg をセットアップし artifacts を保存）
+## トラブルシューティング
+- remotion コマンドが見つからない
+  - 該当アプリに `@remotion/cli` を追加: `pnpm -F @studio/<app> add -D @remotion/cli`
+  - もしくはワークスペースに追加: `pnpm -w add -D @remotion/cli`
+- `import.meta` の警告
+  - remotion.config.ts は `process.cwd()` ベースで解決する実装にしているため、警告は出ない構成です（古い設定が残っていれば差し替え）
+- tsconfig の `must have at most one "*"` 警告
+  - 1エントリ1つの `*` になるよう `paths` を分割済み
+- エントリポイントが見つからない
+  - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレ/デモは同梱済み。
 
 ## ライセンス
-
-TBD（必要に応じて追記してください）
-
+TBD（必要に応じて追記）
