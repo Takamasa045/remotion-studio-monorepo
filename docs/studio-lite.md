@@ -36,6 +36,12 @@ macOS で Chrome for Testing をローカルにダウンロード済みの場合
 - 既存のパッケージを利用したくなった場合は、必要なものだけを追加でインストールしてください。
 - それでも設定を最小に保ちたい場合は `remotion.config.ts` での alias 追加は不要です（TypeScript で `paths` を空オブジェクトにしているため、`@studio/*` のエイリアスは解決されません）。
 - 共有アセットが必要になったら `pnpm sync:assets` を使うか、`public/` に直接配置してください。
+- 主要な Remotion API の抜粋は [`docs/remotion-reference.md`](./remotion-reference.md) にまとめています。
 
 ## どれぐらい軽くなるのか
 既存の demo-showcase を `pnpm dev demo-showcase` で起動すると、10 以上のワークスペースパッケージのビルド監視が始まります。Studio Lite ではこれらが一切走らないため、ウォッチの立ち上がりが数秒で完了し、依存インストールも最小限です。
+
+## Remotion Docs MCP と連携する
+- `pnpm mcp:remotion` を実行すると、Remotion 公式ドキュメントにアクセスする MCP サーバが起動します。
+- Claude Code を利用する場合は、README のサンプル設定を `.claude/config.json` に追記し、`remotiondocs` MCP を有効化してください。
+- チャット内から `remotiondocs.search` などを呼び出すことで、必要な記事をすぐに参照できます。

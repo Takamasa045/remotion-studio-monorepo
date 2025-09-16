@@ -6,6 +6,7 @@ Remotion + React で動画制作を行うためのモノレポです。タイム
 - pnpm workspaces を用いた堅牢なモノレポ運用
 - 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
 - 軽量スタータ（apps/studio-lite / 複数の Chromium 系ブラウザに対応）
+- オフライン参照用リファレンス（docs/remotion-reference.md）
 - タイムライン（@studio/timing）、Anime.js ブリッジ、トランジション、R3F、Pixi/Konva、WebGL エフェクト
 - 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
 - CI（lint / build / デモ自動レンダリング）
@@ -45,6 +46,7 @@ pnpm install
   - `pnpm preview <app>` 例: `pnpm preview test`
   - `pnpm build:app <app>` 例: `pnpm build:app demo-showcase`
   - Studio Lite を CLI からレンダリング: `pnpm render:lite -- --browser brave`
+  - Remotion docs を MCP 経由で検索: `pnpm mcp:remotion`
 - 一括レンダリング
   - `pnpm render:all --parallel 4 --out out`
 - 共通アセット同期
@@ -67,6 +69,21 @@ MCP_NAME=my-remotion MCP_URI=https://example.com/mcp pnpm mcp:remotion
 - ~/.codex/config.toml を利用中の場合は、同等のエントリ（command/args/env）を追加してもOKです。
 - 本リポ内で MCP をパッケージ化したい場合は、`packages/@tools/remotion-mcp` として取り込み、
   ルートの `scripts` から起動できるようにも構成可能です（要望あれば対応します）。
+
+#### Claude Code で remotiondocs を使う場合
+- `.claude/config.json` などに次のエントリを追加してください。
+
+```json
+{
+  "name": "remotiondocs",
+  "command": "pnpm",
+  "args": ["mcp:remotion"],
+  "workingDirectory": "/Users/takamasa/remotion-studio"
+}
+```
+
+- `Claude > MCP` から `remotiondocs` を有効化すると、Remotion の公式ドキュメント検索をチャット内から利用できます。
+- 主要 API やトラブルシューティングの抜粋は `docs/remotion-reference.md` にまとめています。オフラインでも参照可能です。
 
 ## 新規プロジェクト作成
 テンプレ（apps/_template）から対話で生成します。
@@ -121,6 +138,7 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
   - `pnpm build:app studio-lite`
   - CLI レンダリング: `pnpm render:lite -- --browser <chrome|chromium|brave|edge|vivaldi|arc>`
 - フォルダごとコピーすれば単体リポジトリとしても利用できます。
+- Remotion API/トラブルシューティングの抜粋: [`docs/remotion-reference.md`](./docs/remotion-reference.md)
 
 ### テンプレのプレースホルダ
 - `__PACKAGE__` → `@studio/<slug>` に置換
