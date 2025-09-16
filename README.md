@@ -5,6 +5,7 @@ Remotion + React で動画制作を行うためのモノレポです。タイム
 ## 特徴
 - pnpm workspaces を用いた堅牢なモノレポ運用
 - 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
+- 軽量スタータ（apps/studio-lite / 複数の Chromium 系ブラウザに対応）
 - タイムライン（@studio/timing）、Anime.js ブリッジ、トランジション、R3F、Pixi/Konva、WebGL エフェクト
 - 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
 - CI（lint / build / デモ自動レンダリング）
@@ -13,6 +14,7 @@ Remotion + React で動画制作を行うためのモノレポです。タイム
 ```
 remotion-studio/
   apps/
+    studio-lite/      # 依存の少ないシンプルなスタータ
     _template/        # 新規プロジェクト用テンプレ
     demo-showcase/    # デモ・ショーケース
   packages/
@@ -39,8 +41,10 @@ pnpm install
 ## よく使うコマンド（ルート）
 - 任意アプリを起動（汎用ランナー）
   - `pnpm dev <app>` 例: `pnpm dev demo-showcase`
+  - 軽量スタータのみを使う: `pnpm dev studio-lite`
   - `pnpm preview <app>` 例: `pnpm preview test`
   - `pnpm build:app <app>` 例: `pnpm build:app demo-showcase`
+  - Studio Lite を CLI からレンダリング: `pnpm render:lite -- --browser brave`
 - 一括レンダリング
   - `pnpm render:all --parallel 4 --out out`
 - 共通アセット同期
@@ -107,6 +111,16 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
 - バージョン管理の注意
   - 大きなバイナリ（長尺の動画・音源）は Git LFS などの利用を推奨します。
   - プロジェクト固有のストレージ/CDN を使う場合は、`public/` ではなく実行時に取得する運用でもOKです。
+
+### もっと軽量に始めたい場合（Studio Lite）
+- `apps/studio-lite` は React + Remotion のみに依存する極小構成です。
+- 追加パッケージのビルドや別パッケージ監視が発生しないので、初回セットアップと起動が速いです。
+- コマンド例
+  - `pnpm dev studio-lite`
+  - `pnpm preview studio-lite`
+  - `pnpm build:app studio-lite`
+  - CLI レンダリング: `pnpm render:lite -- --browser <chrome|chromium|brave|edge|vivaldi|arc>`
+- フォルダごとコピーすれば単体リポジトリとしても利用できます。
 
 ### テンプレのプレースホルダ
 - `__PACKAGE__` → `@studio/<slug>` に置換

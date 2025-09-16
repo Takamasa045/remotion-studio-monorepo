@@ -43,22 +43,6 @@ importers:
         specifier: ^4.0.0
         version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  apps/another-app:
-    dependencies:
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      remotion:
-        specifier: ^4.0.0
-        version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.0
-        version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
   apps/demo-showcase:
     dependencies:
       '@react-three/fiber':
@@ -90,7 +74,7 @@ importers:
         specifier: ^4.0.347
         version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  apps/test:
+  apps/studio-lite:
     dependencies:
       react:
         specifier: ^18.2.0
@@ -103,33 +87,8 @@ importers:
         version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@remotion/cli':
-        specifier: ^4.0.347
+        specifier: ^4.0.0
         version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
-  apps/toki-mv:
-    dependencies:
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
-    devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.347
-        version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@types/react':
-        specifier: ^19.1.13
-        version: 19.1.13
-      '@types/react-dom':
-        specifier: ^19.1.9
-        version: 19.1.9(@types/react@19.1.13)
-      remotion:
-        specifier: ^4.0.347
-        version: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      typescript:
-        specifier: ^5.9.2
-        version: 5.9.2
 
   packages/@animation/anime-bridge:
     dependencies:
@@ -975,11 +934,6 @@ packages:
 
   '@types/node@24.4.0':
     resolution: {integrity: sha512-gUuVEAK4/u6F9wRLznPUU4WGUacSEBDPoC2TrBkw3GAnOLHBL45QdfHOXp1kJ4ypBGLxTOB+t7NJLpKoC3gznQ==}
-
-  '@types/react-dom@19.1.9':
-    resolution: {integrity: sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ==}
-    peerDependencies:
-      '@types/react': ^19.0.0
 
   '@types/react-reconciler@0.26.7':
     resolution: {integrity: sha512-mBDYl8x+oyPX/VBb3E638N0B7xG+SPk/EAMcVPeexqus/5aTpTphQi0curhhshOqRrc9t6OPoJfEUkbymse/lQ==}
@@ -2462,14 +2416,14 @@ snapshots:
       '@remotion/media-parser': 4.0.347
       '@remotion/studio': 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/studio-shared': 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      css-loader: 5.2.7(webpack@5.96.1)
+      css-loader: 5.2.7(webpack@5.96.1(esbuild@0.25.0))
       esbuild: 0.25.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-refresh: 0.9.0
       remotion: 4.0.347(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       source-map: 0.7.3
-      style-loader: 4.0.0(webpack@5.96.1)
+      style-loader: 4.0.0(webpack@5.96.1(esbuild@0.25.0))
       webpack: 5.96.1(esbuild@0.25.0)
     transitivePeerDependencies:
       - '@swc/core'
@@ -2656,10 +2610,6 @@ snapshots:
   '@types/node@24.4.0':
     dependencies:
       undici-types: 7.11.0
-
-  '@types/react-dom@19.1.9(@types/react@19.1.13)':
-    dependencies:
-      '@types/react': 19.1.13
 
   '@types/react-reconciler@0.26.7':
     dependencies:
@@ -2872,7 +2822,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@5.2.7(webpack@5.96.1):
+  css-loader@5.2.7(webpack@5.96.1(esbuild@0.25.0)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.6)
       loader-utils: 2.0.4
@@ -3587,7 +3537,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-loader@4.0.0(webpack@5.96.1):
+  style-loader@4.0.0(webpack@5.96.1(esbuild@0.25.0)):
     dependencies:
       webpack: 5.96.1(esbuild@0.25.0)
 

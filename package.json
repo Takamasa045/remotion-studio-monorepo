@@ -19,6 +19,10 @@
     "dev": "tsx scripts/dev.ts",
     "preview": "tsx scripts/preview.ts",
     "build:app": "tsx scripts/build-app.ts",
+    "dev:lite": "pnpm dev studio-lite",
+    "preview:lite": "pnpm preview studio-lite",
+    "build:lite": "pnpm build:app studio-lite",
+    "render:lite": "tsx scripts/render-lite.ts",
     "mcp:remotion": "tsx scripts/mcp-remotion.ts",
     "dev:test": "pnpm -F @studio/test run dev"
   },
