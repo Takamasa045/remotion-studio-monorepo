@@ -40,6 +40,8 @@ pnpm install
 ```
 
 ## よく使うコマンド（ルート）
+- Remotion Hub で全プロジェクトをまとめて起動
+  - `pnpm --filter @studio/remotion-hub dev`
 - 任意アプリを起動（汎用ランナー）
   - `pnpm dev <app>` 例: `pnpm dev demo-showcase`
   - 軽量スタータのみを使う: `pnpm dev studio-lite`
@@ -100,6 +102,7 @@ pnpm dev my-app
 ```
 
 ### アセット（動画・音楽・画像）の配置について
+
 - 各アプリは `public/` が公開ルートです。新規作成直後は空なので、必要に応じて以下のようなディレクトリを作成してください。
 
 ```bash
@@ -128,6 +131,13 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
 - バージョン管理の注意
   - 大きなバイナリ（長尺の動画・音源）は Git LFS などの利用を推奨します。
   - プロジェクト固有のストレージ/CDN を使う場合は、`public/` ではなく実行時に取得する運用でもOKです。
+
+### ライブラリの追加・共有
+- pnpm ワークスペースなので、利用したいアプリだけに依存を入れる場合は `pnpm add <pkg> --filter @studio/<app>` を使います。例: Remotion Hub でのみ利用 → `pnpm add @remotion/lottie --filter @studio/remotion-hub`。
+- 全アプリ共通で使う場合は `pnpm add <pkg> -w` でルートに追加するか、必要なアプリそれぞれに同じ依存を追加します。型定義パッケージ（`@types/*`）も同様です。
+- ブラウザ実行が必要なライブラリかを確認してください。Node.js 専用モジュールは Remotion のバンドラーでエラーになります。
+- 独自の共通コードは `packages/` 配下にパッケージを作成し、`"name": "@studio/<pkg>"` として公開すると、どのアプリからも `@studio/<pkg>` で参照できます。
+- 依存を追加したら `pnpm install` を実行し、`pnpm-lock.yaml` の更新を含めてコミットするようにしてください。
 
 ### もっと軽量に始めたい場合（Studio Lite）
 - `apps/studio-lite` は React + Remotion のみに依存する極小構成です。
