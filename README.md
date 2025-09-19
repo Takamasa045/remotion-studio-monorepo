@@ -139,6 +139,23 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
 - 独自の共通コードは `packages/` 配下にパッケージを作成し、`"name": "@studio/<pkg>"` として公開すると、どのアプリからも `@studio/<pkg>` で参照できます。
 - 依存を追加したら `pnpm install` を実行し、`pnpm-lock.yaml` の更新を含めてコミットするようにしてください。
 
+### どんな人が入れるといいのか（使用例）
+このモノレポは全部入りではなく、必要な機能だけを組み合わせる設計になっています。
+用途に応じて、以下のようにライブラリ（peerDependencies）を追加してください。
+
+- 🎞 シンプルに動画を作りたい
+  - `apps/studio-lite` だけで OK（React + Remotion のみで完結）
+- ✨ フェードやイージングを付けたい
+  - `@studio/transitions`, `@studio/easings` を import すれば追加インストール不要
+- 🌀 滑らかなトゥイーンや細かい動きを付けたい
+  - `pnpm add animejs --filter @studio/<app>` を実行し、`@studio/anime-bridge` を使用
+- 🎨 2D グラフィックス（Pixi / Konva）を使いたい
+  - `pnpm add pixi.js konva --filter @studio/<app>` の上で `@studio/visual-canvas2d` を利用
+- 🏔 3D 表現（Three.js + React Three Fiber）を使いたい
+  - `pnpm add three @react-three/fiber --filter @studio/<app>` の上で `@studio/visual-three` を利用
+- 🎵 音声や歌詞同期（LRC）を扱いたい
+  - `@studio/timing`, `@studio/core-hooks` を利用（追加インストール不要）。歌詞ファイルは `assets/audio/` に配置
+
 ### もっと軽量に始めたい場合（Studio Lite）
 - `apps/studio-lite` は React + Remotion のみに依存する極小構成です。
 - 追加パッケージのビルドや別パッケージ監視が発生しないので、初回セットアップと起動が速いです。
