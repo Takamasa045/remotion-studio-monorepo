@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Remotionとは？</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 726px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 726px;
+            position: relative;
+            
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        .title {
+            color: #333333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #555555;
+            font-size: 1.5rem;
+        }
+        .content-text {
+            color: #333333;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #FF6600;
+            font-weight: 600;
+        }
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            color: #FF6600;
+            font-size: 1.8rem;
+        }
+        .vs-container {
+            position: relative;
+        }
+        .vs-circle {
+            background: linear-gradient(135deg, #FF6600, #98FF98);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide gradient-bg p-10" style=" overflow: hidden;">
+<!-- Header -->
+<header class="mb-6">
+<h1 class="title">Remotionとは？</h1>
+<div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-400 mt-2"></div>
+</header>
+<!-- Main Content -->
+<div class="grid grid-cols-12 gap-6 min-h-[550px]">
+<!-- Definition Column -->
+<div class="col-span-12 mb-4">
+<p class="content-text">
+<span class="highlight">Remotion</span>は、Web開発で広く使われるReactの技術を応用し、プログラミングコードで動画を作成できる画期的なツールです。
+                </p>
+</div>
+<!-- Features Column -->
+<div class="col-span-6">
+<h2 class="subtitle mb-4">Remotionの特徴</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="feature-card p-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-code feature-icon mr-3"></i>
+<h3 class="font-semibold">コードで動画を設計</h3>
+</div>
+<p class="text-sm text-gray-600">タイムラインベースではなく、Reactコンポーネントを用いて動画の「設計図」を作成</p>
+</div>
+<div class="feature-card p-4">
+<div class="flex items-center mb-2">
+<i class="fab fa-react feature-icon mr-3"></i>
+<h3 class="font-semibold">Web技術の活用</h3>
+</div>
+<p class="text-sm text-gray-600">React、JavaScript、TypeScript、HTML、CSSなどの既存のWeb開発スキルを活用</p>
+</div>
+<div class="feature-card p-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-eye feature-icon mr-3"></i>
+<h3 class="font-semibold">リアルタイムプレビュー</h3>
+</div>
+<p class="text-sm text-gray-600">ブラウザ上でコードの変更をリアルタイムにプレビューできる機能</p>
+</div>
+<div class="feature-card p-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-recycle feature-icon mr-3"></i>
+<h3 class="font-semibold">再利用性と拡張性</h3>
+</div>
+<p class="text-sm text-gray-600">動画要素を独立したコンポーネントとして作成し、再利用可能</p>
+</div>
+</div>
+</div>
+<!-- Comparison Column -->
+<div class="col-span-6">
+<h2 class="subtitle mb-4">従来の動画編集ソフトと比べて</h2>
+<div class="vs-container flex justify-between items-center bg-white p-6 rounded-lg relative min-h-[350px]">
+<div class="w-[45%] text-center">
+<i class="fas fa-sliders-h text-4xl text-gray-500 mb-4"></i>
+<h3 class="font-bold text-lg mb-2">従来の動画編集ソフト</h3>
+<ul class="text-left text-sm">
+<li class="mb-2"><i class="fas fa-minus text-gray-400 mr-2"></i>タイムラインベースの視覚的操作</li>
+<li class="mb-2"><i class="fas fa-minus text-gray-400 mr-2"></i>動画の見た目を直接編集</li>
+<li class="mb-2"><i class="fas fa-minus text-gray-400 mr-2"></i>再利用性に制限</li>
+<li><i class="fas fa-minus text-gray-400 mr-2"></i>動画制作に特化したインターフェース</li>
+</ul>
+</div>
+<div class="vs-circle">VS</div>
+<div class="w-[45%] text-center">
+<i class="fas fa-code text-4xl text-orange-500 mb-4"></i>
+<h3 class="font-bold text-lg mb-2">Remotion</h3>
+<ul class="text-left text-sm">
+<li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>プログラミングコードによる定義</li>
+<li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>Web開発スキルの活用</li>
+<li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>高い再利用性と拡張性</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>動画制作の自動化と効率化</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-4 right-10 text-gray-500 text-sm" style="visibility: hidden;">
+<p>2 / 14</p>
+</footer>
+</div>
+
+</body></html>

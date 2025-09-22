@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "remotion studio src/index.tsx",
+    "dev": "remotion studio",
     "preview": "remotion preview",
     "build": "mkdir -p out && remotion render AnimeTitle out/anime-title.mp4 && remotion render PixiBubbles out/pixi-bubbles.mp4 && remotion render ThreeLogo out/three-logo.mp4 && remotion render AudioBars out/audio-bars.mp4 && remotion render ChartReveal out/chart-reveal.mp4"
   },
@@ -15,10 +15,15 @@
     "pixi.js": "^7.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.158.0"
+    "three": "^0.158.0",
+    "remotion": "^4.0.350",
+    "@studio/anime-bridge": "workspace:*",
+    "@studio/transitions": "workspace:*",
+    "@studio/timing": "workspace:*",
+    "@studio/visual-canvas2d": "workspace:*",
+    "@studio/visual-three": "workspace:*"
   },
   "devDependencies": {
-    "@remotion/cli": "^4.0.350",
-    "remotion": "^4.0.350"
+    "@remotion/cli": "^4.0.350"
   }
 }

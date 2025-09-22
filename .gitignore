@@ -23,3 +23,6 @@ remotion-preview.out
 build/
 # macOS junk
 __MACOSX
+
+# Temp
+.tmp/

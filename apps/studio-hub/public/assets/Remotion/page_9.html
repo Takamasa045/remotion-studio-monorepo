@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>テンプレート作成</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 865px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 865px;
+            position: relative;
+            
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        .title {
+            color: #333333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #555555;
+            font-size: 1.5rem;
+        }
+        .content-text {
+            color: #333333;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #FF6600;
+            font-weight: 600;
+        }
+        .component-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .component-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .code-block {
+            font-family: monospace;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+            padding: 12px;
+            color: #333333;
+            border-left: 3px solid #FF6600;
+        }
+        .step-circle {
+            background: linear-gradient(135deg, #FF6600, #FF9900);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide gradient-bg p-10" style=" overflow: hidden;">
+<!-- Header -->
+<header class="mb-6">
+<h1 class="title">テンプレート作成</h1>
+<div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-400 mt-2"></div>
+</header>
+<!-- Main Content -->
+<div class="grid grid-cols-12 gap-6 min-h-[550px]">
+<!-- Introduction Column -->
+<div class="col-span-12 mb-4">
+<p class="content-text">
+                    Remotionでは、動画の要素を<span class="highlight">Reactコンポーネント</span>としてテンプレート化することで、再利用可能な動画パーツを作成できます。これにより、動画制作を効率化し、一貫性を保ちます。
+                </p>
+</div>
+<!-- Template Creation Steps -->
+<div class="col-span-6">
+<h2 class="subtitle mb-4">テンプレート作成の手順</h2>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="step-circle mr-4 flex-shrink-0">1</div>
+<div>
+<h3 class="font-semibold text-lg">動画の構成要素を定義</h3>
+<p class="text-gray-600">タイトル、画像、アニメーション、サウンドなど、動画に必要なすべての要素をリストアップします。</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="step-circle mr-4 flex-shrink-0">2</div>
+<div>
+<h3 class="font-semibold text-lg">共通要素をコンポーネントにまとめる</h3>
+<p class="text-gray-600">色、スタイル、動きなどの共通点を持つ要素をまとめて、独立したコンポーネントを作成します。</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="step-circle mr-4 flex-shrink-0">3</div>
+<div>
+<h3 class="font-semibold text-lg">propsを用いてパラメータ化</h3>
+<p class="text-gray-600">コンポーネントにpropsを追加し、外部から値を渡せるようにします。これにより、同じテンプレートで異なる内容を表示できます。</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="step-circle mr-4 flex-shrink-0">4</div>
+<div>
+<h3 class="font-semibold text-lg">状態管理の追加（必要に応じて）</h3>
+<p class="text-gray-600">アニメーションやインタラクションを制御するために、ReactのuseStateやuseAnimationStateなどのフックを追加します。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Example Components -->
+<div class="col-span-6">
+<h2 class="subtitle mb-4">テンプレートの例</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="component-card p-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-heading text-orange-500 mr-3 text-xl"></i>
+<h3 class="font-semibold">タイトルコンポーネント</h3>
+</div>
+<p class="text-sm text-gray-600 mb-2">テキスト、スタイル、アニメーションをpropsで受け取るタイトル表示用コンポーネント</p>
+<div class="code-block text-xs">
+                            function Title({ text, style, animation }) {&#39;\n&#39;}
+                              return (&lt;div&gt;&lt;h1&gt;{text}&lt;/h1&gt;&lt;/div&gt;);{&#39;\n&#39;}
+                            }
+                        </div>
+</div>
+<div class="component-card p-4">
+<div class="flex items-center mb-2">
+<i class="fas fa-image text-orange-500 mr-3 text-xl"></i>
+<h3 class="font-semibold">画像スライドコンポーネント</h3>
+</div>
+<p class="text-sm text-gray-600 mb-2">画像URL、配置、アニメーションをpropsで受け取る画像表示用コンポーネント</p>
+<div class="code-block text-xs">
+                            function ImageSlide({ src, position, animation }) {&#39;\n&#39;}
+                              return (&lt;div&gt;&lt;img src={src} /&gt;&lt;/div&gt;);{&#39;\n&#39;}
+                            }
+                        </div>
+</div>
+<div class="mt-4">
+<h3 class="font-semibold mb-2">テンプレートの効果</h3>
+<div class="bg-white p-4 rounded-lg shadow-sm">
+<ul class="space-y-2">
+<li class="flex items-center">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>動画の要素を独立したコンポーネントとして再利用可能</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>異なる動画で同一のテンプレートを活用</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>パラメータを変更してバリエーションを容易に生成</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>動画の大量生産や自動化の強力な基盤を構築</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-4 right-10 text-gray-500 text-sm" style="visibility: hidden;">
+<p>9 / 14</p>
+</footer>
+</div>
+</div>
+</body></html>

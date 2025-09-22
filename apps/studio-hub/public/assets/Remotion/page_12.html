@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>活用例：パーソナライズド動画</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        .title {
+            color: #333333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #555555;
+            font-size: 1.5rem;
+        }
+        .content-text {
+            color: #333333;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #FF6600;
+            font-weight: 600;
+        }
+        .example-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .example-header {
+            border-radius: 12px 12px 0 0;
+            height: 80px;
+        }
+        .spotify-header {
+            background: linear-gradient(45deg, #191414, #121212);
+        }
+        .github-header {
+            background: linear-gradient(45deg, #000000, #000000);
+        }
+        .marathon-header {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide gradient-bg p-10" style=" overflow: hidden;">
+<!-- Header -->
+<header class="mb-6">
+<h1 class="title">活用例：パーソナライズド動画</h1>
+<div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-400 mt-2"></div>
+</header>
+<!-- Introduction -->
+<div class="mb-8">
+<p class="content-text">
+                Remotionは、<span class="highlight">ユーザー個別のデータ</span>を活用して、一人ひとりに最適化された動画を自動生成するのに非常に強力です。
+            </p>
+</div>
+<!-- Examples Grid -->
+<div class="grid grid-cols-3 gap-8 min-h-[450px]">
+<!-- Spotify Wrapped Example -->
+<div class="example-card flex flex-col">
+<div class="example-header spotify-header flex items-center justify-center">
+<div class="text-center">
+<i class="fab fa-spotify text-4xl text-white mb-2"></i>
+<h3 class="text-white font-bold">Spotify Wrapped</h3>
+</div>
+</div>
+<div class="p-5 flex-grow">
+<p class="text-gray-700 mb-4">
+                        年間を通して聴いた音楽のデータに基づき、ユーザーごとにカスタマイズされた振り返り動画を生成します。
+                    </p>
+<div class="mt-4">
+<h4 class="font-semibold text-gray-800 mb-2">実現方法：</h4>
+<ul class="text-sm text-gray-600">
+<li class="mb-2 flex items-start">
+<i class="fas fa-chart-line text-orange-500 mr-2 mt-1"></i>
+<span>音楽ストリーミングデータの分析</span>
+</li>
+<li class="mb-2 flex items-start">
+<i class="fas fa-palette text-orange-500 mr-2 mt-1"></i>
+<span>ユーザーの音楽好みに基づく視覚的表現</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-sync-alt text-orange-500 mr-2 mt-1"></i>
+<span>自動で更新され、最新の傾向を反映</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- GitHub Unwrapped Example -->
+<div class="example-card flex flex-col">
+<div class="example-header github-header flex items-center justify-center">
+<div class="text-center">
+<i class="fab fa-github text-4xl text-white mb-2"></i>
+<h3 class="text-white font-bold">GitHub Unwrapped</h3>
+</div>
+</div>
+<div class="p-5 flex-grow">
+<p class="text-gray-700 mb-4">
+                        ユーザーのプログラミング活動履歴を視覚化し、個別の活動報告動画を作成します。
+                    </p>
+<div class="mt-4">
+<h4 class="font-semibold text-gray-800 mb-2">実現方法：</h4>
+<ul class="text-sm text-gray-600">
+<li class="mb-2 flex items-start">
+<i class="fas fa-code text-orange-500 mr-2 mt-1"></i>
+<span>GitHubのAPIからユーザー活動を取得</span>
+</li>
+<li class="mb-2 flex items-start">
+<i class="fas fa-chart-bar text-orange-500 mr-2 mt-1"></i>
+<span>コミット履歴や言語使用状況の視覚化</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-user-circle text-orange-500 mr-2 mt-1"></i>
+<span>個人の開発スタイルを反映したデザイン</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Marathon Example -->
+<div class="example-card flex flex-col">
+<div class="example-header marathon-header flex items-center justify-center">
+<div class="text-center">
+<i class="fas fa-running text-4xl text-white mb-2"></i>
+<h3 class="text-white font-bold">マラソン完走証明動画</h3>
+</div>
+</div>
+<div class="p-5 flex-grow">
+<p class="text-gray-700 mb-4">
+                        参加者の走行データや写真などを組み合わせて、記念となる動画を自動生成します。
+                    </p>
+<div class="mt-4">
+<h4 class="font-semibold text-gray-800 mb-2">実現方法：</h4>
+<ul class="text-sm text-gray-600">
+<li class="mb-2 flex items-start">
+<i class="fas fa-map-marker-alt text-orange-500 mr-2 mt-1"></i>
+<span>GPSデータによる走行ルートの視覚化</span>
+</li>
+<li class="mb-2 flex items-start">
+<i class="fas fa-camera text-orange-500 mr-2 mt-1"></i>
+<span>ユーザーが撮影した写真の自動編集</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-trophy text-orange-500 mr-2 mt-1"></i>
+<span>個人の成績と記念すべき瞬間の強調</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-4 right-10 text-gray-500 text-sm" style="visibility: hidden;">
+<p>12 / 14</p>
+</footer>
+</div>
+
+</body></html>

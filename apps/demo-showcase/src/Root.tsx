@@ -1,5 +1,5 @@
 import React from "react";
-import {Composition, registerRoot} from "remotion";
+import {Composition} from "remotion";
 import {AnimeTitle} from "./compositions/AnimeTitle";
 import {PixiBubbles} from "./compositions/PixiBubbles";
 import {ThreeLogo} from "./compositions/ThreeLogo";
@@ -10,7 +10,7 @@ const WIDTH = 1920;
 const HEIGHT = 1080;
 const FPS = 30;
 
-const Root: React.FC = () => {
+export const Root: React.FC = () => {
   return (
     <>
       <Composition
@@ -56,6 +56,3 @@ const Root: React.FC = () => {
     </>
   );
 };
-
-registerRoot(Root);
-

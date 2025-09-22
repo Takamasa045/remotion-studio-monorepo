@@ -19,19 +19,22 @@
     "dev": "tsx scripts/dev.ts",
     "preview": "tsx scripts/preview.ts",
     "build:app": "tsx scripts/build-app.ts",
-    "dev:lite": "pnpm dev studio-lite",
-    "preview:lite": "pnpm preview studio-lite",
-    "build:lite": "pnpm build:app studio-lite",
-    "render:lite": "tsx scripts/render-lite.ts",
+    
     "mcp:remotion": "tsx scripts/mcp-remotion.ts",
     "dev:test": "pnpm -F @studio/test run dev"
   },
   "devDependencies": {
     "@remotion/cli": "^4.0.350",
+    "@types/node": "^24.5.2",
     "eslint": "^9.8.0",
+    "fast-glob": "^3.3.3",
     "prettier": "^3.3.3",
     "remotion": "^4.0.350",
     "tsx": "^4.16.2",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@remotion/zod-types": "4.0.350",
+    "zod": "^4.1.11"
   }
 }

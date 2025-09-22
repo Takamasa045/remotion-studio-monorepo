@@ -1,0 +1,30 @@
+{
+  "name": "@visual/textfx",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./textfx.css": "./textfx.css"
+  },
+  "files": [
+    "dist",
+    "textfx.css",
+    "README.md"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && cp textfx.css dist/textfx.css",
+    "prepare": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.24",
+    "typescript": "^5.5.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
+}

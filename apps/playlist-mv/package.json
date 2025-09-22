@@ -1,0 +1,22 @@
+{
+  "name": "@studio/playlist-mv",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "preview": "remotion preview",
+    "build": "remotion render Main out/playlist-mv.mp4"
+  },
+  "dependencies": {
+    "@remotion/zod-types": "4.0.350",
+    "@visual/textfx": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.350",
+    "zod": "3.22.3"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.350"
+  }
+}

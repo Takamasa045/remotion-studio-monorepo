@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>活用例：SNSコンテンツと解説動画</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 726px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 726px;
+            position: relative;
+            
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        .title {
+            color: #333333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #555555;
+            font-size: 1.5rem;
+        }
+        .content-text {
+            color: #333333;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .highlight-orange {
+            color: #FF6600;
+            font-weight: 600;
+        }
+        .highlight-green {
+            color: #98FF98;
+            font-weight: 600;
+        }
+        .example-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .sns-icon {
+            color: #FF6600;
+            font-size: 2rem;
+        }
+        .video-icon {
+            color: #98FF98;
+            font-size: 2rem;
+        }
+        .workflow-step {
+            position: relative;
+            padding-left: 20px;
+        }
+        .workflow-step:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #FF6600;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide gradient-bg p-10" style=" overflow: hidden;">
+<!-- Header -->
+<header class="mb-6">
+<h1 class="title">活用例：SNSコンテンツと解説動画</h1>
+<div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-400 mt-2"></div>
+</header>
+<!-- Main Content -->
+<div class="grid grid-cols-12 gap-6 min-h-[550px]">
+<!-- SNS Content Section -->
+<div class="col-span-6">
+<div class="flex items-center mb-4">
+<i class="fas fa-hashtag sns-icon mr-3"></i>
+<h2 class="subtitle">SNSコンテンツの量産</h2>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="example-card p-5">
+<div class="flex items-center mb-3">
+<i class="fab fa-youtube text-red-500 text-2xl mr-3"></i>
+<h3 class="font-semibold">YouTube ShortsやTikTok向け動画</h3>
+</div>
+<p class="text-sm text-gray-600 mb-3">
+                            テンプレートとデータを組み合わせることで、トレンドに合わせたショート動画を効率的に量産できます。
+                        </p>
+<div class="flex items-center text-sm text-gray-500">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>自動化ワークフローで大量のSNSコンテンツを生成</span>
+</div>
+</div>
+<div class="example-card p-5">
+<div class="flex items-center mb-3">
+<i class="fas fa-closed-captioning text-blue-500 text-2xl mr-3"></i>
+<h3 class="font-semibold">自動字幕生成動画</h3>
+</div>
+<p class="text-sm text-gray-600 mb-3">
+                            音声認識技術と連携し、動画の音声から自動でテキストを抽出し、単語単位でアニメーションする字幕付き動画を生成できます。
+                        </p>
+<div class="flex items-center text-sm text-gray-500">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>音声と字幕の同期を自動で調整</span>
+</div>
+</div>
+<div class="example-card p-5">
+<div class="flex items-center mb-3">
+<i class="fab fa-instagram text-purple-500 text-2xl mr-3"></i>
+<h3 class="font-semibold">インスタグラム投稿の自動動画化</h3>
+</div>
+<p class="text-sm text-gray-600">
+                            投稿内容を基に、自動で動画コンテンツを作成するボットなどの開発も可能です。
+                        </p>
+</div>
+</div>
+</div>
+<!-- Explanatory Videos Section -->
+<div class="col-span-6">
+<div class="flex items-center mb-4">
+<i class="fas fa-video video-icon mr-3"></i>
+<h2 class="subtitle">解説動画の自動生成</h2>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="example-card p-5">
+<div class="flex items-center mb-3">
+<i class="fas fa-microphone-alt text-orange-500 text-2xl mr-3"></i>
+<h3 class="font-semibold">ゆっくり解説動画</h3>
+</div>
+<p class="text-sm text-gray-600 mb-3">
+                            テキスト原稿と音声合成ソフトウェア（Aquestalkなど）を組み合わせ、キャラクターの口パクや字幕表示、背景などを自動で制御し、解説動画全体を生成するワークフローが構築可能です。
+                        </p>
+<div class="flex flex-col text-sm text-gray-500">
+<div class="workflow-step mb-2">テキストを入力またはインポート</div>
+<div class="workflow-step mb-2">音声合成で音声を生成</div>
+<div class="workflow-step mb-2">口パクと字幕を自動で同期</div>
+<div class="workflow-step">背景とキャラクターを自動で切り替え</div>
+</div>
+</div>
+<div class="example-card p-5">
+<div class="flex items-center mb-3">
+<i class="fas fa-chalkboard-teacher text-blue-500 text-2xl mr-3"></i>
+<h3 class="font-semibold">教育コンテンツ</h3>
+</div>
+<p class="text-sm text-gray-600 mb-3">
+                            プログラミング講座やオンライン授業の教材など、テキストや図を基にした解説動画を効率的に作成できます。
+                        </p>
+<div class="flex items-center text-sm text-gray-500">
+<i class="fas fa-check-circle text-green-500 mr-2"></i>
+<span>複雑な概念を視覚的に分かりやすく表現</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-4 right-10 text-gray-500 text-sm" style="visibility: hidden;">
+<p>13 / 14</p>
+</footer>
+</div>
+
+</body></html>

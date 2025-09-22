@@ -1,5 +1,5 @@
 import React from "react";
-import {Composition, registerRoot, AbsoluteFill, useCurrentFrame, useVideoConfig} from "remotion";
+import {Composition, AbsoluteFill, useCurrentFrame, useVideoConfig} from "remotion";
 
 // These placeholders are replaced by scripts/create-project.ts when generating a new project
 const WIDTH = __WIDTH__;
@@ -20,15 +20,11 @@ const TemplateMain: React.FC = () => {
   );
 };
 
-const Root: React.FC = () => {
+export const Root: React.FC = () => {
   return (
     <>
       <Composition id="TemplateMain" component={TemplateMain} width={WIDTH} height={HEIGHT} fps={FPS} durationInFrames={DURATION} />
     </>
   );
 };
-
-registerRoot(Root);
-
 export {TemplateMain};
-

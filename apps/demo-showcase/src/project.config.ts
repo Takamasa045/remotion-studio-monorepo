@@ -14,3 +14,6 @@ export const projectConfig: ProjectConfig = {
   durationInFrames: 300,
 };
 
+// remotionMCP 標準の別名を用意
+export const videoConfig = projectConfig;
+export const defaultProps = {} as const;

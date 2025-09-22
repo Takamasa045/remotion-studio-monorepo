@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>はじめてのRemotionプロジェクト</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        .title {
+            color: #333333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #555555;
+            font-size: 1.5rem;
+        }
+        .content-text {
+            color: #333333;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .step-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .step-header {
+            border-radius: 12px 12px 0 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        .step-1-header {
+            background: linear-gradient(90deg, #FF6600, #FF9900);
+        }
+        .step-2-header {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+        }
+        .step-3-header {
+            background: linear-gradient(90deg, #2196F3, #03A9F4);
+        }
+        .arrow-connector {
+            position: relative;
+            height: 2px;
+            background-color: #CCCCCC;
+            margin: 0 15px;
+        }
+        .arrow-connector:after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 8px solid #CCCCCC;
+        }
+        .code-snippet {
+            font-family: monospace;
+            background-color: #F9F9F9;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 0.9rem;
+            color: #333333;
+            border-left: 3px solid #FF6600;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide gradient-bg p-10" style=" overflow: hidden;">
+<!-- Header -->
+<header class="mb-6">
+<h1 class="title">はじめてのRemotionプロジェクト</h1>
+<div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-400 mt-2"></div>
+</header>
+<!-- Introduction -->
+<div class="mb-8">
+<p class="content-text">
+                Remotionでは、以下の3つの基本ステップで動画制作を始めることができます。
+                ここでは初心者向けに分かりやすく解説します。
+            </p>
+</div>
+<!-- Steps Container -->
+<div class="flex justify-between items-start min-h-[450px]">
+<!-- Step 1 -->
+<div class="w-[30%]">
+<div class="step-card flex flex-col">
+<div class="step-1-header flex items-center">
+<i class="fas fa-folder-open mr-3"></i>
+<span>プロジェクト作成</span>
+</div>
+<div class="p-5 flex-grow">
+<div class="mb-4">
+<p class="font-semibold text-lg mb-2">必要な手順</p>
+<ul class="list-disc pl-5 space-y-2">
+<li>ターミナルを開き、任意のディレクトリで<span class="code-snippet">npm init video</span>コマンドを実行</li>
+<li>プロジェクト名の入力が求められるので、任意の名前を入力</li>
+<li>利用したいテンプレートを選択（初心者には「Blank」テンプレートが推奨）</li>
+</ul>
+</div>
+<div class="mt-4">
+<p class="text-sm text-gray-600">
+<i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                これらの手順で、Remotionプロジェクトの基本構造が自動的に生成され、すぐに開発を開始できる状態になります。
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Arrow 1 -->
+<div class="arrow-connector self-center flex-grow max-w-[50px]"></div>
+<!-- Step 2 -->
+<div class="w-[30%]">
+<div class="step-card flex flex-col">
+<div class="step-2-header flex items-center">
+<i class="fas fa-code mr-3"></i>
+<span>開発とプレビュー</span>
+</div>
+<div class="p-5 flex-grow">
+<div class="mb-4">
+<p class="font-semibold text-lg mb-2">必要な手順</p>
+<ul class="list-disc pl-5 space-y-2">
+<li>プロジェクトディレクトリに移動し、<span class="code-snippet">npm start</span>コマンドを実行</li>
+<li>開発サーバーが起動し、ブラウザで動画のプレビュー画面が表示</li>
+<li>コードを変更すると、ブラウザ上のプレビューに即座に反映</li>
+</ul>
+</div>
+<div class="mt-4">
+<p class="text-sm text-gray-600">
+<i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                このリアルタイムプレビュー機能により、試行錯誤しながら効率的に動画を制作できます。
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Arrow 2 -->
+<div class="arrow-connector self-center flex-grow max-w-[50px]"></div>
+<!-- Step 3 -->
+<div class="w-[30%]">
+<div class="step-card flex flex-col">
+<div class="step-3-header flex items-center">
+<i class="fas fa-file-export mr-3"></i>
+<span>動画の書き出し</span>
+</div>
+<div class="p-5 flex-grow">
+<div class="mb-4">
+<p class="font-semibold text-lg mb-2">必要な手順</p>
+<ul class="list-disc pl-5 space-y-2">
+<li>プレビュー画面の右下にある「Render」ボタンをクリックするか、ターミナルで<span class="code-snippet">npx remotion render [Composition名] [出力ファイル名]</span>コマンドを実行</li>
+<li>Remotionが動画をレンダリングし、MP4、WebM、GIFなどの指定された形式で出力</li>
+<li>レンダリングには数秒から数分かかる場合があります</li>
+</ul>
+</div>
+<div class="mt-4">
+<p class="text-sm text-gray-600">
+<i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                                クラウドレンダリング（AWS Lambdaなど）を利用することで、レンダリング時間を大幅に短縮できます。
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-4 right-10 text-gray-500 text-sm" style="visibility: hidden;">
+<p>4 / 14</p>
+</footer>
+</div>
+
+</body></html>

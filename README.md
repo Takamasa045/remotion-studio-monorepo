@@ -5,7 +5,7 @@ Remotion + React で動画制作を行うためのモノレポです。タイム
 ## 特徴
 - pnpm workspaces を用いた堅牢なモノレポ運用
 - 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
-- 軽量スタータ（apps/studio-lite / 複数の Chromium 系ブラウザに対応）
+ 
 - オフライン参照用リファレンス（docs/remotion-reference.md）
 - タイムライン（@studio/timing）、Anime.js ブリッジ、トランジション、R3F、Pixi/Konva、WebGL エフェクト
 - 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
@@ -15,9 +15,14 @@ Remotion + React で動画制作を行うためのモノレポです。タイム
 ```
 remotion-studio/
   apps/
-    studio-lite/      # 依存の少ないシンプルなスタータ
+    studio-hub/       # 自動収集Hub（一覧プレビュー用）
     _template/        # 新規プロジェクト用テンプレ
     demo-showcase/    # デモ・ショーケース
+    remotion-rev/     # デッキ/ページ系のサンプル
+    playlist-mv/      # プレイリストMV
+    hello/            # 最小例（zod schema）
+    CSSanimation/     # CSS ベースのアニメ
+    Remotionvideo/    # 各種シーンの例
   packages/
     @core/            # 基盤層（timing/hooks/types）
     @animation/       # アニメーション層（anime-bridge/transitions/easings）
@@ -40,15 +45,14 @@ pnpm install
 ```
 
 ## よく使うコマンド（ルート）
-- Remotion Hub で全プロジェクトをまとめて起動
-  - `pnpm --filter @studio/remotion-hub dev`
-- 任意アプリを起動（汎用ランナー）
+- 任意アプリを起動（通常はこちら）
   - `pnpm dev <app>` 例: `pnpm dev demo-showcase`
-  - 軽量スタータのみを使う: `pnpm dev studio-lite`
   - `pnpm preview <app>` 例: `pnpm preview test`
   - `pnpm build:app <app>` 例: `pnpm build:app demo-showcase`
-  - Studio Lite を CLI からレンダリング: `pnpm render:lite -- --browser brave`
   - Remotion docs を MCP 経由で検索: `pnpm mcp:remotion`
+- Studio Hub で複数プロジェクトをまとめて閲覧（必要なときだけ）
+  - `pnpm --filter @studio/studio-hub dev`
+  - 用途: 一覧ブラウズ／横断検証（通常開発は各アプリで実施）
 - 一括レンダリング
   - `pnpm render:all --parallel 4 --out out`
 - 共通アセット同期
@@ -132,19 +136,57 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
   - 大きなバイナリ（長尺の動画・音源）は Git LFS などの利用を推奨します。
   - プロジェクト固有のストレージ/CDN を使う場合は、`public/` ではなく実行時に取得する運用でもOKです。
 
-### ライブラリの追加・共有
-- pnpm ワークスペースなので、利用したいアプリだけに依存を入れる場合は `pnpm add <pkg> --filter @studio/<app>` を使います。例: Remotion Hub でのみ利用 → `pnpm add @remotion/lottie --filter @studio/remotion-hub`。
-- 全アプリ共通で使う場合は `pnpm add <pkg> -w` でルートに追加するか、必要なアプリそれぞれに同じ依存を追加します。型定義パッケージ（`@types/*`）も同様です。
-- ブラウザ実行が必要なライブラリかを確認してください。Node.js 専用モジュールは Remotion のバンドラーでエラーになります。
-- 独自の共通コードは `packages/` 配下にパッケージを作成し、`"name": "@studio/<pkg>"` として公開すると、どのアプリからも `@studio/<pkg>` で参照できます。
-- 依存を追加したら `pnpm install` を実行し、`pnpm-lock.yaml` の更新を含めてコミットするようにしてください。
+### ライブラリの考え方（なぜ必要？ 起動時？ 追加方法？）
+
+なぜ必要か（用途別の代表例）
+- アニメーション強化: `animejs`（`@studio/anime-bridge`）/ `@studio/transitions` / `@studio/easings`
+- 2D/Canvas 系: `pixi.js`, `konva`（`@studio/visual-canvas2d`）
+- 3D/R3F 系: `three`, `@react-three/fiber`（`@studio/visual-three`）
+- 入力検証/スキーマ: `zod`（`@remotion/zod-types` 連携）
+- メディアユーティリティ: `@remotion/media-utils` など
+
+起動時（dev/preview/render）の挙動
+- Remotion CLI（Webpack）がエントリ `src/index.ts` を基点に依存をバンドルします。
+  - 解決順は「アプリ内の `src` → モノレポ内のエイリアス `@studio/*`, `@design/*` → `node_modules`」。
+  - 各アプリの `remotion.config.ts` は共有ヘルパ `monorepoAliasesOverride` を使い、`packages/**/src` を自動で `alias` 登録します。
+  - そのためモノレポ内パッケージは「ビルド済み `dist` に依存せず、`src` を直接コンパイル」できます。
+- `pnpm install` 時に一部パッケージは `prepare` スクリプトで `dist` を生成しますが、開発時のバンドルは `src` を参照します（ホットリロードが高速）。
+- `public/` 以下のアセットは `staticFile()` で解決され、開発サーバ経由で配信されます。
+
+追加方法（ケース別）
+- あるアプリだけで使う
+  - `pnpm add <pkg> --filter @studio/<app>`
+  - 例: `pnpm add animejs --filter @studio/demo-showcase`
+  - 型定義は開発依存で: `pnpm add -D @types/<pkg> --filter @studio/<app>`
+- モノレポ全体で使う
+  - ルートに追加: `pnpm add <pkg> -w`（開発依存なら `-Dw`）
+  - ただし「本当に全アプリが必要か」を検討してください（不要なビルド時間や依存肥大化を防ぐ）
+- モノレポ内パッケージを新規作成して共有する
+  - 例: `packages/@visual/my-lib` を作成し、`package.json` に `"name": "@studio/my-lib"` を設定
+  - 以降、任意のアプリから `import {X} from '@studio/my-lib'` で利用可能（alias/tsconfig が既に対応済み）
+
+PeerDependencies（注意）
+- 内製パッケージは、外部ライブラリを `peerDependencies` にしている場合があります。
+  - 例: `@studio/visual-three` を使うアプリでは、`pnpm add three @react-three/fiber --filter @studio/<app>` が必要
+  - 例: `@studio/visual-canvas2d` を使うアプリでは、`pnpm add pixi.js konva --filter @studio/<app>` が必要
+
+ブラウザ実行の前提（落とし穴）
+- Composition 側のコードはブラウザで実行されるため、`fs`, `path`, `net` などの Node.js 専用モジュールは使えません。
+  - こういった処理は Node スクリプト（`scripts/` 配下）やビルド時前処理、あるいは `remotion.config.ts` 側へ分離してください。
+- ライブラリが CSS を伴う場合は、明示的に import が必要なことがあります。
+  - 例: `import 'your-lib/dist/styles.css'`
+
+導入後の基本手順
+- 依存追加後は `pnpm install` を実行し、ロックファイルを更新してコミットします。
+- 開発: `pnpm dev <app>` / プレビュー: `pnpm preview <app>` / レンダ: `pnpm build:app <app>`
+- ビルド時にエラーが出る場合は、`remotion.config.ts` で `overrideWebpackConfig` による調整（`alias` 追加、ブラウザ向けビルドを指すようにする等）を検討してください。
 
 ### どんな人が入れるといいのか（使用例）
 このモノレポは全部入りではなく、必要な機能だけを組み合わせる設計になっています。
 用途に応じて、以下のようにライブラリ（peerDependencies）を追加してください。
 
 - 🎞 シンプルに動画を作りたい
-  - `apps/studio-lite` だけで OK（React + Remotion のみで完結）
+  - `apps/hello` か `apps/_template` でOK（最小構成）
 - ✨ フェードやイージングを付けたい
   - `@studio/transitions`, `@studio/easings` を import すれば追加インストール不要
 - 🌀 滑らかなトゥイーンや細かい動きを付けたい
@@ -156,16 +198,7 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
 - 🎵 音声や歌詞同期（LRC）を扱いたい
   - `@studio/timing`, `@studio/core-hooks` を利用（追加インストール不要）。歌詞ファイルは `assets/audio/` に配置
 
-### もっと軽量に始めたい場合（Studio Lite）
-- `apps/studio-lite` は React + Remotion のみに依存する極小構成です。
-- 追加パッケージのビルドや別パッケージ監視が発生しないので、初回セットアップと起動が速いです。
-- コマンド例
-  - `pnpm dev studio-lite`
-  - `pnpm preview studio-lite`
-  - `pnpm build:app studio-lite`
-  - CLI レンダリング: `pnpm render:lite -- --browser <chrome|chromium|brave|edge|vivaldi|arc>`
-- フォルダごとコピーすれば単体リポジトリとしても利用できます。
-- Remotion API/トラブルシューティングの抜粋: [`docs/remotion-reference.md`](./docs/remotion-reference.md)
+<!-- Studio Lite セクションは削除（混乱防止のため） -->
 
 ### テンプレのプレースホルダ
 - `__PACKAGE__` → `@studio/<slug>` に置換
@@ -193,7 +226,17 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
 
 ## Remotion 設定
 - 新API: `@remotion/cli/config` の `Config.overrideWebpackConfig`
-- remotion.config.ts はモノレポの `packages/**/src` を再帰走査して `{pkg.name → src}` の alias を自動生成
+- 共有ヘルパ: `packages/@core/config/remotion-shared.ts`
+  - 各アプリの `remotion.config.ts` で `Config.overrideWebpackConfig(monorepoAliasesOverride)` を使用
+  - モノレポの `packages/**/src` を再帰走査して `{pkg.name → src}` の alias を自動生成
+ 
+
+## 規約（Entry / Root / 命名）
+- Entry point: 各アプリの `src/index.ts`（または `.tsx`）がエントリで、必ず `registerRoot(Root)` を呼びます。
+- Root file: `src/Root.tsx` で `<Composition />` を宣言します（`registerRoot` はここでは呼ばない）。
+- CLI: `remotion studio` / `remotion render` はエントリ自動検出を利用し、`--entry-point` を原則省略します。
+- 命名: Root ファイルは `Root.tsx`（PascalCase）で統一します。
+- 任意: 厳密化したい場合は `remotion.config.ts` に `Config.setEntryPoint('src/index.ts')` を明示可能です。
 
 ## TypeScript 設定
 - ルート `tsconfig.base.json` の `paths`:

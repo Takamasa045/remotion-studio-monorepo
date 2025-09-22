@@ -1,0 +1,123 @@
+/* ==========================================================
+ * THEME & RESET
+ * ======================================================== */
+:root{
+  --bg:#0b0e12; --panel:#0f141b; --ink:#e9f1ff; --dim:#9db3ff;
+  --acc:#66fff1; --hot:#ff5ab3; --warm:#ffc86b; --lime:#aaff6c;
+  /* Align accents to KAMUI palette */
+  --paper:#f4eee2; --ink-wafu:#0a0a0a; --accent-wafu:#2C6B56; --gold:#B28033;
+  --bpm:100; /* Controls beat-driven effects (slider) */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; color:var(--ink); background:
+  radial-gradient(1200px 600px at 70% -10%, #131a23 0%, var(--bg) 45%, #06080b 100%);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+header{padding:22px clamp(14px,3vw,28px); display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+h1{font-size:clamp(22px,3.6vw,34px); margin:0; letter-spacing:.02em}
+.meta{opacity:.7; font-size:12px}
+.controls{margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+button, .chip, input[type="range"]{
+  background:#141a22; color:var(--ink); border:1px solid #263041; padding:10px 12px; border-radius:12px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02), 0 6px 20px rgba(0,0,0,.35); font-weight:600
+}
+button{cursor:pointer; transition:transform .12s ease, background .2s ease, border-color .2s ease}
+button:hover{transform:translateY(-1px); background:#1a2330; border-color:#344862}
+.range-wrap{display:flex; gap:10px; align-items:center; padding:6px 10px; border-radius:12px}
+.range-wrap label{font-size:12px; opacity:.8}
+input[type="range"]{accent-color:var(--acc)}
+
+main{padding:0 clamp(14px,2.4vw,26px) 64px}
+.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:18px}
+.demo{position:relative; border:1px solid #1c2330; border-radius:18px; overflow:hidden; min-height:220px;
+      background:linear-gradient(180deg,#11161b 0%, #0b0f15 100%); display:flex; align-items:center; justify-content:center; padding:16px}
+.demo h3{position:absolute; inset:auto 0 0 0; margin:0; padding:10px 14px; font-size:12px; letter-spacing:.08em; opacity:.75;
+  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.35));}
+.txt{font-weight:900; line-height:1; letter-spacing:.02em; text-align:center}
+.sm .txt{font-size: clamp(26px, 4.6vw, 46px)}
+.md .txt{font-size: clamp(32px, 6.6vw, 72px)}
+.lg .txt{font-size: clamp(40px, 9.2vw, 110px)}
+
+/* ==========================================================
+ * ADVANCED FX SET
+ * ======================================================== */
+
+/* 01: Slice Reveal (dir=alternate) */
+.fx-slice{ --n:8; }
+.fx-slice .layer{position:absolute; inset:0; display:grid; place-items:center;}
+.fx-slice .slice{position:absolute; inset:0; clip-path:polygon(0% var(--y1), 100% var(--y1), 100% var(--y2), 0% var(--y2));
+                 opacity:0; transform:translateY(var(--offset));}
+.fx-slice[data-play] .slice{animation:sliceIn .9s cubic-bezier(.2,.8,.2,1) calc(var(--i)*.06s) forwards}
+@keyframes sliceIn{ to{ opacity:1; transform:translateY(0) } }
+
+/* 02: Liquid Ink Fill (SVG filter + mask) */
+.fx-ink{ position:relative }
+.fx-ink .txt{ color:transparent; -webkit-text-stroke:2px var(--dim) }
+.fx-ink[data-play] .txt{ -webkit-text-stroke-color:transparent; background:linear-gradient(90deg,var(--hot),var(--acc),var(--warm));
+  background-size:200% 100%; background-clip:text; -webkit-background-clip:text; animation:inkSweep calc(60s/var(--bpm)) linear infinite }
+@keyframes inkSweep{ to{ background-position:200% 0 } }
+.fx-ink .ink-noise{ position:absolute; inset:0; filter:url(#ink-wobble); mix-blend-mode:overlay; opacity:.25 }
+
+/* 03: Kinetic Words (per-word skew/rotate w/ antiphase) */
+.fx-kinetic .w{display:inline-block; padding:0 .18em}
+.fx-kinetic[data-play] .w:nth-child(odd){animation:k1 calc(120s/var(--bpm)) ease-in-out infinite alternate}
+.fx-kinetic[data-play] .w:nth-child(even){animation:k2 calc(120s/var(--bpm)) ease-in-out infinite alternate}
+@keyframes k1{ 50%{transform:translateY(-6%) rotate(-3deg) skewX(-6deg)} }
+@keyframes k2{ 50%{transform:translateY(6%) rotate(3deg) skewX(6deg)} }
+
+/* 04: Motion Trail (ghost layers following) */
+.fx-trail{ position:relative }
+.fx-trail .ghost{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:.0; filter:blur(2px)}
+.fx-trail .ghost.g1{color:#ff3b6e} .fx-trail .ghost.g2{color:#49f3ff} .fx-trail .ghost.g3{color:#fff176}
+
+/* 05: 3D Tilt + Shadow Parallax (BPM pulsing) */
+.fx-tilt{ --dx:0; --dy:0; perspective:1000px }
+.fx-tilt .txt{ transform:rotateX(calc(var(--dy)*.08deg)) rotateY(calc(var(--dx)*-.08deg));
+               text-shadow: calc(var(--dx)*.7px) calc(var(--dy)*.7px) 0 rgba(0,0,0,.5), 0 0 28px rgba(102,255,241,.25) }
+.fx-tilt[data-play] .txt{ animation:pulse calc(60s/var(--bpm)) cubic-bezier(.2,.8,.2,1) infinite }
+@keyframes pulse{ 40%{transform:scale(1.04)} 80%{transform:scale(1)} }
+
+/* 06: Displace Glare (SVG displacement + gradient mask) */
+.fx-glare{ position:relative }
+.fx-glare .txt{ position:relative; color:transparent; -webkit-text-stroke:2px var(--ink);
+  background:linear-gradient(90deg,#fff, #b2ccff, #fff); background-size:300% 100%; background-clip:text;-webkit-background-clip:text }
+.fx-glare[data-play] .txt{ animation:glare 2.6s ease-in-out infinite }
+@keyframes glare{ 50%{ background-position:200% 0 } }
+.fx-glare .noisefx{ position:absolute; inset:0; filter:url(#disp-noise); mix-blend-mode:screen; opacity:.25 }
+
+/* ==========================================================
+ * 縦書き 和風 SET
+ * ======================================================== */
+.panel-wafu{position:relative; border:1px solid #e6dcc7; border-radius:18px; overflow:hidden; min-height:360px; display:grid;}
+.panel-wafu *{pointer-events:auto}
+.paper{position:absolute; inset:0; background:
+  linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.2)),
+  repeating-linear-gradient( 0deg, rgba(0,0,0,.02) 0 1px, rgba(0,0,0,0) 1px 24px),
+  radial-gradient(1200px 800px at 40% -10%, #ffffff 0%, #f3eee5 50%, #efe9de 100%);
+}
+.wafu-wrap{position:relative; display:grid; grid-template-columns:1fr; padding:22px}
+.wafu-title{font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; color:var(--ink-wafu); font-size: clamp(38px, 7vw, 84px); font-weight:800;
+            writing-mode: vertical-rl; text-orientation: mixed; letter-spacing:.04em; line-height:1.2}
+.wafu-sub{font-family: "Hiragino Mincho ProN", "Yu Mincho", serif; color:#2e6c57; writing-mode: vertical-rl; text-orientation: mixed;
+          margin-right:18px; letter-spacing:.2em}
+.kakejiku{ position:absolute; inset:14px; border:2px solid #d9caa5; border-radius:16px; pointer-events:none; box-shadow: 0 0 0 10px rgba(201,161,58,.06) inset }
+
+/* Brush mask reveal for vertical text */
+.wafu-title{ -webkit-mask: linear-gradient(90deg, #0000 0%, #000 14%, #000 86%, #0000 100%); mask: linear-gradient(90deg, #0000 0%, #000 14%, #000 86%, #0000 100%); }
+.wafu[data-play] .wafu-title{ animation:brushReveal 1.8s cubic-bezier(.2,.8,.2,1) forwards }
+@keyframes brushReveal{ from{ clip-path: inset(0 0 100% 0) } to{ clip-path: inset(0 0 0 0) } }
+
+/* Ink spread via SVG filter overlay */
+.ink-overlay{ position:absolute; inset:0; filter:url(#ink-spread); mix-blend-mode:multiply; opacity:.25 }
+
+/* Ruby support example */
+ruby{ writing-mode:vertical-rl; ruby-position: inter-character; }
+rt{ font-size:.5em; color:#6b6b6b; }
+
+/* ==========================================================
+ * Helpers / Sizes
+ * ======================================================== */
+.note{opacity:.75; font-size:12px}
+.row{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px}

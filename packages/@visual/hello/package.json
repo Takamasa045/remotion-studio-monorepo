@@ -1,0 +1,28 @@
+{
+  "name": "@visual/hello",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && cp src/hello.css dist/hello.css",
+    "prepare": "pnpm run build"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.24",
+    "typescript": "^5.5.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "remotion": "^4.0.350"
+  }
+}

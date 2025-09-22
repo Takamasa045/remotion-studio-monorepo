@@ -1,0 +1,22 @@
+{
+  "name": "@studio/remotion-rev",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "preview": "remotion preview",
+    "build": "remotion render Main out/remotion-rev.mp4",
+    "build:pages": "remotion render RemotionPages out/remotion-pages.mp4",
+    "build:mcp": "remotion render McpSlide out/mcp-slide.mp4",
+    "build:mcp-deck": "remotion render McpDeck out/mcp-deck.mp4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.350"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.350"
+  }
+}

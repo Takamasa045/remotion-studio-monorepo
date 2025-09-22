@@ -14,14 +14,14 @@ Remotion の主要 API とトラブルシューティングの抜粋です。公
 | エラー | 原因 | 対処 |
 | ------- | ------ | ----- |
 | `useCurrentFrame can only be used within a Remotion composition` | `registerRoot` されたコンポーネント外でフックを呼んでいる | `src/index.ts` で `registerRoot` 済みのツリー内にコンポーネントを配置する |
-| `Could not find composition with the ID "Main"` | `remotion render` の引数が `Composition id` と一致していない | `Composition id` を確認し、`pnpm render:lite -- --composition <ID>` を使う |
+| `Could not find composition with the ID "Main"` | `remotion render` の引数が `Composition id` と一致していない | `Composition id` を確認し、`remotion render <ID> out/video.mp4` を使う |
 | `ReferenceError: window is not defined` | Node 実行時に `window` 参照をしている | コンポーネント内で `typeof window !== 'undefined'` を挟むか、SSR で触れないようにする |
 | 音声・画像のパスが 404 になる | `public/` 以下に置かれていない、または `staticFile()` を使っていない | `public/assets/...` に配置するか、`staticFile('assets/...')` を使用 |
 | Chrome Headless Shell のダウンロード失敗 | ネットワーク制限で `storage.googleapis.com` に到達できない | オフライン環境向けに `REMOTION_BROWSER_EXECUTABLE` を設定するか、ネットワーク許可を得て再試行 |
 
 ## レンダリングとブラウザ設定
-- CLI からは `pnpm render:lite` を利用できます。`--browser brave` などで Chromium 系ブラウザを選択可能。 ([docs/studio-lite.md](./studio-lite.md))
-- 独自の実行ファイルを指定する: `REMOTION_BROWSER_EXECUTABLE=/path/to/chromium pnpm render:lite`
+- CLI からは `remotion render` を利用します。
+- Chromium 系ブラウザは `--browser-executable=/path/to/chromium` か、環境変数 `REMOTION_BROWSER_EXECUTABLE=/path/to/chromium` で指定できます。
 - Remotion v4 では `headless-shell` か `chrome-for-testing` の利用を推奨。`pnpm remotion install chrome --chrome-mode headless-shell` で取得できます。
 
 ## MCP (remotiondocs) 活用

@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>動画の書き出し方法</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 743px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 743px;
+            position: relative;
+            
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+        }
+        .title {
+            color: #333333;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #555555;
+            font-size: 1.5rem;
+        }
+        .content-text {
+            color: #333333;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #FF6600;
+            font-weight: 600;
+        }
+        .step-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .step-number {
+            background: linear-gradient(135deg, #FF6600, #FF9900);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #e2e2e2;
+            padding: 16px;
+            position: relative;
+        }
+        .code-block::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 12px;
+            height: 12px;
+            background-color: #ff5f56;
+            border-radius: 50%;
+        }
+        .code-block::after {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 28px;
+            width: 12px;
+            height: 12px;
+            background-color: #98FF98;
+            border-radius: 50%;
+        }
+        .info-box {
+            background-color: rgba(255, 102, 0, 0.1);
+            border-left: 4px solid #FF6600;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide gradient-bg p-10" style=" overflow: hidden;">
+<!-- Header -->
+<header class="mb-6">
+<h1 class="title">動画の書き出し方法</h1>
+<div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-green-400 mt-2"></div>
+</header>
+<!-- Main Content -->
+<div class="grid grid-cols-12 gap-6 min-h-[550px]">
+<!-- Introduction -->
+<div class="col-span-12 mb-2">
+<p class="content-text">
+                    完成した動画をレンダリングして最終的なファイルとして出力する方法を説明します。
+                </p>
+</div>
+<!-- Main Methods Section -->
+<div class="col-span-12 grid grid-cols-2 gap-8">
+<!-- GUI Method -->
+<div class="step-card p-6">
+<div class="flex items-center mb-4">
+<div class="step-number mr-3">1</div>
+<h2 class="subtitle">GUIによる書き出し</h2>
+</div>
+<div class="pl-10">
+<div class="flex items-start mb-4">
+<i class="fas fa-mouse-pointer text-orange-500 mr-3 mt-1"></i>
+<p>プレビュー画面の右下にある<span class="highlight">「Render」</span>ボタンをクリック</p>
+</div>
+<div class="flex items-start mb-4">
+<i class="fas fa-cog text-orange-500 mr-3 mt-1"></i>
+<p>出力オプションを選択（動画形式、解像度、フレームレート等）</p>
+</div>
+<div class="flex items-start">
+<i class="fas fa-save text-orange-500 mr-3 mt-1"></i>
+<p>保存先のファイル名と場所を指定</p>
+</div>
+</div>
+</div>
+<!-- Command Line Method -->
+<div class="step-card p-6">
+<div class="flex items-center mb-4">
+<div class="step-number mr-3">2</div>
+<h2 class="subtitle">コマンドラインによる書き出し</h2>
+</div>
+<div class="pl-10 mb-4">
+<div class="flex items-start mb-4">
+<i class="fas fa-terminal text-orange-500 mr-3 mt-1"></i>
+<p>ターミナルで以下のコマンドを実行</p>
+</div>
+<div class="code-block text-sm mb-4">
+                            npx remotion render [Composition名] [出力ファイル名]<br/>
+<span class="text-gray-400"># 例: npx remotion render MyVideo out.mp4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Information -->
+<div class="col-span-12 grid grid-cols-2 gap-8 mt-4">
+<!-- Output Formats -->
+<div class="step-card p-6">
+<div class="flex items-center mb-3">
+<i class="fas fa-film text-2xl text-orange-500 mr-3"></i>
+<h2 class="subtitle">出力形式オプション</h2>
+</div>
+<div class="grid grid-cols-4 gap-3 pl-6">
+<div class="flex items-center">
+<i class="fas fa-file-video text-gray-600 mr-2"></i>
+<span>MP4</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-file-video text-gray-600 mr-2"></i>
+<span>WebM</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-file-image text-gray-600 mr-2"></i>
+<span>GIF</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-images text-gray-600 mr-2"></i>
+<span>画像シーケンス</span>
+</div>
+</div>
+</div>
+<!-- Tips and Notes -->
+<div class="step-card p-6">
+<div class="flex items-center mb-3">
+<i class="fas fa-lightbulb text-2xl text-orange-500 mr-3"></i>
+<h2 class="subtitle">ポイントと注意</h2>
+</div>
+<div class="pl-6">
+<div class="info-box p-3 mb-3">
+<p class="text-sm"><i class="fas fa-clock text-orange-500 mr-2"></i>レンダリングには、動画の長さや複雑さによって数秒から数分かかります</p>
+</div>
+<div class="info-box p-3">
+<p class="text-sm"><i class="fas fa-cloud text-orange-500 mr-2"></i>クラウドレンダリング（AWS Lambdaなど）を利用することで、処理を高速化できます</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="absolute bottom-4 right-10 text-gray-500 text-sm" style="visibility: hidden;">
+<p>7 / 14</p>
+</footer>
+</div>
+
+</body></html>
