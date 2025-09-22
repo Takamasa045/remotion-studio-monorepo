@@ -65,28 +65,7 @@ pnpm install
   - `remotion-reference.md`: Remotion の主要API/トラブルシューティングの要点を抜粋
   - 推奨: チーム運用メモ（命名規約、パス設計、アセット配置方針、レビュー基準）、利用ライブラリの導入手順、ビルド/配信フローなどを追記
   - 参考: テンプレで生成した各アプリの README も、docs からリンクしておくとオンボーディングが容易です
-- 一括レンダリング
-  - `pnpm render:all --parallel 4 --out out`
-- 共通アセット同期
-  - `pnpm sync:assets`（シンボリックリンク）
-  - `pnpm sync:assets --mode copy`（コピー）
-
-### MCP（Model Context Protocol）連携（remotionmcp など）
-- ローカル/外部の MCP サーバを HTTP でアダプトして stdio で利用するランナーを同梱しています。
-- 既定値: `MCP_NAME=remotionmcp`, `MCP_URI=http://localhost:4000`
-
-```
-# そのまま（http://localhost:4000 を想定）
-pnpm mcp:remotion
-
-# 明示的に URI/NAME を指定
-MCP_URI=http://localhost:8787 pnpm mcp:remotion
-MCP_NAME=my-remotion MCP_URI=https://example.com/mcp pnpm mcp:remotion
-```
-
-- ~/.codex/config.toml を利用中の場合は、同等のエントリ（command/args/env）を追加してもOKです。
-- 本リポ内で MCP をパッケージ化したい場合は、`packages/@tools/remotion-mcp` として取り込み、
-  ルートの `scripts` から起動できるようにも構成可能です（要望あれば対応します）。
+<!-- 一括レンダリングやMCPのランナーはテンプレには含めていません。必要に応じて scripts/ に追加してください。 -->
 
 #### Claude Code で remotiondocs を使う場合
 - `.claude/config.json` などに次のエントリを追加してください。
@@ -117,18 +96,28 @@ pnpm create:project
 pnpm dev my-app
 ```
 
-### アセット（動画・音楽・画像）の配置について
+### アセット（CSS・フォント・画像・音源・動画など）
 
-- 各アプリは `public/` が公開ルートです。新規作成直後は空なので、必要に応じて以下のようなディレクトリを作成してください。
+- 各アプリは `public/` が公開ルートです。`pnpm create:project` で生成すると、次のサブフォルダが自動作成されます（.gitkeep 付き）。
 
-```bash
-mkdir -p apps/<your-app>/public/assets/{images,audio,video}
+```
+public/
+  assets/
+    images/   # PNG/JPG/SVG など
+    audio/    # MP3/WAV/WEBM など
+    video/    # MP4/WEBM など
+    fonts/    # WOFF/TTF など（@font-face + staticFile で参照）
+    css/      # スタンドアロンCSS（必要なら staticFile で取得）
+    data/     # JSON などのデータ
+    lottie/   # Lottie JSON
 ```
 
 - 使い方の例
   - 画像: `/assets/images/logo.png`
   - 音声: `/assets/audio/bgm.mp3`
   - 動画: `/assets/video/clip.mp4`
+  - CSS: `src/styles` でインポート推奨（例: `import './styles/app.css'`）。外部CSSを `public/assets/css` に置く場合は `staticFile('/assets/css/app.css')` から取得し、`<style>` へ流し込む等で適用できます。
+  - フォント: `public/assets/fonts` へ配置し、CSSの `@font-face` で `src: url(staticFile('/assets/fonts/xxx.woff2'))` を指定。
 
 - リリック（LRC）の配置ルール（標準）
   - 音声ファイルと同じディレクトリ（assets/audio）に、同じベース名で `.lrc` を置きます。
@@ -139,10 +128,7 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
     // 必要に応じて LRC をパースして [{timeMs, text}] などに変換
     ```
 
-- 共通アセットを使う場合（推奨）
-  - 共有パッケージ `@design/assets/assets` を各アプリの `public/assets` にリンク/コピーできます。
-  - シンボリックリンク: `pnpm sync:assets`
-  - コピー: `pnpm sync:assets --mode copy`
+<!-- 共通アセット同期スクリプトはテンプレには含めていません。必要なら scripts/ に追加してください。 -->
 
 - バージョン管理の注意
   - 大きなバイナリ（長尺の動画・音源）は Git LFS などの利用を推奨します。

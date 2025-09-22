@@ -164,18 +164,27 @@ async function main() {
 
   // Ensure public directory
   await ensureExists(path.join(destDir, 'public'));
-  // Also scaffold public/assets/{images,audio,video}
+  // Scaffold public/assets with commonly used subfolders
+  // images, audio, video, fonts, css, data(json), lottie(json)
   const assetsBase = path.join(destDir, 'public', 'assets');
   const assetDirs = [
-    path.join(assetsBase, 'images'),
-    path.join(assetsBase, 'audio'),
-    path.join(assetsBase, 'video'),
-  ];
+    'images',
+    'audio',
+    'video',
+    'fonts',
+    'css',
+    'data',
+    'lottie',
+  ].map((n) => path.join(assetsBase, n));
   for (const d of assetDirs) {
     await ensureExists(d);
-    // create a .gitkeep so empty folders are kept if user commits their app
     try { await fsp.writeFile(path.join(d, '.gitkeep'), ''); } catch {}
   }
+
+  // Optional source-side styles directory for CSS imports via bundler
+  const srcStyles = path.join(destDir, 'src', 'styles');
+  await ensureExists(srcStyles);
+  try { await fsp.writeFile(path.join(srcStyles, '.gitkeep'), ''); } catch {}
 
   // Post-copy placeholder replacement across the project
   await replaceInFiles(destDir, {
