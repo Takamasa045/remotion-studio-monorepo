@@ -1,4 +1,7 @@
 import {Config} from "@remotion/cli/config";
-import {monorepoAliasesOverride} from "../../packages/@core/config/remotion-shared";
 
-Config.overrideWebpackConfig(monorepoAliasesOverride);
+// Minimal config for standalone template projects.
+// Keep Webpack config vanilla unless you need overrides.
+Config.overrideWebpackConfig((c) => c);
+
+export {};

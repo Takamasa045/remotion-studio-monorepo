@@ -24,10 +24,7 @@ Remotion の主要 API とトラブルシューティングの抜粋です。公
 - Chromium 系ブラウザは `--browser-executable=/path/to/chromium` か、環境変数 `REMOTION_BROWSER_EXECUTABLE=/path/to/chromium` で指定できます。
 - Remotion v4 では `headless-shell` か `chrome-for-testing` の利用を推奨。`pnpm remotion install chrome --chrome-mode headless-shell` で取得できます。
 
-## MCP (remotiondocs) 活用
-- `pnpm mcp:remotion` でローカルの Remotion Docs MCP を起動。
-- Claude Code などのクライアントでは `command: pnpm`, `args: ["mcp:remotion"]` を設定。
-- MCP から `remotiondocs.search` を呼び出すと公式ドキュメントの記事がキーワード検索できます。
+<!-- MCP ツールの記述はテンプレからは外しています。必要に応じて導入してください。 -->
 
 ## 参考リンク
 - Remotion Docs: https://www.remotion.dev/docs

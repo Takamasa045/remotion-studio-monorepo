@@ -4,13 +4,7 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "NodeNext",
-    "baseUrl": ".",
-    "paths": {
-      "@studio/*": [
-        "../../packages/*/src",
-        "../../packages/@*/*/src"
-      ]
-    }
+    "baseUrl": "."
   },
   "include": [
     "src",

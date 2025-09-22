@@ -200,7 +200,7 @@ async function main() {
     });
   }
 
-  console.log(`Next steps:\n  - pnpm -F @studio/${answers.name} run dev\n  - pnpm -F @studio/${answers.name} run build`);
+  console.log(`Next steps:\n  - pnpm -C apps/${answers.name} run dev\n  - pnpm -C apps/${answers.name} run build`);
 }
 
 main().catch((err) => {

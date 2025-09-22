@@ -12,19 +12,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "@studio/*": [
-        "packages/@core/*/src",
-        "packages/@animation/*/src",
-        "packages/@visual/*/src",
-        "packages/@audio/*/src",
-        "packages/@content/*/src"
-      ],
-      "@design/*": [
-        "packages/@design/*/src",
-        "packages/@design/*"
-      ]
-    }
+    "baseUrl": "."
   }
 }

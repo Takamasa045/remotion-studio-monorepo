@@ -1,6 +1,6 @@
 # Remotion Studio Monorepo
 
-Remotion + React で動画制作を行うためのモノレポです。タイムライン、アニメーション、ビジュアル、テンプレート、スクリプト、CI を一式同梱し、素早く制作〜レンダリングまで回せます。
+Remotion + React の「テンプレート専用」リポジトリです。`apps/_template` を元に新規プロジェクトを作成し、各アプリ内で開発・レンダリングを行います。
 
 ## 特徴
 - pnpm workspaces を用いた堅牢なモノレポ運用
@@ -15,23 +15,11 @@ Remotion + React で動画制作を行うためのモノレポです。タイム
 ```
 remotion-studio/
   apps/
-    studio-hub/       # 自動収集Hub（一覧プレビュー用）
-    _template/        # 新規プロジェクト用テンプレ
-    demo-showcase/    # デモ・ショーケース
-    remotion-rev/     # デッキ/ページ系のサンプル
-    playlist-mv/      # プレイリストMV
-    hello/            # 最小例（zod schema）
-    CSSanimation/     # CSS ベースのアニメ
-    Remotionvideo/    # 各種シーンの例
-  packages/
-    @core/            # 基盤層（timing/hooks/types）
-    @animation/       # アニメーション層（anime-bridge/transitions/easings）
-    @visual/          # ビジュアル層（canvas2d/three/shaders/effects）
-    @audio/           # オーディオ層（雛形）
-    @content/         # コンテンツ層（雛形）
-    @design/          # デザイン（assets/tokens/themes）
-  scripts/            # CLI スクリプト群
-  docs/               # ドキュメント
+    _template/        # 新規プロジェクト用テンプレ（この雛形を複製して使う）
+  scripts/
+    create-project.ts # テンプレから新規アプリを生成
+  docs/
+    remotion-reference.md  # Remotion の要点（抜粋）
 ```
 
 ## 要件
@@ -44,15 +32,14 @@ remotion-studio/
 pnpm install
 ```
 
-## よく使うコマンド（ルート）
-- 任意アプリを起動（通常はこちら）
-  - `pnpm dev <app>` 例: `pnpm dev demo-showcase`
-  - `pnpm preview <app>` 例: `pnpm preview test`
-  - `pnpm build:app <app>` 例: `pnpm build:app demo-showcase`
-  - Remotion docs を MCP 経由で検索: `pnpm mcp:remotion`
-- Studio Hub で複数プロジェクトをまとめて閲覧（必要なときだけ）
-  - `pnpm --filter @studio/studio-hub dev`
-  - 用途: 一覧ブラウズ／横断検証（通常開発は各アプリで実施）
+## よく使うコマンド（テンプレ使用）
+- 新規アプリ作成
+  - `pnpm create:project`
+  - 指示に従って name / width / height / fps / duration / compositionId を入力
+- アプリの起動（作成後）
+  - `pnpm -C apps/<name> run dev`（プレビュー）
+  - `pnpm -C apps/<name> run preview`（ビルドされたプレビュー）
+  - `pnpm -C apps/<name> run build`（mp4レンダリング）
 - 一括レンダリング
   - `pnpm render:all --parallel 4 --out out`
 - 共通アセット同期
@@ -147,9 +134,7 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
 
 起動時（dev/preview/render）の挙動
 - Remotion CLI（Webpack）がエントリ `src/index.ts` を基点に依存をバンドルします。
-  - 解決順は「アプリ内の `src` → モノレポ内のエイリアス `@studio/*`, `@design/*` → `node_modules`」。
-  - 各アプリの `remotion.config.ts` は共有ヘルパ `monorepoAliasesOverride` を使い、`packages/**/src` を自動で `alias` 登録します。
-  - そのためモノレポ内パッケージは「ビルド済み `dist` に依存せず、`src` を直接コンパイル」できます。
+- テンプレはモノレポの独自エイリアスに依存しません（`remotion.config.ts` は素のまま）。
 - `pnpm install` 時に一部パッケージは `prepare` スクリプトで `dist` を生成しますが、開発時のバンドルは `src` を参照します（ホットリロードが高速）。
 - `public/` 以下のアセットは `staticFile()` で解決され、開発サーバ経由で配信されます。
 
@@ -158,12 +143,10 @@ mkdir -p apps/<your-app>/public/assets/{images,audio,video}
   - `pnpm add <pkg> --filter @studio/<app>`
   - 例: `pnpm add animejs --filter @studio/demo-showcase`
   - 型定義は開発依存で: `pnpm add -D @types/<pkg> --filter @studio/<app>`
-- モノレポ全体で使う
-  - ルートに追加: `pnpm add <pkg> -w`（開発依存なら `-Dw`）
-  - ただし「本当に全アプリが必要か」を検討してください（不要なビルド時間や依存肥大化を防ぐ）
-- モノレポ内パッケージを新規作成して共有する
-  - 例: `packages/@visual/my-lib` を作成し、`package.json` に `"name": "@studio/my-lib"` を設定
-  - 以降、任意のアプリから `import {X} from '@studio/my-lib'` で利用可能（alias/tsconfig が既に対応済み）
+- 複数アプリで使う
+  - それぞれのアプリに必要な依存を追加してください（テンプレは最小構成）。
+- 共有パッケージを作りたい
+  - このテンプレでは既定で `packages/` は使いません。必要になったら作成して workspace に追加してください。
 
 PeerDependencies（注意）
 - 内製パッケージは、外部ライブラリを `peerDependencies` にしている場合があります。
@@ -224,12 +207,9 @@ PeerDependencies（注意）
 
 注: 一部は peerDependencies（react/three/@react-three/fiber/animejs/pixi.js/konva 等）です。必要なアプリで追加してください。
 
-## Remotion 設定
-- 新API: `@remotion/cli/config` の `Config.overrideWebpackConfig`
-- 共有ヘルパ: `packages/@core/config/remotion-shared.ts`
-  - 各アプリの `remotion.config.ts` で `Config.overrideWebpackConfig(monorepoAliasesOverride)` を使用
-  - モノレポの `packages/**/src` を再帰走査して `{pkg.name → src}` の alias を自動生成
- 
+## Remotion 設定（テンプレ）
+- `@remotion/cli/config` の `Config.overrideWebpackConfig` は最小のまま利用しています（デフォルトのままでOK）。
+- 必要に応じて各アプリの `remotion.config.ts` に Webpack の alias 追加などを行ってください。
 
 ## 規約（Entry / Root / 命名）
 - Entry point: 各アプリの `src/index.ts`（または `.tsx`）がエントリで、必ず `registerRoot(Root)` を呼びます。
@@ -238,11 +218,8 @@ PeerDependencies（注意）
 - 命名: Root ファイルは `Root.tsx`（PascalCase）で統一します。
 - 任意: 厳密化したい場合は `remotion.config.ts` に `Config.setEntryPoint('src/index.ts')` を明示可能です。
 
-## TypeScript 設定
-- ルート `tsconfig.base.json` の `paths`:
-  - `@studio/*` → `packages/@core/*/src`, `@animation/*/src`, `@visual/*/src`, `@audio/*/src`, `@content/*/src`
-  - `@design/*` → `packages/@design/*/src`, `packages/@design/*`
-- 各アプリの `tsconfig.json` も同様の設定
+## TypeScript 設定（テンプレ）
+- ルート `tsconfig.base.json` は最小構成です。追加のパスエイリアスが必要になったら適宜拡張してください。
 
 ## CI
 - `.github/workflows/ci.yml`：依存→ビルド→Prettier チェック
