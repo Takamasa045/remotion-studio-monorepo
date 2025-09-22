@@ -11,16 +11,27 @@ Remotion + React の「テンプレート専用」リポジトリです。`apps/
 - 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
 - CI（lint / build / デモ自動レンダリング）
 
-## 構成
+## 構成（標準ブループリント）
+以下はテンプレ運用の推奨レイアウトです（現状のリポジトリには最小限のみ含まれます）。
+
 ```
 remotion-studio/
   apps/
+    studio-lite/      # 依存の少ないシンプルなスタータ（例・任意）
     _template/        # 新規プロジェクト用テンプレ（この雛形を複製して使う）
-  scripts/
-    create-project.ts # テンプレから新規アプリを生成
-  docs/
-    remotion-reference.md  # Remotion の要点（抜粋）
+    demo-showcase/    # デモ・ショーケース（例・任意）
+  packages/
+    @core/            # 基盤層（timing/hooks/types などの共有コード／例・任意）
+    @animation/       # アニメーション層（anime-bridge/transitions/easings／例・任意）
+    @visual/          # ビジュアル層（canvas2d/three/shaders/effects／例・任意）
+    @audio/           # オーディオ層（雛形／例・任意）
+    @content/         # コンテンツ層（雛形／例・任意）
+    @design/          # デザイン（assets/tokens/themes／例・任意）
+  scripts/            # CLI スクリプト群（create-project 等。用途は後述）
+  docs/               # ドキュメント（運用メモ・参照資料等。用途は後述）
 ```
+
+注記: 現在のリポジトリは「テンプレ最小構成」のため、実体としては `apps/_template` と最低限の `scripts`/`docs` のみを含みます。他は将来必要に応じて追加・生成してください。
 
 ## 要件
 - Node.js 18+（推奨: 20）
@@ -40,6 +51,20 @@ pnpm install
   - `pnpm -C apps/<name> run dev`（プレビュー）
   - `pnpm -C apps/<name> run preview`（ビルドされたプレビュー）
   - `pnpm -C apps/<name> run build`（mp4レンダリング）
+
+## scripts と docs の用途
+- scripts/（CLI スクリプト群）
+  - `create-project.ts`
+    - 役割: `apps/_template` を複製して `apps/<name>` を作成。Width/Height/FPS/Duration/Composition ID を対話で設定。
+    - 使い方: `pnpm create:project`（ルートから）
+  - 追加の例（必要になったら作成）
+    - `dev.ts`/`preview.ts`/`build-app.ts`: 任意アプリの起動・プレビュー・ビルドを共通のUIで行うランナー
+    - `render-all.ts`: 複数アプリ・複数Compositionの一括レンダリング
+    - `sync-assets.ts`: 共通アセットの各アプリ `public/` への同期
+- docs/（ドキュメント）
+  - `remotion-reference.md`: Remotion の主要API/トラブルシューティングの要点を抜粋
+  - 推奨: チーム運用メモ（命名規約、パス設計、アセット配置方針、レビュー基準）、利用ライブラリの導入手順、ビルド/配信フローなどを追記
+  - 参考: テンプレで生成した各アプリの README も、docs からリンクしておくとオンボーディングが容易です
 - 一括レンダリング
   - `pnpm render:all --parallel 4 --out out`
 - 共通アセット同期
@@ -208,10 +233,12 @@ PeerDependencies（注意）
 注: 一部は peerDependencies（react/three/@react-three/fiber/animejs/pixi.js/konva 等）です。必要なアプリで追加してください。
 
 ## Remotion 設定（テンプレ）
-- `@remotion/cli/config` の `Config.overrideWebpackConfig` は最小のまま利用しています（デフォルトのままでOK）。
-- 必要に応じて各アプリの `remotion.config.ts` に Webpack の alias 追加などを行ってください。
+- いま設定は不要です（テンプレはそのまま動きます）。
+- `@remotion/cli/config` の `Config.overrideWebpackConfig` は最小のまま利用しています（デフォルトでOK）。
+- 必要になったときだけ、各アプリの `remotion.config.ts` を編集してください（例: Webpack の alias を追加）。
 
 ## 規約（Entry / Root / 命名）
+- これは動作ルールの説明で、いま何かを設定する必要はありません。
 - Entry point: 各アプリの `src/index.ts`（または `.tsx`）がエントリで、必ず `registerRoot(Root)` を呼びます。
 - Root file: `src/Root.tsx` で `<Composition />` を宣言します（`registerRoot` はここでは呼ばない）。
 - CLI: `remotion studio` / `remotion render` はエントリ自動検出を利用し、`--entry-point` を原則省略します。
@@ -219,11 +246,13 @@ PeerDependencies（注意）
 - 任意: 厳密化したい場合は `remotion.config.ts` に `Config.setEntryPoint('src/index.ts')` を明示可能です。
 
 ## TypeScript 設定（テンプレ）
-- ルート `tsconfig.base.json` は最小構成です。追加のパスエイリアスが必要になったら適宜拡張してください。
+- いま設定は不要です（最小構成のままでOK）。
+- 追加のパスエイリアスが必要になったら、必要になったタイミングで拡張してください。
 
 ## CI
-- `.github/workflows/ci.yml`：依存→ビルド→Prettier チェック
-- `.github/workflows/render-demo.yml`：ffmpeg セットアップ→デモ自動レンダリング→成果物アップロード
+- いまは何も設定されていません。使いたい場合のみ、GitHub Actions などを追加してください。
+- 例（任意）: `.github/workflows/ci.yml`（依存→ビルド→Prettier チェック）
+- 例（任意）: `.github/workflows/render-demo.yml`（ffmpeg セットアップ→自動レンダリング→成果物アップロード）
 
 ## トラブルシューティング
 - remotion コマンドが見つからない
@@ -237,4 +266,4 @@ PeerDependencies（注意）
   - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレ/デモは同梱済み。
 
 ## ライセンス
-TBD（必要に応じて追記）
+MIT License（このリポジトリ直下の `LICENSE` を参照）
