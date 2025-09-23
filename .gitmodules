@@ -1,0 +1,4 @@
+[submodule "apps"]
+	path = apps
+	url = git@github.com:Takamasa045/remotion-studio-apps.git
+	branch = main
