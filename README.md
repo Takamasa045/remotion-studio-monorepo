@@ -17,7 +17,6 @@ Remotion + React の「テンプレート専用」リポジトリです。`apps/
 ```
 remotion-studio/
   apps/
-    studio-lite/      # 依存の少ないシンプルなスタータ（例・任意）
     _template/        # 新規プロジェクト用テンプレ（この雛形を複製して使う）
     demo-showcase/    # デモ・ショーケース（例・任意）
   packages/
