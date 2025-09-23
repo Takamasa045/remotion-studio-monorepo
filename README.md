@@ -138,7 +138,7 @@ public/
 なぜ必要か（用途別の代表例）
 - アニメーション強化: `animejs`（`@studio/anime-bridge`）/ `@studio/transitions` / `@studio/easings`
 - 2D/Canvas 系: `pixi.js`, `konva`（`@studio/visual-canvas2d`）
-- 3D/R3F 系: `three`, `@react-three/fiber`（`@studio/visual-three`）
+– 3D/R3F 系: `three`, `@react-three/fiber`, `@react-three/drei`, `@remotion/three`
 - 入力検証/スキーマ: `zod`（`@remotion/zod-types` 連携）
 - メディアユーティリティ: `@remotion/media-utils` など
 
@@ -174,6 +174,13 @@ PeerDependencies（注意）
 - 開発: `pnpm dev <app>` / プレビュー: `pnpm preview <app>` / レンダ: `pnpm build:app <app>`
 - ビルド時にエラーが出る場合は、`remotion.config.ts` で `overrideWebpackConfig` による調整（`alias` 追加、ブラウザ向けビルドを指すようにする等）を検討してください。
 
+#### 3D/R3F 導入メモ
+- インストール（アプリ配下）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350`
+- またはルートから（workspace filter）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
+- 互換性: Remotion v4.0.350 に対して `@remotion/three@^4.0.350` を推奨
+- WebGL の安定化（必要時）: 各アプリの `remotion.config.ts` で `Config.setChromiumOpenGlRenderer('angle')` 等を指定可能
+- アセット読み込み: `public/` にモデル/テクスチャを置き、`staticFile('/assets/...')` の URL を `useGLTF()` などへ渡す
+
 ### どんな人が入れるといいのか（使用例）
 このモノレポは全部入りではなく、必要な機能だけを組み合わせる設計になっています。
 用途に応じて、以下のようにライブラリ（peerDependencies）を追加してください。
@@ -187,7 +194,7 @@ PeerDependencies（注意）
 - 🎨 2D グラフィックス（Pixi / Konva）を使いたい
   - `pnpm add pixi.js konva --filter @studio/<app>` の上で `@studio/visual-canvas2d` を利用
 - 🏔 3D 表現（Three.js + React Three Fiber）を使いたい
-  - `pnpm add three @react-three/fiber --filter @studio/<app>` の上で `@studio/visual-three` を利用
+  - `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
 - 🎵 音声や歌詞同期（LRC）を扱いたい
   - `@studio/timing`, `@studio/core-hooks` を利用（追加インストール不要）。歌詞ファイルは `assets/audio/` に配置
 
