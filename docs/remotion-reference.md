@@ -1,6 +1,4 @@
-# Remotion Reference (Link-First)
-
-このドキュメントは「URLリンク中心」方針です。公式ドキュメントの内容を再配布せず、最小限の要約と出典リンクのみを掲載します。最新情報と詳細は必ずリンク先をご参照ください。
+# Remotion Reference
 
 ## 主要リンク
 - Docs（総合）: https://www.remotion.dev/docs
@@ -38,10 +36,18 @@
 - Chrome for Testing / Headless Shell の導入
   - 出典: https://www.remotion.dev/docs/chromium
 
-## ライセンス / 実務の注意（出典リンク）
-- チーム規模の数え方: 関わる全社合算で 4 名以上なら Company License（代理店×クライアント合算）。
-- クラウドでレンダリングする場合は Cloud Rendering Unit の自己申告が必要（ローカルのみなら不要）。
-  - 出典: https://companies.remotion.dev
 
-（注）上記は最小限の要約です。適用条件や例外・最新の規定は必ず公式の出典を参照してください。
+## Disclaimers
+This repository provides templates and scripts only.
+It does not redistribute the Remotion software.
+Users install Remotion via npm (e.g. pnpm i remotion @remotion/cli).
+This project is unofficial and not affiliated with or endorsed by Remotion.
+For Remotion’s license & terms, see the official docs.
 
+（日本語版）
+
+このリポジトリはテンプレート／スクリプトのみを提供します。
+Remotion本体の同梱・再配布は行いません（利用者が pnpm i remotion @remotion/cli 等で導入）。
+本プロジェクトは非公式であり、Remotionの提携・公認ではありません。
+ライセンスと規約は必ず公式ドキュメントをご確認ください。
+companies.remotion.dev
