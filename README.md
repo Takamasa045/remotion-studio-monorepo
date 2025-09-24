@@ -42,29 +42,22 @@ remotion-studio/
 pnpm install
 ```
 
+## クイックスタート（最短手順）
+- プロジェクト生成: `pnpm create:project`
+- 生成後にアプリへ移動: `cd apps/<name>`
+- 開発サーバ起動: `pnpm dev`（プレビュー）
+- ビルド済みプレビュー: `pnpm preview`
+- レンダリング（mp4）: `pnpm build`
+
 ## よく使うコマンド（テンプレ使用）
 - 新規アプリ作成
   - `pnpm create:project`
   - 指示に従って name / width / height / fps / duration / compositionId を入力
 - アプリの起動（作成後）
-  - `pnpm -C apps/<name> run dev`（プレビュー）
-  - `pnpm -C apps/<name> run preview`（ビルドされたプレビュー）
-  - `pnpm -C apps/<name> run build`（mp4レンダリング）
-
-## scripts と docs の用途
-- scripts/（CLI スクリプト群）
-  - `create-project.ts`
-    - 役割: `apps/_template` を複製して `apps/<name>` を作成。Width/Height/FPS/Duration/Composition ID を対話で設定。
-    - 使い方: `pnpm create:project`（ルートから）
-  - 追加の例（必要になったら作成）
-    - `dev.ts`/`preview.ts`/`build-app.ts`: 任意アプリの起動・プレビュー・ビルドを共通のUIで行うランナー
-    - `render-all.ts`: 複数アプリ・複数Compositionの一括レンダリング
-    - `sync-assets.ts`: 共通アセットの各アプリ `public/` への同期
-- docs/（ドキュメント）
-  - `remotion-reference.md`: Remotion の主要API/トラブルシューティングの要点を抜粋
-  - 推奨: チーム運用メモ（命名規約、パス設計、アセット配置方針、レビュー基準）、利用ライブラリの導入手順、ビルド/配信フローなどを追記
-  - 参考: テンプレで生成した各アプリの README も、docs からリンクしておくとオンボーディングが容易です
-<!-- 一括レンダリングやMCPのランナーはテンプレには含めていません。必要に応じて scripts/ に追加してください。 -->
+  - `cd apps/<name>`
+  - `pnpm dev`（プレビュー）
+  - `pnpm preview`（ビルドされたプレビュー）
+  - `pnpm build`（mp4レンダリング）
 
 #### Claude Code で remotiondocs を使う場合
 - `.claude/config.json` などに次のエントリを追加してください。
@@ -92,7 +85,8 @@ pnpm create:project
 
 生成後（デフォルトでは Composition ID は `Main` に設定されます。対話で変更可）:
 ```
-pnpm dev my-app
+cd apps/my-app
+pnpm dev
 ```
 
 ### アセット（CSS・フォント・画像・音源・動画など）
@@ -171,7 +165,7 @@ PeerDependencies（注意）
 
 導入後の基本手順
 - 依存追加後は `pnpm install` を実行し、ロックファイルを更新してコミットします。
-- 開発: `pnpm dev <app>` / プレビュー: `pnpm preview <app>` / レンダ: `pnpm build:app <app>`
+- 開発: 対象アプリ配下で `pnpm dev` / プレビュー: `pnpm preview` / レンダ: `pnpm build`
 - ビルド時にエラーが出る場合は、`remotion.config.ts` で `overrideWebpackConfig` による調整（`alias` 追加、ブラウザ向けビルドを指すようにする等）を検討してください。
 
 #### 3D/R3F 導入メモ
@@ -256,6 +250,21 @@ PeerDependencies（注意）
   - 1エントリ1つの `*` になるよう `paths` を分割済み
 - エントリポイントが見つからない
   - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレ/デモは同梱済み。
+
+## scripts と docs の用途
+- scripts/（CLI スクリプト群）
+  - `create-project.ts`
+    - 役割: `apps/_template` を複製して `apps/<name>` を作成。Width/Height/FPS/Duration/Composition ID を対話で設定。
+    - 使い方: `pnpm create:project`（ルートから）
+  - 追加の例（必要になったら作成）
+    - `dev.ts`/`preview.ts`/`build-app.ts`: 任意アプリの起動・プレビュー・ビルドを共通のUIで行うランナー
+    - `render-all.ts`: 複数アプリ・複数Compositionの一括レンダリング
+    - `sync-assets.ts`: 共通アセットの各アプリ `public/` への同期
+- docs/（ドキュメント）
+  - `remotion-reference.md`: Remotion の主要API/トラブルシューティングの要点を抜粋
+  - 推奨: チーム運用メモ（命名規約、パス設計、アセット配置方針、レビュー基準）、利用ライブラリの導入手順、ビルド/配信フローなどを追記
+  - 参考: テンプレで生成した各アプリの README も、docs からリンクしておくとオンボーディングが容易です
+<!-- 一括レンダリングやMCPのランナーはテンプレには含まれていません。必要に応じて scripts/ に追加してください。 -->
 
 ## ライセンス
 MIT License（このリポジトリ直下の `LICENSE` を参照）
