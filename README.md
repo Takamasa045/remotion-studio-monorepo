@@ -42,37 +42,49 @@ remotion-studio/
 pnpm install
 ```
 
-## クイックスタート（最短手順）
-- プロジェクト生成: `pnpm create:project`
+## 使い方
+- 新規アプリ作成: `pnpm create:project`（name / width / height / fps / duration / compositionId を対話入力）
 - 生成後にアプリへ移動: `cd apps/<name>`
-- 開発サーバ起動: `pnpm dev`（プレビュー）
+- 開発サーバ起動（プレビュー）: `pnpm dev`
 - ビルド済みプレビュー: `pnpm preview`
 - レンダリング（mp4）: `pnpm build`
 
-## よく使うコマンド（テンプレ使用）
-- 新規アプリ作成
-  - `pnpm create:project`
-  - 指示に従って name / width / height / fps / duration / compositionId を入力
-- アプリの起動（作成後）
-  - `cd apps/<name>`
-  - `pnpm dev`（プレビュー）
-  - `pnpm preview`（ビルドされたプレビュー）
-  - `pnpm build`（mp4レンダリング）
+## MCP 設定
 
-#### Claude Code で remotiondocs を使う場合
-- `.claude/config.json` などに次のエントリを追加してください。
+### Claude Code
+端末で追加:
+
+```
+claude mcp add
+# Name: remotion-documentation
+# Command: npx
+# Args: @remotion/mcp@latest
+```
+
+GUI ウィザードを使わない場合は設定に以下を追記:
 
 ```json
 {
-  "name": "remotiondocs",
-  "command": "pnpm",
-  "args": ["mcp:remotion"],
-  "workingDirectory": "/Users/takamasa/remotion-studio"
+  "mcpServers": {
+    "remotion-documentation": {
+      "command": "npx",
+      "args": ["@remotion/mcp@latest"]
+    }
+  }
 }
 ```
 
-- `Claude > MCP` から `remotiondocs` を有効化すると、Remotion の公式ドキュメント検索をチャット内から利用できます。
-- 主要 API やトラブルシューティングの抜粋は `docs/remotion-reference.md` にまとめています。オフラインでも参照可能です。
+→ Claude のチャットで「remotion-documentation を使って “render h264 フラグ” を調べて」と指示。公式ガイド通りの設定です（remotion.dev）。
+
+### Codex（OpenAI Codex CLI）
+`~/.codex/config.toml` に追記:
+
+```toml
+[mcp_servers.remotion_documentation]
+type = "stdio"
+command = "npx"
+args = ["@remotion/mcp@latest"]
+```
 
 ## 新規プロジェクト作成
 テンプレ（apps/_template）から対話で生成します。
