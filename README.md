@@ -133,7 +133,7 @@ pnpm install
 
 ## ドキュメント/ライセンスに関する注意点
 
-- docs/remotion-reference.md（“オフライン参照用”）：公式ドキュメントの抜粋を同梱するのはリスキー。URLリンク中心に置き換え or 最小限の要約＋出典リンクに。
+ - docs/remotion-reference.md（“オフライン参照用”）：公式ドキュメントの抜粋を同梱するのはリスキーですので、URLリンク中心に置き換え or 最小限の要約＋出典リンクにしてください
   - companies.remotion.dev
 
 📏 ライセンス実務の注意
