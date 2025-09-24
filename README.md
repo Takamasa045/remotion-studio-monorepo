@@ -379,3 +379,16 @@ PeerDependencies（注意）
 
 ## ライセンス
 MIT License（このリポジトリ直下の `LICENSE` を参照）
+
+This repository provides templates and scripts only.
+It does not redistribute the Remotion software.
+Users install Remotion via npm (e.g. pnpm i remotion @remotion/cli).
+This project is unofficial and not affiliated with or endorsed by Remotion.
+For Remotion’s license & terms, see the official docs.
+
+（日本語版）
+
+このリポジトリはテンプレート／スクリプトのみを提供します。
+Remotion本体の同梱・再配布は行いません（利用者が pnpm i remotion @remotion/cli 等で導入）。
+本プロジェクトは非公式であり、Remotionの提携・公認ではありません。
+ライセンスと規約は必ず公式ドキュメントをご確認ください。
