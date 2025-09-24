@@ -2,6 +2,86 @@
 
 Remotion + React の「テンプレート専用」リポジトリです。`apps/_template` を元に新規プロジェクトを作成し、各アプリ内で開発・レンダリングを行います。
 
+## クイックスタート（セットアップ）
+
+このリポジトリは Git サブモジュール（`apps`）を利用しています。クローン時は必ずサブモジュールも取得してください。
+
+前提ソフト（必須）
+- Node.js 18+（推奨: 20）/ 推奨: `nvm` などでバージョン管理
+- pnpm 8+
+- ffmpeg（レンダリングに必要）
+
+バージョン確認
+```
+node -v
+pnpm -v
+ffmpeg -version
+```
+
+1) リポジトリをクローン（推奨: SSH、サブモジュール込み）
+
+```
+# SSH の場合（推奨: サブモジュールURLもSSHのため）
+git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
+
+# HTTPS の場合（SSH未設定の方向け）
+git clone https://github.com/Takamasa045/remotion-studio.git
+cd remotion-studio
+# サブモジュールを初期化・取得
+ git submodule update --init --recursive
+```
+
+2) 依存のインストール（Node.js 18+ / 推奨: 20、pnpm 8+）
+
+```
+cd remotion-studio
+# pnpm が無ければ（任意の方法で）
+# 推奨: corepack を使う（Node 18+ で利用可）
+# corepack enable && corepack prepare pnpm@latest --activate
+# もしくはグローバル: npm i -g pnpm
+
+# Node バージョン切替（必要な場合）
+# nvm install 20 && nvm use 20
+
+pnpm install
+```
+
+3) 動作確認（デモアプリで起動）
+
+```
+# 例: デモアプリをプレビュー起動
+cd apps/demo-showcase
+pnpm dev
+
+# レンダリング（mp4 出力）
+pnpm build
+```
+
+4) 新規プロジェクト作成（テンプレから生成）
+
+```
+cd <repo-root>
+pnpm create:project
+# → 対話で name / width / height / fps / duration / compositionId を入力
+cd apps/<name>
+pnpm dev
+```
+
+補足
+- ffmpeg が未インストールの場合は導入してください（macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: 各ディストリのパッケージマネージャ）。
+- サブモジュールの取得状況は `git submodule status` で確認できます。HTTPS でクローンした場合に権限エラーが出るときは、SSH 設定を行うか `.gitmodules` の URL を HTTPS に変更して `git submodule sync --recursive` を実行してください。
+
+各アプリの起動・ビルド例
+```
+# three アプリの起動
+cd apps/three
+pnpm dev
+
+# playlist-mv アプリのレンダリング
+cd apps/playlist-mv
+pnpm build
+```
+
 ## 特徴
 - pnpm workspaces を用いた堅牢なモノレポ運用
 - 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
@@ -256,12 +336,27 @@ PeerDependencies（注意）
 - remotion コマンドが見つからない
   - 該当アプリに `@remotion/cli` を追加: `pnpm -F @studio/<app> add -D @remotion/cli`
   - もしくはワークスペースに追加: `pnpm -w add -D @remotion/cli`
+- サブモジュール関連
+  - 初期化・取得していない: `git submodule update --init --recursive`
+  - 取得内容を最新にしたい: `git submodule update --remote --merge`
+  - HTTPS クローンで権限エラー: `.gitmodules` の URL を HTTPS に変更し同期
+    - `git config -f .gitmodules submodule.apps.url https://github.com/Takamasa045/remotion-studio-apps.git`
+    - `git submodule sync --recursive`
+    - `git submodule update --init --recursive`
+  - `fatal: not a git repository` が出る: リポジトリ直下で実行しているか確認
 - `import.meta` の警告
   - remotion.config.ts は `process.cwd()` ベースで解決する実装にしているため、警告は出ない構成です（古い設定が残っていれば差し替え）
 - tsconfig の `must have at most one "*"` 警告
   - 1エントリ1つの `*` になるよう `paths` を分割済み
 - エントリポイントが見つからない
   - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレ/デモは同梱済み。
+- ffmpeg が見つからない
+  - macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: `apt/yum` などで導入後、`ffmpeg -version` で確認
+- Node バージョン起因のエラー
+  - `nvm install 20 && nvm use 20` で切り替え。`node -v` で確認
+- ポート競合（EADDRINUSE）
+  - 既存の開発サーバを停止するか、別ポートで起動
+  - 例: macOS で 3000 番のプロセス確認 `lsof -i :3000`
 
 ## scripts と docs の用途
 - scripts/（CLI スクリプト群）
