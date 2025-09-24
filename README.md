@@ -71,7 +71,7 @@ pnpm dev
 - ffmpeg が未インストールの場合は導入してください（macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: 各ディストリのパッケージマネージャ）。
 - サブモジュールの取得状況は `git submodule status` で確認できます。HTTPS でクローンした場合に権限エラーが出るときは、SSH 設定を行うか `.gitmodules` の URL を HTTPS に変更して `git submodule sync --recursive` を実行してください。
 
-各アプリの起動・ビルド例（公開リポは `_template` と `demo-showcase` のみ同梱）
+各アプリの起動・ビルド例（公開リポは `_template` と `demo-showcase` と `3D-template` を同梱）
 ```
 # demo アプリの起動
 cd apps/demo-showcase
