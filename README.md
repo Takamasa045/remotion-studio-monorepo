@@ -131,18 +131,6 @@ pnpm install
 - ビルド済みプレビュー: `pnpm preview`
 - レンダリング（mp4）: `pnpm build`
 
-## ドキュメント/ライセンスに関する注意点
-
- - docs/remotion-reference.md（“オフライン参照用”）：公式ドキュメントの抜粋を同梱するのはリスキーですので、URLリンク中心に置き換え or 最小限の要約＋出典リンクにしてください
-  - companies.remotion.dev
-
-📏 ライセンス実務の注意
-
-- チーム規模の数え方は「関わる全社合算で4名以上ならCompany License」。代理店×クライアントの合算で閾値を超えると有料に。
-  - companies.remotion.dev
-- クラウドでレンダを回すならCloud Rendering Unitの自己申告が必要（ローカルのみなら不要）。
-  - companies.remotion.dev
-
  
 
 ## MCP 設定
