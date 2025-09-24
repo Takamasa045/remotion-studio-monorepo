@@ -131,6 +131,38 @@ pnpm install
 - ビルド済みプレビュー: `pnpm preview`
 - レンダリング（mp4）: `pnpm build`
 
+## ドキュメント/ライセンスに関する注意点
+
+- docs/remotion-reference.md（“オフライン参照用”）：公式ドキュメントの抜粋を同梱するのはリスキー。URLリンク中心に置き換え or 最小限の要約＋出典リンクに。
+  - companies.remotion.dev
+
+📏 ライセンス実務の注意
+
+- チーム規模の数え方は「関わる全社合算で4名以上ならCompany License」。代理店×クライアントの合算で閾値を超えると有料に。
+  - companies.remotion.dev
+- クラウドでレンダを回すならCloud Rendering Unitの自己申告が必要（ローカルのみなら不要）。
+  - companies.remotion.dev
+
+### READMEに入れておくと安心な一文（コピペOK）
+
+```
+This repository provides templates and scripts only.
+It does not redistribute the Remotion software.
+Users install Remotion via npm (e.g. pnpm i remotion @remotion/cli).
+This project is unofficial and not affiliated with or endorsed by Remotion.
+For Remotion’s license & terms, see the official docs.
+```
+
+（日本語版）
+
+```
+このリポジトリはテンプレート／スクリプトのみを提供します。
+Remotion本体の同梱・再配布は行いません（利用者が pnpm i remotion @remotion/cli 等で導入）。
+本プロジェクトは非公式であり、Remotionの提携・公認ではありません。
+ライセンスと規約は必ず公式ドキュメントをご確認ください。
+companies.remotion.dev
+```
+
 ## MCP 設定
 
 ### Claude Code
