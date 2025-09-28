@@ -1,151 +1,175 @@
+[EN](./README.md) | [JA](./README.ja.md)
+
 # Remotion Studio Monorepo
 
-Remotion + React の「テンプレート専用」リポジトリです。`apps/_template` を元に新規プロジェクトを作成し、各アプリ内で開発・レンダリングを行います。
+A template‑only repository for **Remotion + React**. Create new projects from `apps/_template`, then develop & render **inside each app**.
 
-## クイックスタート（セットアップ）
+---
 
-このリポジトリは Git サブモジュール（`apps`）を利用しています。クローン時は必ずサブモジュールも取得してください。
+## Quick Start
 
-前提ソフト（必須）
-- Node.js 18+（推奨: 20）/ 推奨: `nvm` などでバージョン管理
-- pnpm 8+
-- ffmpeg（レンダリングに必要）
+> This repository uses **Git submodules** (`apps`). **Be sure to fetch submodules** when cloning.
 
-バージョン確認
-```
+### Prerequisites
+
+* **Node.js 18+** (recommended: 20) — consider using **nvm**
+* **pnpm 8+**
+* **ffmpeg** (required for rendering)
+
+Check versions:
+
+```bash
 node -v
 pnpm -v
 ffmpeg -version
 ```
 
-1) リポジトリをクローン（推奨: SSH、サブモジュール込み）
+### Clone (submodules included)
 
-```
-# SSH の場合（推奨: サブモジュールURLもSSHのため）
+**SSH (recommended, submodule URLs are SSH):**
+
+```bash
 git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
+```
 
-# HTTPS の場合（SSH未設定の方向け）
+**HTTPS:**
+
+```bash
 git clone https://github.com/Takamasa045/remotion-studio.git
 cd remotion-studio
-# サブモジュールを初期化・取得
- git submodule update --init --recursive
+# Initialize & fetch submodules if you didn’t use --recurse-submodules
+git submodule update --init --recursive
 ```
 
-2) 依存のインストール（Node.js 18+ / 推奨: 20、pnpm 8+）
+### Install
 
-```
+```bash
 cd remotion-studio
-# pnpm が無ければ（任意の方法で）
-# 推奨: corepack を使う（Node 18+ で利用可）
+# If pnpm is not installed:
 # corepack enable && corepack prepare pnpm@latest --activate
-# もしくはグローバル: npm i -g pnpm
-
-# Node バージョン切替（必要な場合）
+# or: npm i -g pnpm
+# (Optional) Switch Node:
 # nvm install 20 && nvm use 20
-
 pnpm install
 ```
 
-3) 動作確認（デモアプリで起動）
+### Verify (run demo app)
 
-```
-# 例: デモアプリをプレビュー起動
+```bash
 cd apps/demo-showcase
-pnpm dev
-
-# レンダリング（mp4 出力）
-pnpm build
+pnpm dev      # preview mode
+pnpm build    # render to mp4
 ```
 
-4) 新規プロジェクト作成（テンプレから生成）
+### Create a New Project (from template)
 
-```
+```bash
 cd <repo-root>
 pnpm create:project
-# → 対話で name / width / height / fps / duration / compositionId を入力
+# Answer prompts: name / width / height / fps / duration / compositionId
 cd apps/<name>
 pnpm dev
 ```
 
-補足
-- ffmpeg が未インストールの場合は導入してください（macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: 各ディストリのパッケージマネージャ）。
-- サブモジュールの取得状況は `git submodule status` で確認できます。HTTPS でクローンした場合に権限エラーが出るときは、SSH 設定を行うか `.gitmodules` の URL を HTTPS に変更して `git submodule sync --recursive` を実行してください。
+---
 
-各アプリの起動・ビルド例（公開リポは `_template` と `demo-showcase` と `3D-template` を同梱）
-```
-# demo アプリの起動
+## Notes
+
+* Install `ffmpeg` if missing:
+
+  * macOS: `brew install ffmpeg`
+  * Windows: `choco install ffmpeg`
+  * Linux: use your distro’s package manager
+* Check submodule status: `git submodule status`.
+
+  * If you cloned via HTTPS and hit permission errors, either set up SSH **or** change `.gitmodules` URLs to HTTPS and run `git submodule sync --recursive`.
+* **Public repo contents (examples)**: `_template`, `demo-showcase`, `3D-template`.
+
+### App start & build (examples)
+
+```bash
+# Start demo app
 cd apps/demo-showcase
 pnpm dev
 
-# テンプレから新規作成（例: my-app）
+# Create a new app from template (example: my-app)
 cd <repo-root>
 pnpm create:project
 cd apps/my-app
 pnpm build
 ```
 
-## 特徴
-- pnpm workspaces を用いた堅牢なモノレポ運用
-- 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
- 
-- オフライン参照用リファレンス（docs/remotion-reference.md）
-- タイムライン（@studio/timing）、Anime.js ブリッジ、トランジション、R3F、Pixi/Konva、WebGL エフェクト
-- 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
-- CI（lint / build / デモ自動レンダリング）
+---
 
-## 構成（標準ブループリント）
-以下はテンプレ運用の推奨レイアウトです（現状のリポジトリには最小限のみ含まれます）。
+## Features
+
+* Monorepo powered by **pnpm workspaces**
+* **Template** `apps/_template` and **demo** `apps/demo-showcase`
+* **Offline reference**: `docs/remotion-reference.md`
+* **Timeline utilities** (`@studio/timing`), **Anime.js bridge**, transitions, R3F, Pixi/Konva, WebGL effects
+* Productivity scripts (dev/preview/build runners, **batch rendering**, **asset sync**, **template replacement**)
+* Optional CI (lint / build / automatic demo rendering)
+
+---
+
+## Structure (Standard Blueprint)
 
 ```
 remotion-studio/
   apps/
-    _template/        # 新規プロジェクト用テンプレ（この雛形を複製して使う）
-    demo-showcase/    # デモ・ショーケース（例・任意）
+    _template/        # Template skeleton used by pnpm create:project
+    demo-showcase/    # Demo app (optional)
   packages/
-    @core/            # 基盤層（timing/hooks/types などの共有コード／例・任意）
-    @animation/       # アニメーション層（anime-bridge/transitions/easings／例・任意）
-    @visual/          # ビジュアル層（canvas2d/three/shaders/effects／例・任意）
-    @audio/           # オーディオ層（雛形／例・任意）
-    @content/         # コンテンツ層（雛形／例・任意）
-    @design/          # デザイン（assets/tokens/themes／例・任意）
-  scripts/            # CLI スクリプト群（create-project 等。用途は後述）
-  docs/               # ドキュメント（運用メモ・参照資料等。用途は後述）
+    @core/            # Shared timing/hooks/types (optional)
+    @animation/       # Anime bridge / transitions / easings (optional)
+    @visual/          # Canvas2D/Three/shaders/effects (optional)
+    @audio/           # Audio layer (optional)
+    @content/         # Content layer (optional)
+    @design/          # Assets/tokens/themes (optional)
+  scripts/            # CLI scripts (create-project, runners, etc.)
+  docs/               # References & ops notes
 ```
 
-注記: 現在のリポジトリは「テンプレ最小構成」のため、実体としては `apps/_template` と最低限の `scripts`/`docs` のみを含みます。他は将来必要に応じて追加・生成してください。
+> This repo ships **minimal template** parts: `apps/_template` plus minimal `scripts/` and `docs/`. Add others as needed.
 
-## 要件
-- Node.js 18+（推奨: 20）
-- pnpm 8+（推奨: 最新）
-- ffmpeg（レンダリングに必要）
+---
 
-## セットアップ
-```
+## Requirements
+
+* Node.js 18+ (20 recommended)
+* pnpm 8+ (latest recommended)
+* ffmpeg
+
+### Setup
+
+```bash
 pnpm install
 ```
 
-## 使い方
-- 新規アプリ作成: `pnpm create:project`（name / width / height / fps / duration / compositionId を対話入力）
-- 生成後にアプリへ移動: `cd apps/<name>`
-- 開発サーバ起動（プレビュー）: `pnpm dev`
-- ビルド済みプレビュー: `pnpm preview`
-- レンダリング（mp4）: `pnpm build`
+### Usage
 
- 
+* Create new app: `pnpm create:project` (interactive)
+* Move into app: `cd apps/<name>`
+* Preview: `pnpm dev`
+* Preview built output: `pnpm preview`
+* Render (mp4): `pnpm build`
 
-## MCP 設定
+---
+
+## MCP Setup (optional)
 
 ### Claude Code
-端末で追加:
 
-```
+Add via terminal:
+
+```bash
 claude mcp add
 # Name: remotion-documentation
 # Command: npx
 # Args: @remotion/mcp@latest
 ```
 
-GUI ウィザードを使わない場合は設定に以下を追記:
+Manual settings (if not using GUI):
 
 ```json
 {
@@ -158,10 +182,11 @@ GUI ウィザードを使わない場合は設定に以下を追記:
 }
 ```
 
-→ Claude のチャットで「remotion-documentation を使って “render h264 フラグ” を調べて」と指示。公式ガイド通りの設定です（remotion.dev）。
+Usage example in chat: “Use **remotion-documentation** to look up the **render h264** flag.” (per remotion.dev guidance)
 
-### Codex（OpenAI Codex CLI）
-`~/.codex/config.toml` に追記:
+### Codex (OpenAI Codex CLI)
+
+Append to `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.remotion_documentation]
@@ -170,225 +195,310 @@ command = "npx"
 args = ["@remotion/mcp@latest"]
 ```
 
-## 新規プロジェクト作成
-テンプレ（apps/_template）から対話で生成します。
-```
+---
+
+## Creating a New Project (details)
+
+```bash
 pnpm create:project
 ```
-入力例:
-- name: `my-app` → apps/my-app として作成 / package 名は `@studio/my-app`
-- width/height/fps/duration: 数値で指定
 
-生成後（デフォルトでは Composition ID は `Main` に設定されます。対話で変更可）:
-```
+**Example inputs**
+
+* `name: my-app` → creates `apps/my-app` (pkg name `@studio/my-app`)
+* `width / height / fps / duration`: numeric values
+
+**After generation**
+
+```bash
 cd apps/my-app
 pnpm dev
 ```
 
-### アセット（CSS・フォント・画像・音源・動画など）
+---
 
-- 各アプリは `public/` が公開ルートです。`pnpm create:project` で生成すると、次のサブフォルダが自動作成されます（.gitkeep 付き）。
+## Assets (CSS / Fonts / Images / Audio / Video)
+
+Each app serves static files from `public/`. After `pnpm create:project`, subfolders are scaffolded with `.gitkeep`:
 
 ```
 public/
   assets/
-    images/   # PNG/JPG/SVG など
-    audio/    # MP3/WAV/WEBM など
-    video/    # MP4/WEBM など
-    fonts/    # WOFF/TTF など（@font-face + staticFile で参照）
-    css/      # スタンドアロンCSS（必要なら staticFile で取得）
-    data/     # JSON などのデータ
-    lottie/   # Lottie JSON
+    images/  # PNG/JPG/SVG …
+    audio/   # MP3/WAV/WEBM …
+    video/   # MP4/WEBM …
+    fonts/   # WOFF/TTF … (use @font-face + staticFile)
+    css/     # Optional CSS (can be injected)
+    data/    # JSON, etc.
+    lottie/  # Lottie JSON
 ```
 
-- 使い方の例
-  - 画像: `/assets/images/logo.png`
-  - 音声: `/assets/audio/bgm.mp3`
-  - 動画: `/assets/video/clip.mp4`
-  - CSS: `src/styles` でインポート推奨（例: `import './styles/app.css'`）。外部CSSを `public/assets/css` に置く場合は `staticFile('/assets/css/app.css')` から取得し、`<style>` へ流し込む等で適用できます。
-  - フォント: `public/assets/fonts` へ配置し、CSSの `@font-face` で `src: url(staticFile('/assets/fonts/xxx.woff2'))` を指定。
+**Examples**
 
-- リリック（LRC）の配置ルール（標準）
-  - 音声ファイルと同じディレクトリ（assets/audio）に、同じベース名で `.lrc` を置きます。
-  - 例: `/assets/audio/song.mp3` に対して `/assets/audio/song.lrc`
-  - コード例（取得）:
-    ```ts
-    const lrc = await fetch('/assets/audio/song.lrc').then(r => r.text());
-    // 必要に応じて LRC をパースして [{timeMs, text}] などに変換
-    ```
+* Image: `/assets/images/logo.png`
+* Audio: `/assets/audio/bgm.mp3`
+* Video: `/assets/video/clip.mp4`
+* CSS: Prefer `src/styles` imports (e.g. `import './styles/app.css'`). If placing under `public/assets/css`, fetch via `staticFile('/assets/css/app.css')` and inject into `<style>`.
+* Fonts: Place under `public/assets/fonts` and define in CSS with `@font-face` (e.g. `src: url(staticFile('/assets/fonts/xxx.woff2'))`).
 
-<!-- 共通アセット同期スクリプトはテンプレには含めていません。必要なら scripts/ に追加してください。 -->
+**Lyrics (LRC) convention**
 
-- バージョン管理の注意
-  - 大きなバイナリ（長尺の動画・音源）は Git LFS などの利用を推奨します。
-  - プロジェクト固有のストレージ/CDN を使う場合は、`public/` ではなく実行時に取得する運用でもOKです。
+* Put the `.lrc` file **next to** the audio file, e.g. `/assets/audio/song.mp3` → `/assets/audio/song.lrc`
 
-### ライブラリの考え方（なぜ必要？ 起動時？ 追加方法？）
+```ts
+const lrc = await fetch('/assets/audio/song.lrc').then(r => r.text());
+// Parse into [{ timeMs, text }] as needed
+```
 
-なぜ必要か（用途別の代表例）
-- アニメーション強化: `animejs`（`@studio/anime-bridge`）/ `@studio/transitions` / `@studio/easings`
-- 2D/Canvas 系: `pixi.js`, `konva`（`@studio/visual-canvas2d`）
-– 3D/R3F 系: `three`, `@react-three/fiber`, `@react-three/drei`, `@remotion/three`
-- 入力検証/スキーマ: `zod`（`@remotion/zod-types` 連携）
-- メディアユーティリティ: `@remotion/media-utils` など
+**Version control**
 
-起動時（dev/preview/render）の挙動
-- Remotion CLI（Webpack）がエントリ `src/index.ts` を基点に依存をバンドルします。
-- テンプレはモノレポの独自エイリアスに依存しません（`remotion.config.ts` は素のまま）。
-- `pnpm install` 時に一部パッケージは `prepare` スクリプトで `dist` を生成しますが、開発時のバンドルは `src` を参照します（ホットリロードが高速）。
-- `public/` 以下のアセットは `staticFile()` で解決され、開発サーバ経由で配信されます。
+* For large binaries (long videos/audio), consider **Git LFS**.
+* Alternatively, fetch assets at runtime from external storage/CDN.
 
-追加方法（ケース別）
-- あるアプリだけで使う
-  - `pnpm add <pkg> --filter @studio/<app>`
-  - 例: `pnpm add animejs --filter @studio/demo-showcase`
-  - 型定義は開発依存で: `pnpm add -D @types/<pkg> --filter @studio/<app>`
-- 複数アプリで使う
-  - それぞれのアプリに必要な依存を追加してください（テンプレは最小構成）。
-- 共有パッケージを作りたい
-  - このテンプレでは既定で `packages/` は使いません。必要になったら作成して workspace に追加してください。
+---
 
-PeerDependencies（注意）
-- 内製パッケージは、外部ライブラリを `peerDependencies` にしている場合があります。
-  - 例: `@studio/visual-three` を使うアプリでは、`pnpm add three @react-three/fiber --filter @studio/<app>` が必要
-  - 例: `@studio/visual-canvas2d` を使うアプリでは、`pnpm add pixi.js konva --filter @studio/<app>` が必要
+## Why These Libraries? (When / How)
 
-ブラウザ実行の前提（落とし穴）
-- Composition 側のコードはブラウザで実行されるため、`fs`, `path`, `net` などの Node.js 専用モジュールは使えません。
-  - こういった処理は Node スクリプト（`scripts/` 配下）やビルド時前処理、あるいは `remotion.config.ts` 側へ分離してください。
-- ライブラリが CSS を伴う場合は、明示的に import が必要なことがあります。
-  - 例: `import 'your-lib/dist/styles.css'`
+**Typical use cases**
 
-導入後の基本手順
-- 依存追加後は `pnpm install` を実行し、ロックファイルを更新してコミットします。
-- 開発: 対象アプリ配下で `pnpm dev` / プレビュー: `pnpm preview` / レンダ: `pnpm build`
-- ビルド時にエラーが出る場合は、`remotion.config.ts` で `overrideWebpackConfig` による調整（`alias` 追加、ブラウザ向けビルドを指すようにする等）を検討してください。
+* **Animation**: `animejs` via `@studio/anime-bridge`, plus `@studio/transitions`, `@studio/easings`
+* **2D / Canvas**: Pixi.js, Konva via `@studio/visual-canvas2d`
+* **3D / R3F**: `three`, `@react-three/fiber`, `@react-three/drei`, `@remotion/three`
+* **Validation**: `zod` (+ `@remotion/zod-types`)
+* **Media utils**: `@remotion/media-utils`, etc.
 
-#### 3D/R3F 導入メモ
-- インストール（アプリ配下）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350`
-- またはルートから（workspace filter）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
-- 互換性: Remotion v4.0.350 に対して `@remotion/three@^4.0.350` を推奨
-- WebGL の安定化（必要時）: 各アプリの `remotion.config.ts` で `Config.setChromiumOpenGlRenderer('angle')` 等を指定可能
-- アセット読み込み: `public/` にモデル/テクスチャを置き、`staticFile('/assets/...')` の URL を `useGLTF()` などへ渡す
+**Dev / Preview / Render behavior**
 
-### どんな人が入れるといいのか（使用例）
-このモノレポは全部入りではなく、必要な機能だけを組み合わせる設計になっています。
-用途に応じて、以下のようにライブラリ（peerDependencies）を追加してください。
+* Remotion CLI (Webpack) bundles from `src/index.ts` (entry).
+* Template avoids monorepo‑specific aliases; `remotion.config.ts` is minimal.
+* During `pnpm install`, some packages build `dist` via `prepare`, while dev uses `src` for faster HMR.
+* Assets under `public/` are resolved via `staticFile()`.
 
-- 🎞 シンプルに動画を作りたい
-  - `apps/hello` か `apps/_template` でOK（最小構成）
-- ✨ フェードやイージングを付けたい
-  - `@studio/transitions`, `@studio/easings` を import すれば追加インストール不要
-- 🌀 滑らかなトゥイーンや細かい動きを付けたい
-  - `pnpm add animejs --filter @studio/<app>` を実行し、`@studio/anime-bridge` を使用
-- 🎨 2D グラフィックス（Pixi / Konva）を使いたい
-  - `pnpm add pixi.js konva --filter @studio/<app>` の上で `@studio/visual-canvas2d` を利用
-- 🏔 3D 表現（Three.js + React Three Fiber）を使いたい
-  - `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
-- 🎵 音声や歌詞同期（LRC）を扱いたい
-  - `@studio/timing`, `@studio/core-hooks` を利用（追加インストール不要）。歌詞ファイルは `assets/audio/` に配置
+**Adding dependencies**
 
-<!-- Studio Lite セクションは削除（混乱防止のため） -->
+* **One app only**
 
-### テンプレのプレースホルダ
-- `__PACKAGE__` → `@studio/<slug>` に置換
-- `__APP_NAME__` → `<slug>` に置換
-- （必要なら）`pnpm templateize` でテンプレ自体をプレースホルダ化
+  ```bash
+  pnpm add <pkg> --filter @studio/<app>
+  pnpm add -D @types/<pkg> --filter @studio/<app>
+  ```
+* **Multiple apps**
 
-## パッケージ一覧（要点）
-- 基盤
-  - `@studio/timing`: タイムライン/進捗/フレーム換算
-  - `@studio/core-hooks`: `useAnimationFrame`, `useMediaTiming`
-  - `@studio/core-types`: 共有型
-- アニメーション
-  - `@studio/anime-bridge`: Anime.js ブリッジ + `useAnime`
-  - `@studio/transitions`: `FadeIn/FadeOut/CrossFade/SlideIn/Wipe`
-  - `@studio/easings`: cubicBezier/各種 Easing + Anime 変換
-- ビジュアル
-  - `@studio/visual-canvas2d`: Pixi/Konva 連携
-  - `@studio/visual-three`: R3F ラッパー、カメラ/ライトプリセット
-  - `@studio/visual-shaders`: ShaderCanvas（WebGL）
-  - `@studio/visual-effects`: グリッチ/ブラー/グロー等（シェーダベース）
-- デザイン
-  - `@design/assets`: 共通アセット（`pnpm sync:assets`で各アプリへ）
+  * Add per app (template remains minimal).
+* **Shared packages**
 
-注: 一部は peerDependencies（react/three/@react-three/fiber/animejs/pixi.js/konva 等）です。必要なアプリで追加してください。
+  * Not used by default. Create under `packages/` when needed and add to the workspace.
 
-## Remotion 設定（テンプレ）
-- いま設定は不要です（テンプレはそのまま動きます）。
-- `@remotion/cli/config` の `Config.overrideWebpackConfig` は最小のまま利用しています（デフォルトでOK）。
-- 必要になったときだけ、各アプリの `remotion.config.ts` を編集してください（例: Webpack の alias を追加）。
+**PeerDependencies (important)**
 
-## 規約（Entry / Root / 命名）
-- これは動作ルールの説明で、いま何かを設定する必要はありません。
-- Entry point: 各アプリの `src/index.ts`（または `.tsx`）がエントリで、必ず `registerRoot(Root)` を呼びます。
-- Root file: `src/Root.tsx` で `<Composition />` を宣言します（`registerRoot` はここでは呼ばない）。
-- CLI: `remotion studio` / `remotion render` はエントリ自動検出を利用し、`--entry-point` を原則省略します。
-- 命名: Root ファイルは `Root.tsx`（PascalCase）で統一します。
-- 任意: 厳密化したい場合は `remotion.config.ts` に `Config.setEntryPoint('src/index.ts')` を明示可能です。
+* `@studio/visual-three` → install `three @react-three/fiber`
+* `@studio/visual-canvas2d` → install `pixi.js konva`
 
-## TypeScript 設定（テンプレ）
-- いま設定は不要です（最小構成のままでOK）。
-- 追加のパスエイリアスが必要になったら、必要になったタイミングで拡張してください。
+**Browser context (pitfalls)**
 
-## CI
-- いまは何も設定されていません。使いたい場合のみ、GitHub Actions などを追加してください。
-- 例（任意）: `.github/workflows/ci.yml`（依存→ビルド→Prettier チェック）
-- 例（任意）: `.github/workflows/render-demo.yml`（ffmpeg セットアップ→自動レンダリング→成果物アップロード）
+* Composition code runs in the **browser**. Node‑only modules like `fs`, `path`, `net` are not available.
+* Move such logic to Node scripts (`scripts/`), build‑time prep, or `remotion.config.ts`.
+* Some libraries require CSS imports, e.g.:
 
-## トラブルシューティング
-- remotion コマンドが見つからない
-  - 該当アプリに `@remotion/cli` を追加: `pnpm -F @studio/<app> add -D @remotion/cli`
-  - もしくはワークスペースに追加: `pnpm -w add -D @remotion/cli`
-- サブモジュール関連
-  - 初期化・取得していない: `git submodule update --init --recursive`
-  - 取得内容を最新にしたい: `git submodule update --remote --merge`
-  - HTTPS クローンで権限エラー: `.gitmodules` の URL を HTTPS に変更し同期
-    - `git config -f .gitmodules submodule.apps.url https://github.com/Takamasa045/remotion-studio-apps.git`
-    - `git submodule sync --recursive`
-    - `git submodule update --init --recursive`
-  - `fatal: not a git repository` が出る: リポジトリ直下で実行しているか確認
-- `import.meta` の警告
-  - remotion.config.ts は `process.cwd()` ベースで解決する実装にしているため、警告は出ない構成です（古い設定が残っていれば差し替え）
-- tsconfig の `must have at most one "*"` 警告
-  - 1エントリ1つの `*` になるよう `paths` を分割済み
-- エントリポイントが見つからない
-  - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレ/デモは同梱済み。
-- ffmpeg が見つからない
-  - macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: `apt/yum` などで導入後、`ffmpeg -version` で確認
-- Node バージョン起因のエラー
-  - `nvm install 20 && nvm use 20` で切り替え。`node -v` で確認
-- ポート競合（EADDRINUSE）
-  - 既存の開発サーバを停止するか、別ポートで起動
-  - 例: macOS で 3000 番のプロセス確認 `lsof -i :3000`
+  ```ts
+  import 'your-lib/dist/styles.css'
+  ```
 
-## scripts と docs の用途
-- scripts/（CLI スクリプト群）
-  - `create-project.ts`
-    - 役割: `apps/_template` を複製して `apps/<name>` を作成。Width/Height/FPS/Duration/Composition ID を対話で設定。
-    - 使い方: `pnpm create:project`（ルートから）
-  - 追加の例（必要になったら作成）
-    - `dev.ts`/`preview.ts`/`build-app.ts`: 任意アプリの起動・プレビュー・ビルドを共通のUIで行うランナー
-    - `render-all.ts`: 複数アプリ・複数Compositionの一括レンダリング
-    - `sync-assets.ts`: 共通アセットの各アプリ `public/` への同期
-- docs/（ドキュメント）
-  - `remotion-reference.md`: Remotion の主要API/トラブルシューティングの要点を抜粋
-  - 推奨: チーム運用メモ（命名規約、パス設計、アセット配置方針、レビュー基準）、利用ライブラリの導入手順、ビルド/配信フローなどを追記
-  - 参考: テンプレで生成した各アプリの README も、docs からリンクしておくとオンボーディングが容易です
-<!-- 一括レンダリングやMCPのランナーはテンプレには含まれていません。必要に応じて scripts/ に追加してください。 -->
+**After adding deps (typical flow)**
 
-## ライセンス
-MIT License（このリポジトリ直下の `LICENSE` を参照）
+```bash
+pnpm install
+# In target app
+pnpm dev      # preview
+pnpm preview  # preview built output
+pnpm build    # render
+```
 
-This repository provides templates and scripts only.
-It does not redistribute the Remotion software.
-Users install Remotion via npm (e.g. pnpm i remotion @remotion/cli).
-This project is unofficial and not affiliated with or endorsed by Remotion.
-For Remotion’s license & terms, see the official docs.
+If needed, customize Webpack via `Config.overrideWebpackConfig` in `remotion.config.ts`.
 
-（日本語版）
+---
 
-このリポジトリはテンプレート／スクリプトのみを提供します。
-Remotion本体の同梱・再配布は行いません（利用者が pnpm i remotion @remotion/cli 等で導入）。
-本プロジェクトは非公式であり、Remotionの提携・公認ではありません。
-ライセンスと規約は必ず公式ドキュメントをご確認ください。
+## 3D / R3F Notes
+
+**Per‑app install**
+
+```bash
+pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350
+```
+
+**Or from root (workspace filter)**
+
+```bash
+pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>
+```
+
+* Compatibility: Remotion `v4.0.350` ↔ `@remotion/three@^4.0.350`.
+* WebGL stability: in `remotion.config.ts`, you may set `Config.setChromiumOpenGlRenderer('angle')`.
+* Asset loading: place models/textures in `public/`, pass URLs from `staticFile('/assets/...)` to loaders like `useGLTF()`.
+
+---
+
+## Who Is This For?
+
+This monorepo is **not** a kitchen‑sink. Compose only what you need and add `peerDependencies` per use case.
+
+* **Simple videos** → use `apps/_template` (minimal)
+* **Fades & easings** → `@studio/transitions`, `@studio/easings`
+* **Nuanced motion** → `pnpm add animejs --filter @studio/<app>` + `@studio/anime-bridge`
+* **2D (Pixi/Konva)** → `pnpm add pixi.js konva --filter @studio/<app>` + `@studio/visual-canvas2d`
+* **3D (Three.js + R3F)** → install `three @react-three/fiber @react-three/drei @remotion/three@^4.0.350`
+* **Audio & LRC lyrics** → `@studio/timing`, `@studio/core-hooks` (place `.lrc` under `assets/audio/`)
+
+---
+
+## Template Placeholders
+
+* `__PACKAGE__` → `@studio/<slug>`
+* `__APP_NAME__` → `<slug>`
+
+Optional: run `pnpm templateize` to parameterize the template itself.
+
+---
+
+## Package List (highlights)
+
+**Foundation**
+
+* `@studio/timing`: timeline / progress / frame conversions
+* `@studio/core-hooks`: `useAnimationFrame`, `useMediaTiming`
+* `@studio/core-types`: shared types
+
+**Animation**
+
+* `@studio/anime-bridge`: Anime.js bridge + `useAnime`
+* `@studio/transitions`: `FadeIn` / `FadeOut` / `CrossFade` / `SlideIn` / `Wipe`
+* `@studio/easings`: `cubicBezier` + common easings (Anime conversions)
+
+**Visual**
+
+* `@studio/visual-canvas2d`: Pixi/Konva integration
+* `@studio/visual-three`: R3F wrappers, camera/light presets
+* `@studio/visual-shaders`: `ShaderCanvas` (WebGL)
+* `@studio/visual-effects`: glitch / blur / glow (shader‑based)
+
+**Design**
+
+* `@design/assets`: shared assets (sync via `pnpm sync:assets`)
+
+> Some are `peerDependencies` (`react`, `three`, `@react-three/fiber`, `animejs`, `pixi.js`, `konva`, etc.). Install them in the apps that need them.
+
+---
+
+## Remotion Settings (Template)
+
+No settings required. The template works out of the box with minimal `remotion.config.ts`. Edit only if necessary (e.g., aliases).
+
+---
+
+## Conventions (Entry / Root / Naming)
+
+* **Entry**: `src/index.ts` (or `.tsx`) per app → must call `registerRoot(Root)`
+* **Root file**: `src/Root.tsx` declares `<Composition />` (do **not** call `registerRoot` here)
+* **CLI**: `remotion studio` / `remotion render` auto‑detect entry → omit `--entry-point`
+* **Naming**: Use `Root.tsx` (PascalCase) for the root component
+* Optional strictness: `Config.setEntryPoint('src/index.ts')` in `remotion.config.ts`
+
+---
+
+## TypeScript Settings
+
+Defaults are minimal. Add path aliases only if needed.
+
+---
+
+## CI (optional)
+
+Not configured by default. Add GitHub Actions if desired, e.g.:
+
+* `.github/workflows/ci.yml` (install → build → Prettier check)
+* `.github/workflows/render-demo.yml` (setup ffmpeg → auto‑render → upload artifacts)
+
+---
+
+## Troubleshooting
+
+**`remotion` command not found**
+
+```bash
+pnpm -F @studio/<app> add -D @remotion/cli
+# or workspace‑wide:
+pnpm -w add -D @remotion/cli
+```
+
+**Submodules**
+
+```bash
+git submodule update --init --recursive          # init/fetch
+git submodule update --remote --merge            # update to latest
+# If HTTPS clone causes permission issues, switch .gitmodules to HTTPS and sync:
+git config -f .gitmodules submodule.apps.url \
+  https://github.com/Takamasa045/remotion-studio-apps.git
+git submodule sync --recursive
+git submodule update --init --recursive
+```
+
+**`fatal: not a git repository`** → ensure you run commands at the repo root.
+
+**`import.meta` warnings** → `remotion.config.ts` resolves with `process.cwd()`. Replace older configs if needed.
+
+**`tsconfig` “must have at most one *”** → Ensure each paths entry has at most one `*`.
+
+**Entry point not found** → Each app must have `src/index.ts` as the Remotion v4 entry; template/demo already include it.
+
+**`ffmpeg` not found**
+
+```bash
+# macOS
+brew install ffmpeg
+# Windows
+choco install ffmpeg
+# Linux
+ffmpeg -version  # ensure installed via apt/yum/etc.
+```
+
+**Node version issues**
+
+```bash
+nvm install 20 && nvm use 20
+node -v
+```
+
+**Port conflict (`EADDRINUSE`)**
+
+```bash
+# Example (macOS): check port 3000
+lsof -i :3000
+```
+
+---
+
+## Purpose of `scripts/` and `docs/`
+
+### `scripts/` (CLI)
+
+* `create-project.ts` — duplicates `apps/_template` → `apps/<name>`; prompts **Width/Height/FPS/Duration/Composition ID**
+
+  * Run from root: `pnpm create:project`
+* Examples (optional to add): `dev.ts` / `preview.ts` / `build-app.ts` / `render-all.ts` / `sync-assets.ts`
+
+### `docs/` (Documentation)
+
+* `remotion-reference.md`: highlights of Remotion APIs & troubleshooting
+* Team ops notes: naming rules, path strategy, asset policy, review criteria
+* Library setup steps, build/distribution flow
+* Tip: Link from `docs/` to each generated app’s README for onboarding
+
+---
+
+## License
+
+**MIT License** — see `LICENSE` at the repository root.
+
+> This repository provides **templates and scripts only** and **does not redistribute Remotion**.
+> Install Remotion via npm (e.g., `pnpm i remotion @remotion/cli`).
+> This project is **unofficial** and **not affiliated with or endorsed by Remotion**. For Remotion’s license & terms, see the official docs.
