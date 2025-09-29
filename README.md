@@ -53,6 +53,10 @@ cd remotion-studio
 pnpm install
 ```
 
+Note (3D disabled by default)
+- The workspace excludes `apps/3D-template` and the demo’s `ThreeLogo` composition to avoid requiring a local `@studio/visual-three` package.
+- If you want 3D, add `apps/3D-template` back to `pnpm-workspace.yaml` and provide `@studio/visual-three` under `packages/` (or switch the app dependency to a published version if available).
+
 ### Verify (run demo app)
 
 ```bash
@@ -83,7 +87,7 @@ pnpm dev
 * Check submodule status: `git submodule status`.
 
   * If you cloned via HTTPS and hit permission errors, either set up SSH **or** change `.gitmodules` URLs to HTTPS and run `git submodule sync --recursive`.
-* **Public repo contents (examples)**: `_template`, `demo-showcase`, `3D-template`.
+* **Public repo contents (examples)**: `_template`, `demo-showcase`, `3D-template` (not included in the workspace by default).
 
 ### App start & build (examples)
 
@@ -319,6 +323,8 @@ If needed, customize Webpack via `Config.overrideWebpackConfig` in `remotion.con
 ---
 
 ## 3D / R3F Notes
+
+Default: 3D is disabled in this repo to keep install minimal. Enable it by adding `apps/3D-template` to `pnpm-workspace.yaml` and wiring `@studio/visual-three` into the workspace (or point apps to a published version).
 
 **Per‑app install**
 
