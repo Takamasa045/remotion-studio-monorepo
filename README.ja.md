@@ -47,13 +47,6 @@ cd remotion-studio
 pnpm install
 ```
 
-注意（3D機能の初期状態）
-- 初期構成では 3D 系（`@studio/visual-three`）を使わない前提のため、ワークスペースから `apps/3D-template` を除外しています。
-- デモ内の 3D コンポジション（`ThreeLogo`）も無効化済みです。
-- 3D を使いたい場合は、次のいずれかを行ってください。
-  - `pnpm-workspace.yaml` に `apps/3D-template` を追加し、`packages/visual-three`（`name: "@studio/visual-three"`）を用意する。
-  - もしくは各アプリの `package.json` で `"@studio/visual-three"` を公開版へ差し替える（公開がある場合のみ）。
-
 3) 動作確認（デモアプリで起動）
 
 ```
@@ -273,7 +266,6 @@ PeerDependencies（注意）
 - ビルド時にエラーが出る場合は、`remotion.config.ts` で `overrideWebpackConfig` による調整（`alias` 追加、ブラウザ向けビルドを指すようにする等）を検討してください。
 
 #### 3D/R3F 導入メモ
-- 初期状態では 3D テンプレ（`apps/3D-template`）と `@studio/visual-three` は無効化しています。3D を使う場合は `pnpm-workspace.yaml` に `apps/3D-template` を追加し、`@studio/visual-three` をワークスペースに用意（または公開版へ切替）してください。
 - インストール（アプリ配下）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350`
 - またはルートから（workspace filter）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
 - 互換性: Remotion v4.0.350 に対して `@remotion/three@^4.0.350` を推奨
