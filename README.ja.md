@@ -31,6 +31,16 @@ pnpm create:project -- -t 3d
 
 （対話モードでは「Use 3D template?」に y で 3D テンプレを選択できます）
 
+テンプレ構造に影響を与えずに別リポで開発する（推奨）
+
+```
+# apps/ 配下ではなく、任意の出力先へ生成
+pnpm create:project -- <name> --dest ../my-app
+cd ../my-app
+git init && git remote add origin <your-repo> && pnpm install
+pnpm dev
+```
+
 ## フルセットアップ
 
 初回導入やチームの標準手順向け。前提ソフトの確認、サブモジュール、（任意の）スパースチェックアウト等を含みます。
