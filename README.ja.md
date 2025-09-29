@@ -24,12 +24,7 @@ ffmpeg -version
 ```
 # SSH の場合（推奨: サブモジュールURLもSSHのため）
 git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
-
-# HTTPS の場合（SSH未設定の方向け）
-git clone https://github.com/Takamasa045/remotion-studio.git
-cd remotion-studio
-# サブモジュールを初期化・取得
- git submodule update --init --recursive
+(HTTPS を使う場合は、`.gitmodules` を HTTPS に変更し `git submodule sync --recursive` の上で `git submodule update --init --recursive` を実行してください)
 ```
 
 2) 依存のインストール（Node.js 18+ / 推奨: 20、pnpm 8+）
@@ -47,18 +42,7 @@ cd remotion-studio
 pnpm install
 ```
 
-3) 動作確認（デモアプリで起動）
-
-```
-# 例: デモアプリをプレビュー起動
-cd apps/demo-showcase
-pnpm dev
-
-# レンダリング（mp4 出力）
-pnpm build
-```
-
-4) 新規プロジェクト作成（テンプレから生成）
+3) 新規プロジェクト作成（テンプレから生成）
 
 ```
 cd <repo-root>
@@ -72,23 +56,23 @@ pnpm dev
 - ffmpeg が未インストールの場合は導入してください（macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: 各ディストリのパッケージマネージャ）。
 - サブモジュールの取得状況は `git submodule status` で確認できます。HTTPS でクローンした場合に権限エラーが出るときは、SSH 設定を行うか `.gitmodules` の URL を HTTPS に変更して `git submodule sync --recursive` を実行してください。
 
-任意: apps サブモジュールをスパースチェックアウト（_template と demo のみ展開）
+任意: apps サブモジュールをスパースチェックアウト（_template と 3D のみ展開）
 
 ```
 pnpm run sparse:apps
-# 後で 3D-template も展開したい場合:
-#   cd apps && git sparse-checkout set _template demo-showcase 3D-template
+# 後で demo を展開したい場合:
+#   cd apps && git sparse-checkout set _template 3D-template demo-showcase
 ```
 
  
 
 ## 特徴
 - pnpm workspaces によるモノレポ運用
-- 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
+- テンプレ群（apps/_template と apps/3D-template）
 - オフライン参照（docs/remotion-reference.md）
 - タイムライン/アニメ/2D/3D/WebGL のユーティリティ群
 - 開発スクリプト（ランナー/一括レンダ/アセット同期/テンプレ置換）
-- CI（lint/build/デモ自動レンダリング）
+- CI（lint/build/自動レンダリング）
 
 ## 構成（標準ブループリント）
 以下はテンプレ運用の推奨レイアウトです（現状のリポジトリには最小限のみ含まれます）。
@@ -97,7 +81,7 @@ pnpm run sparse:apps
 remotion-studio/
   apps/
     _template/        # 新規プロジェクト用テンプレ（この雛形を複製して使う）
-    demo-showcase/    # デモ・ショーケース（例・任意）
+    3D-template/      # 3D 用テンプレ（Three/R3F 前提の運用に拡張しやすい）
   packages/
     @core/            # 基盤層（timing/hooks/types などの共有コード／例・任意）
     @animation/       # アニメーション層（anime-bridge/transitions/easings／例・任意）
@@ -109,7 +93,7 @@ remotion-studio/
   docs/               # ドキュメント（運用メモ・参照資料等。用途は後述）
 ```
 
-注記: 現在のリポジトリは「テンプレ最小構成」のため、実体としては `apps/_template` と最低限の `scripts`/`docs` のみを含みます。他は将来必要に応じて追加・生成してください。
+注記: 現在のリポジトリは「テンプレ最小構成」のため、実体としては `apps/_template` と `apps/3D-template`、および最小限の `scripts`/`docs` を含みます。他は必要に応じて追加・生成してください。
 
 ## 要件
 - Node.js 18+（推奨: 20）
@@ -238,7 +222,7 @@ public/
 追加方法（ケース別）
 - あるアプリだけで使う
   - `pnpm add <pkg> --filter @studio/<app>`
-  - 例: `pnpm add animejs --filter @studio/demo-showcase`
+  - 例: `pnpm add animejs --filter @studio/<app>`
   - 型定義は開発依存で: `pnpm add -D @types/<pkg> --filter @studio/<app>`
 - 複数アプリで使う
   - それぞれのアプリに必要な依存を追加してください（テンプレは最小構成）。
@@ -350,7 +334,7 @@ PeerDependencies（注意）
 - tsconfig の `must have at most one "*"` 警告
   - 1エントリ1つの `*` になるよう `paths` を分割済み
 - エントリポイントが見つからない
-  - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレ/デモは同梱済み。
+  - 各アプリの `src/index.ts` が Remotion v4 のエントリ。テンプレは同梱済み。
 - ffmpeg が見つからない
   - macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: `apt/yum` などで導入後、`ffmpeg -version` で確認
 - Node バージョン起因のエラー

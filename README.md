@@ -53,14 +53,6 @@ cd remotion-studio
 pnpm install
 ```
 
-### Verify (run demo app)
-
-```bash
-cd apps/demo-showcase
-pnpm dev      # preview mode
-pnpm build    # render to mp4
-```
-
 ### Create a New Project (from template)
 
 ```bash
@@ -83,20 +75,20 @@ pnpm dev
 * Check submodule status: `git submodule status`.
 
   * If you cloned via HTTPS and hit permission errors, either set up SSH **or** change `.gitmodules` URLs to HTTPS and run `git submodule sync --recursive`.
-* **Public repo contents (examples)**: `_template`, `demo-showcase`, `3D-template`.
+* **Public repo contents (examples)**: `_template`, `3D-template`.
 
-Optional: sparse-checkout the apps submodule (only `_template` and `demo-showcase`)
+Optional: sparse-checkout the apps submodule (only `_template` and `3D-template`)
 
 ```bash
 pnpm run sparse:apps
-# Later, to include 3D-template as well:
-#   (cd apps && git sparse-checkout set _template demo-showcase 3D-template)
+# Later, to include demo as well:
+#   (cd apps && git sparse-checkout set _template 3D-template demo-showcase)
 ```
 
 ## Features
 
 * Monorepo powered by **pnpm workspaces**
-* **Template** `apps/_template` and **demo** `apps/demo-showcase`
+* **Templates** `apps/_template`, `apps/3D-template`
 * **Offline reference**: `docs/remotion-reference.md`
 * **Timeline utilities** (`@studio/timing`), **Anime.js bridge**, transitions, R3F, Pixi/Konva, WebGL effects
 * Productivity scripts (dev/preview/build runners, **batch rendering**, **asset sync**, **template replacement**)
@@ -110,7 +102,7 @@ pnpm run sparse:apps
 remotion-studio/
   apps/
     _template/        # Template skeleton used by pnpm create:project
-    demo-showcase/    # Demo app (optional)
+    3D-template/      # 3D template
   packages/
     @core/            # Shared timing/hooks/types (optional)
     @animation/       # Anime bridge / transitions / easings (optional)
