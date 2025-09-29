@@ -43,9 +43,7 @@ pnpm dev
 
 ## フルセットアップ
 
-初回導入やチームの標準手順向け。前提ソフトの確認、サブモジュール、（任意の）スパースチェックアウト等を含みます。
-
-このリポジトリは Git サブモジュール（`apps`）を利用しています。クローン時は必ずサブモジュールも取得してください。
+初回導入やチームの標準手順向け。前提ソフトの確認などを含みます（サブモジュールは使用しません）。
 
 前提ソフト（必須）
 - Node.js 18+（推奨: 20）/ 推奨: `nvm` などでバージョン管理
@@ -62,9 +60,8 @@ ffmpeg -version
 1) リポジトリをクローン（推奨: SSH、サブモジュール込み）
 
 ```
-# SSH の場合（推奨: サブモジュールURLもSSHのため）
-git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
-(HTTPS を使う場合は、`.gitmodules` を HTTPS に変更し `git submodule sync --recursive` の上で `git submodule update --init --recursive` を実行してください)
+# SSH の場合
+git clone git@github.com:Takamasa045/remotion-studio.git
 ```
 
 2) 依存のインストール（Node.js 18+ / 推奨: 20、pnpm 8+）
@@ -94,15 +91,6 @@ pnpm dev
 
 補足
 - ffmpeg が未インストールの場合は導入してください（macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: 各ディストリのパッケージマネージャ）。
-- サブモジュールの取得状況は `git submodule status` で確認できます。HTTPS でクローンした場合に権限エラーが出るときは、SSH 設定を行うか `.gitmodules` の URL を HTTPS に変更して `git submodule sync --recursive` を実行してください。
-
-任意: apps サブモジュールをスパースチェックアウト（_template と 3D のみ展開）
-
-```
-pnpm run sparse:apps
-# 後で他のアプリを展開したい場合（例）:
-#   cd apps && git sparse-checkout set _template 3D-template <app-name>
-```
 
  
 
