@@ -24,6 +24,14 @@ cd apps/<name>
 pnpm dev
 ```
 
+Start with the 3D template (non‑interactive):
+
+```
+pnpm create:project -- -t 3d
+```
+
+(Interactively, answer “y” to “Use 3D template?”)
+
 ---
 
 ## Full Setup
