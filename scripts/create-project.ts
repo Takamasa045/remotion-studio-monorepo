@@ -32,6 +32,7 @@ type TemplateKey = 'default' | '3d';
 function parseArgs(argv: string[]) {
   let nameArg: string | undefined;
   let templateKey: TemplateKey | undefined;
+  let destArg: string | undefined;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--template' || a === '-t') {
@@ -43,12 +44,20 @@ function parseArgs(argv: string[]) {
         continue;
       }
     }
+    if (a === '--dest' || a === '--out' || a === '-o') {
+      const v = argv[i + 1];
+      if (v) {
+        destArg = path.resolve(process.cwd(), v);
+        i++;
+        continue;
+      }
+    }
     if (!a.startsWith('-') && !nameArg) {
       nameArg = a;
       continue;
     }
   }
-  return {nameArg, templateKey};
+  return {nameArg, templateKey, destArg};
 }
 
 async function ensureExists(p: string) {
@@ -118,7 +127,7 @@ async function renameIfNeeded(dir: string, oldStr: string, newStr: string) {
 }
 
 async function main() {
-  const {nameArg, templateKey: cliTemplate} = parseArgs(process.argv.slice(2));
+  const {nameArg, templateKey: cliTemplate, destArg} = parseArgs(process.argv.slice(2));
   const defaultName = nameArg || 'new-app';
   const nameAns = (nameArg) ? nameArg : (await question(`Project name (@studio/<name>) [${defaultName}]: `)) || defaultName;
   const normName = nameAns.trim();
@@ -150,7 +159,7 @@ async function main() {
 
   rl.close();
 
-  const destDir = path.join(appsDir, answers.name);
+  const destDir = destArg ? destArg : path.join(appsDir, answers.name);
   if (fs.existsSync(destDir)) {
     console.error(`Directory already exists: ${destDir}`);
     process.exit(1);
@@ -247,9 +256,11 @@ async function main() {
   console.log('Project created successfully.');
 
   if (answers.install) {
-    console.log('Running pnpm install (workspace)...');
+    const insideWorkspace = destDir.startsWith(appsDir + path.sep);
+    const installCwd = insideWorkspace ? repoRoot : destDir;
+    console.log(`Running pnpm install (${insideWorkspace ? 'workspace root' : 'new app'})...`);
     await new Promise<void>((resolve, reject) => {
-      const child = spawn('pnpm', ['install'], {cwd: repoRoot, stdio: 'inherit', shell: true});
+      const child = spawn('pnpm', ['install'], {cwd: installCwd, stdio: 'inherit', shell: true});
       child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`pnpm install failed with code ${code}`))));
     }).catch((e) => {
       console.warn(String(e));
@@ -257,7 +268,9 @@ async function main() {
     });
   }
 
-  console.log(`Next steps:\n  - pnpm -C apps/${answers.name} run dev\n  - pnpm -C apps/${answers.name} run build`);
+  const nextDevCmd = destArg ? `pnpm -C ${destDir} run dev` : `pnpm -C apps/${answers.name} run dev`;
+  const nextBuildCmd = destArg ? `pnpm -C ${destDir} run build` : `pnpm -C apps/${answers.name} run build`;
+  console.log(`Next steps:\n  - ${nextDevCmd}\n  - ${nextBuildCmd}`);
 }
 
 main().catch((err) => {

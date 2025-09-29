@@ -32,6 +32,15 @@ pnpm create:project -- -t 3d
 
 (Interactively, answer “y” to “Use 3D template?”)
 
+Develop outside the template repo (recommended to avoid impacting it):
+
+```
+pnpm create:project -- <name> --dest ../my-app
+cd ../my-app
+git init && git remote add origin <your-repo> && pnpm install
+pnpm dev
+```
+
 ---
 
 ## Full Setup
