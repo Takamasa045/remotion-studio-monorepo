@@ -117,53 +117,17 @@ remotion-studio/
 
 注記: 現在のリポジトリは「テンプレ最小構成」のため、実体としては `apps/_template` と `apps/3D-template`、および最小限の `scripts`/`docs` を含みます。他は必要に応じて追加・生成してください。
 
-## 要件
+## 要件（詳細は省略）
 - Node.js 18+（推奨: 20）
 - pnpm 8+（推奨: 最新）
 - ffmpeg（レンダリングに必要）
 
-## セットアップ
-```
-pnpm install
-```
-
-## 使い方
-- 新規アプリ作成: `pnpm create:project`（name / width / height / fps / duration / compositionId を対話入力）
-- 生成後にアプリへ移動: `cd apps/<name>`
-- 開発サーバ起動（プレビュー）: `pnpm dev`
-- ビルド済みプレビュー: `pnpm preview`
-- レンダリング（mp4）: `pnpm build`
-
- 
-
-## MCP 設定
-
-### Claude Code
-端末で追加:
-
-```
-claude mcp add
-# Name: remotion-documentation
-# Command: npx
-# Args: @remotion/mcp@latest
-```
-
-GUI ウィザードを使わない場合は設定に以下を追記:
-
-```json
-{
-  "mcpServers": {
-    "remotion-documentation": {
-      "command": "npx",
-      "args": ["@remotion/mcp@latest"]
-    }
-  }
-}
-```
-
-→ Claude のチャットで「remotion-documentation を使って “render h264 フラグ” を調べて」と指示。公式ガイド通りの設定です（remotion.dev）。
-
-### Codex（OpenAI Codex CLI）
+## もっと知る（詳細ドキュメント）
+- 構成（Blueprint）: `docs/structure.md`
+- 依存の追加ガイド: `docs/adding-deps.md`
+- アセット運用: `docs/assets.md`
+- 3D / R3F メモ: `docs/3d-notes.md`
+- MCP 設定（Claude / Codex）: `docs/mcp-setup.md`
 `~/.codex/config.toml` に追記:
 
 ```toml
