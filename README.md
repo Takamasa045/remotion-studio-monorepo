@@ -4,7 +4,9 @@
 
 A template‑only repository for **Remotion + React**. Create new projects from `apps/_template`, then develop & render **inside each app**.
 
-## Quick Start (simplest)
+## Shortest Guide
+
+Run the minimal commands to scaffold and start an app (assumes prerequisites are installed, SSH is set up).
 
 ```bash
 # 1) Clone (with submodules, via SSH)
@@ -24,7 +26,9 @@ pnpm dev
 
 ---
 
-## Quick Start
+## Full Setup
+
+For first-time setup and team-wide onboarding. Includes prerequisites, submodules and optional sparse-checkout.
 
 > This repository uses **Git submodules** (`apps`). **Be sure to fetch submodules** when cloning.
 
