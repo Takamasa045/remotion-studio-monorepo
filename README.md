@@ -93,22 +93,6 @@ pnpm run sparse:apps
 #   (cd apps && git sparse-checkout set _template demo-showcase 3D-template)
 ```
 
-### App start & build (examples)
-
-```bash
-# Start demo app
-cd apps/demo-showcase
-pnpm dev
-
-# Create a new app from template (example: my-app)
-cd <repo-root>
-pnpm create:project
-cd apps/my-app
-pnpm build
-```
-
----
-
 ## Features
 
 * Monorepo powered by **pnpm workspaces**

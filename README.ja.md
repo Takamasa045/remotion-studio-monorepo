@@ -80,27 +80,15 @@ pnpm run sparse:apps
 #   cd apps && git sparse-checkout set _template demo-showcase 3D-template
 ```
 
-各アプリの起動・ビルド例（公開リポは `_template` と `demo-showcase` と `3D-template` を同梱。初期設定では `3D-template` はワークスペース対象外）
-```
-# demo アプリの起動
-cd apps/demo-showcase
-pnpm dev
-
-# テンプレから新規作成（例: my-app）
-cd <repo-root>
-pnpm create:project
-cd apps/my-app
-pnpm build
-```
+ 
 
 ## 特徴
-- pnpm workspaces を用いた堅牢なモノレポ運用
+- pnpm workspaces によるモノレポ運用
 - 汎用テンプレ（apps/_template）とデモ（apps/demo-showcase）
- 
-- オフライン参照用リファレンス（docs/remotion-reference.md）
-- タイムライン（@studio/timing）、Anime.js ブリッジ、トランジション、R3F、Pixi/Konva、WebGL エフェクト
-- 開発効率化スクリプト（dev/preview/build の汎用ランナー、一括レンダリング、アセット同期、テンプレ置換）
-- CI（lint / build / デモ自動レンダリング）
+- オフライン参照（docs/remotion-reference.md）
+- タイムライン/アニメ/2D/3D/WebGL のユーティリティ群
+- 開発スクリプト（ランナー/一括レンダ/アセット同期/テンプレ置換）
+- CI（lint/build/デモ自動レンダリング）
 
 ## 構成（標準ブループリント）
 以下はテンプレ運用の推奨レイアウトです（現状のリポジトリには最小限のみ含まれます）。
