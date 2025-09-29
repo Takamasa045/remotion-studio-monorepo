@@ -111,8 +111,8 @@ Optional: sparse-checkout the apps submodule (only `_template` and `3D-template`
 
 ```bash
 pnpm run sparse:apps
-# Later, to include demo as well:
-#   (cd apps && git sparse-checkout set _template 3D-template demo-showcase)
+# Later, to include more apps (example):
+#   (cd apps && git sparse-checkout set _template 3D-template <app-name>)
 ```
 
 ## Features

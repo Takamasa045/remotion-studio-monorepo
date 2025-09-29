@@ -19,7 +19,7 @@ echo "[INFO] Enabling sparse-checkout for apps submodule..."
   git sparse-checkout init --cone
   git sparse-checkout set _template 3D-template
   echo "[OK] Sparse tree set to: _template 3D-template"
-  echo "[HINT] To include demo later: git sparse-checkout set _template 3D-template demo-showcase"
+  echo "[HINT] To include more apps later: git sparse-checkout set _template 3D-template <app-name>"
 )
 
 echo "[DONE] apps sparse-checkout configured."
