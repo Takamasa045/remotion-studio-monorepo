@@ -4,18 +4,22 @@
 
 A template‑only repository for **Remotion + React**. Create new projects from `apps/_template`, then develop & render **inside each app**.
 
-## Quick Start (3 commands)
+## Quick Start (simplest)
 
 ```bash
 # 1) Clone (with submodules, via SSH)
 git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
 cd remotion-studio
 
-# 2) Optional: only _template + 3D-template in apps
-pnpm run sparse:apps
-
-# 3) Install dependencies
+# 2) Install dependencies
 pnpm install
+
+# 3) Scaffold a new app from template
+pnpm create:project
+
+# 4) Start the app (example)
+cd apps/<name>
+pnpm dev
 ```
 
 ---
