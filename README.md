@@ -45,7 +45,7 @@ pnpm dev
 
 ## Full Setup
 
-For first-time setup and team-wide onboarding. Includes prerequisites, submodules and optional sparse-checkout.
+For first-time setup and team-wide onboarding. Includes prerequisites (no submodules required).
 
 > This repository uses **Git submodules** (`apps`). **Be sure to fetch submodules** when cloning.
 
@@ -65,20 +65,13 @@ ffmpeg -version
 
 ### Clone (submodules included)
 
-**SSH (recommended, submodule URLs are SSH):**
+**SSH (recommended):**
 
 ```bash
-git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
+git clone git@github.com:Takamasa045/remotion-studio.git
 ```
 
-**HTTPS:**
-
-```bash
-git clone https://github.com/Takamasa045/remotion-studio.git
-cd remotion-studio
-# Initialize & fetch submodules if you didn’t use --recurse-submodules
-git submodule update --init --recursive
-```
+**HTTPS:** `git clone https://github.com/Takamasa045/remotion-studio.git`
 
 ### Install
 
@@ -111,18 +104,7 @@ pnpm dev
   * macOS: `brew install ffmpeg`
   * Windows: `choco install ffmpeg`
   * Linux: use your distro’s package manager
-* Check submodule status: `git submodule status`.
-
-  * If you cloned via HTTPS and hit permission errors, either set up SSH **or** change `.gitmodules` URLs to HTTPS and run `git submodule sync --recursive`.
 * **Public repo contents (examples)**: `_template`, `3D-template`.
-
-Optional: sparse-checkout the apps submodule (only `_template` and `3D-template`)
-
-```bash
-pnpm run sparse:apps
-# Later, to include more apps (example):
-#   (cd apps && git sparse-checkout set _template 3D-template <app-name>)
-```
 
 ## Features
 
