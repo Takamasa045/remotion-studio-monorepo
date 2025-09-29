@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "baseUrl": ".",
+    "paths": {
+      "@studio/*": [
+        "../../packages/*/src",
+        "../../packages/@*/*/src"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "remotion.config.ts"
+  ]
+}

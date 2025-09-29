@@ -1,0 +1,22 @@
+{
+  "name": "@studio/3D-matumoto",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "preview": "remotion preview",
+    "build": "remotion render Main out/3D-matumoto.mp4",
+    "build:linked": "remotion render src/index.ts LinkedParticles out/linked.mp4",
+    "bundle": "remotion bundle src/index.ts --out out/web"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.351",
+    "three": "0.169.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.351"
+  }
+}
