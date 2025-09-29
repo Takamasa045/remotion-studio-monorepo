@@ -90,8 +90,8 @@ pnpm dev
 
 ```
 pnpm run sparse:apps
-# 後で demo を展開したい場合:
-#   cd apps && git sparse-checkout set _template 3D-template demo-showcase
+# 後で他のアプリを展開したい場合（例）:
+#   cd apps && git sparse-checkout set _template 3D-template <app-name>
 ```
 
  
