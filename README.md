@@ -85,6 +85,14 @@ pnpm dev
   * If you cloned via HTTPS and hit permission errors, either set up SSH **or** change `.gitmodules` URLs to HTTPS and run `git submodule sync --recursive`.
 * **Public repo contents (examples)**: `_template`, `demo-showcase`, `3D-template`.
 
+Optional: sparse-checkout the apps submodule (only `_template` and `demo-showcase`)
+
+```bash
+pnpm run sparse:apps
+# Later, to include 3D-template as well:
+#   (cd apps && git sparse-checkout set _template demo-showcase 3D-template)
+```
+
 ### App start & build (examples)
 
 ```bash

@@ -7,76 +7,22 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@remotion/zod-types':
-        specifier: 4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.11)
-      zod:
-        specifier: ^4.1.11
-        version: 4.1.11
     devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/node':
         specifier: ^24.5.2
         version: 24.5.2
       eslint:
         specifier: ^9.8.0
         version: 9.35.0
-      fast-glob:
-        specifier: ^3.3.3
-        version: 3.3.3
       prettier:
         specifier: ^3.3.3
         version: 3.6.2
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tsx:
         specifier: ^4.16.2
         version: 4.20.5
       typescript:
         specifier: ^5.6.3
         version: 5.9.2
-
-  apps/CSSanimation:
-    dependencies:
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
-  apps/Remotionvideo:
-    dependencies:
-      '@remotion/media-utils':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@remotion/transitions':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   apps/_template:
     dependencies:
@@ -99,21 +45,6 @@ importers:
       '@react-three/fiber':
         specifier: ^8.17.10
         version: 8.18.0(@types/react@19.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.158.0)
-      '@studio/anime-bridge':
-        specifier: workspace:*
-        version: link:../../packages/@animation/anime-bridge
-      '@studio/timing':
-        specifier: workspace:*
-        version: link:../../packages/@core/timing
-      '@studio/transitions':
-        specifier: workspace:*
-        version: link:../../packages/@animation/transitions
-      '@studio/visual-canvas2d':
-        specifier: workspace:*
-        version: link:../../packages/@visual/canvas2d
-      '@studio/visual-three':
-        specifier: workspace:*
-        version: link:../../packages/@visual/three
       animejs:
         specifier: ^3.2.1
         version: 3.2.2
@@ -129,9 +60,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       three:
         specifier: ^0.158.0
         version: 0.158.0
@@ -139,204 +67,9 @@ importers:
       '@remotion/cli':
         specifier: ^4.0.350
         version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
-  apps/hello:
-    dependencies:
-      '@visual/hello':
-        specifier: workspace:*
-        version: link:../../packages/@visual/hello
-
-  apps/playlist-mv:
-    dependencies:
-      '@remotion/zod-types':
-        specifier: 4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.22.3)
-      '@visual/textfx':
-        specifier: workspace:*
-        version: link:../../packages/@visual/textfx
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
       remotion:
         specifier: ^4.0.350
         version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      zod:
-        specifier: 3.22.3
-        version: 3.22.3
-    devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
-  apps/remotion-rev:
-    dependencies:
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@remotion/cli':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
-  apps/studio-hub:
-    dependencies:
-      '@remotion/cli':
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
-  packages/@animation/anime-bridge:
-    dependencies:
-      animejs:
-        specifier: '>=3.2.0'
-        version: 3.2.2
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-    devDependencies:
-      '@types/react':
-        specifier: ^18.3.24
-        version: 18.3.24
-
-  packages/@animation/easings: {}
-
-  packages/@animation/transitions:
-    dependencies:
-      '@studio/anime-bridge':
-        specifier: workspace:*
-        version: link:../anime-bridge
-      '@studio/easings':
-        specifier: workspace:*
-        version: link:../easings
-      animejs:
-        specifier: '>=3.2.0'
-        version: 3.2.2
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-
-  packages/@audio/analysis: {}
-
-  packages/@audio/sync: {}
-
-  packages/@audio/visualizers: {}
-
-  packages/@content/data-viz: {}
-
-  packages/@content/typography: {}
-
-  packages/@content/ui-kit: {}
-
-  packages/@core/hooks:
-    dependencies:
-      '@studio/core-types':
-        specifier: workspace:*
-        version: link:../types
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-
-  packages/@core/timing:
-    dependencies:
-      '@studio/core-types':
-        specifier: workspace:*
-        version: link:../types
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-    devDependencies:
-      '@types/react':
-        specifier: ^18.3.24
-        version: 18.3.24
-
-  packages/@core/types: {}
-
-  packages/@design/assets: {}
-
-  packages/@design/themes: {}
-
-  packages/@design/tokens: {}
-
-  packages/@visual/canvas2d:
-    dependencies:
-      konva:
-        specifier: '>=9.0.0'
-        version: 9.3.22
-      pixi.js:
-        specifier: '>=6.0.0'
-        version: 7.4.3
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-
-  packages/@visual/effects:
-    dependencies:
-      '@studio/visual-shaders':
-        specifier: workspace:*
-        version: link:../shaders
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-
-  packages/@visual/hello:
-    dependencies:
-      react:
-        specifier: ^18.0.0
-        version: 18.3.1
-      remotion:
-        specifier: ^4.0.350
-        version: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@types/react':
-        specifier: ^18.3.24
-        version: 18.3.24
-      typescript:
-        specifier: ^5.5.0
-        version: 5.9.2
-
-  packages/@visual/shaders: {}
-
-  packages/@visual/textfx:
-    dependencies:
-      react:
-        specifier: ^18.0.0
-        version: 18.3.1
-    devDependencies:
-      '@types/react':
-        specifier: ^18.3.24
-        version: 18.3.24
-      typescript:
-        specifier: ^5.5.0
-        version: 5.9.2
-
-  packages/@visual/three:
-    dependencies:
-      '@react-three/fiber':
-        specifier: '>=8.0.0'
-        version: 8.18.0(@types/react@19.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.158.0)
-      react:
-        specifier: '>=18.0.0'
-        version: 18.3.1
-      three:
-        specifier: '>=0.156.0'
-        version: 0.158.0
 
 packages:
 
@@ -737,18 +470,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@nodelib/fs.scandir@2.1.5':
-    resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
-    engines: {node: '>= 8'}
-
-  '@nodelib/fs.stat@2.0.5':
-    resolution: {integrity: sha512-RkhPPp2zrqDAQA/2jNhnztcPAlv64XdhIp7a7454A5ovI7Bukxgt7MX7udwAu3zg1DcpPU0rz3VV1SeaqvY4+A==}
-    engines: {node: '>= 8'}
-
-  '@nodelib/fs.walk@1.2.8':
-    resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
-    engines: {node: '>= 8'}
-
   '@pixi/accessibility@7.4.3':
     resolution: {integrity: sha512-tCr0yeWpMe0yucFvEPidy5a7gVJGpTjqGrDpSEBYT/kbScfUwcoX49RrckCCCiXDlyO4WRh9lVVuHXTvqRLIMg==}
     peerDependencies:
@@ -1034,9 +755,6 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@remotion/paths@4.0.350':
-    resolution: {integrity: sha512-VPX8iLr6QprXVA2Z4pGyQ/2h8wljFzb4VuzD0scWnn7DrVvL8zDuxjjlzKNJzV0T3GlCrGBLEZAZGBvdq97PDw==}
-
   '@remotion/player@4.0.350':
     resolution: {integrity: sha512-/jruEQec2rUWmFdgoP778UCKsY4K7EM0F5aG1nzgDgMj/ZArOjatl7gsvYZNIjoJsFStPYL/uVU8QinFx35YSA==}
     peerDependencies:
@@ -1045,12 +763,6 @@ packages:
 
   '@remotion/renderer@4.0.350':
     resolution: {integrity: sha512-m2nLPdZHT8QxFPVpjc7rhIa23SissfFHRx0BZEGi7fgqg4T5PeQlhHXCVH9wX1a7Y3TjAmmOsI9i8e/UC2cfJA==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-
-  '@remotion/shapes@4.0.350':
-    resolution: {integrity: sha512-GfAXAF8jbFQ02J+jMyZ9A35YNXU55WM2piDlnchFGU25x78gRi7UlW7FQuF2N/AxsEkn2AbT6pnxMu3wBw+kLw==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -1066,12 +778,6 @@ packages:
 
   '@remotion/studio@4.0.350':
     resolution: {integrity: sha512-AGLndlAhnyavHkNky8QYtQuyedlaVTOHLrJHe2jQ9+zJO7Tdk+O6AOoIQ2cVqU4V02kdyvrPONyi96Igo3b8Dg==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-
-  '@remotion/transitions@4.0.350':
-    resolution: {integrity: sha512-qbFzFiZp6oMmo4n4Kz8A29nDw7UqGgenS0n09/kNqIN2pcaD+yJQbLhgiarR7Dblq0l/ISLoKc3CPt4PhK7oUg==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -1248,10 +954,6 @@ packages:
 
   brace-expansion@1.1.12:
     resolution: {integrity: sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==}
-
-  braces@3.0.3:
-    resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
-    engines: {node: '>=8'}
 
   browserslist@4.26.0:
     resolution: {integrity: sha512-P9go2WrP9FiPwLv3zqRD/Uoxo0RSHjzFCiQz7d4vbmwNqQFo9T9WCeP/Qn5EbcKQY6DBbkxEXNcpJOmncNrb7A==}
@@ -1469,10 +1171,6 @@ packages:
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
-  fast-glob@3.3.3:
-    resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
-    engines: {node: '>=8.6.0'}
-
   fast-json-stable-stringify@2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
 
@@ -1482,19 +1180,12 @@ packages:
   fast-uri@3.1.0:
     resolution: {integrity: sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==}
 
-  fastq@1.19.1:
-    resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
-
   fd-slicer@1.1.0:
     resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
 
   file-entry-cache@8.0.0:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
     engines: {node: '>=16.0.0'}
-
-  fill-range@7.1.1:
-    resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
-    engines: {node: '>=8'}
 
   find-up@5.0.0:
     resolution: {integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==}
@@ -1536,10 +1227,6 @@ packages:
 
   get-tsconfig@4.10.1:
     resolution: {integrity: sha512-auHyJ4AgMz7vgS8Hp3N6HXSmlMdUyhSUrfBF16w153rxtLIEOE+HGqaBppczZvnHLqQJfiHotCYpNhl0lUROFQ==}
-
-  glob-parent@5.1.2:
-    resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
-    engines: {node: '>= 6'}
 
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
@@ -1608,10 +1295,6 @@ packages:
   is-glob@4.0.3:
     resolution: {integrity: sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg==}
     engines: {node: '>=0.10.0'}
-
-  is-number@7.0.0:
-    resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
-    engines: {node: '>=0.12.0'}
 
   is-stream@2.0.1:
     resolution: {integrity: sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg==}
@@ -1714,14 +1397,6 @@ packages:
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
 
-  merge2@1.4.1:
-    resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
-    engines: {node: '>= 8'}
-
-  micromatch@4.0.8:
-    resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
-    engines: {node: '>=8.6'}
-
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
@@ -1806,10 +1481,6 @@ packages:
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
-  picomatch@2.3.1:
-    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
-    engines: {node: '>=8.6'}
-
   pixi.js@7.4.3:
     resolution: {integrity: sha512-uIWdH0EI2dVgNoqN9aFaHCmR0V65OEhMkXs2sek3c/QP2ItV6UoM+ouX9esSv3ibo20F+J5D1XwnQhUZI6wqeQ==}
 
@@ -1875,9 +1546,6 @@ packages:
     resolution: {integrity: sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==}
     engines: {node: '>=0.6'}
 
-  queue-microtask@1.2.3:
-    resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
-
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
@@ -1929,13 +1597,6 @@ packages:
 
   resolve-pkg-maps@1.0.0:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
-
-  reusify@1.1.0:
-    resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
-    engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
-
-  run-parallel@1.2.0:
-    resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
@@ -2075,10 +1736,6 @@ packages:
   tiny-invariant@1.3.3:
     resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==}
 
-  to-regex-range@5.0.1:
-    resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
-    engines: {node: '>=8.0'}
-
   tr46@1.0.1:
     resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
 
@@ -2178,9 +1835,6 @@ packages:
 
   zod@3.22.3:
     resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
-
-  zod@4.1.11:
-    resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
 
   zustand@3.7.2:
     resolution: {integrity: sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==}
@@ -2434,18 +2088,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
-
-  '@nodelib/fs.scandir@2.1.5':
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      run-parallel: 1.2.0
-
-  '@nodelib/fs.stat@2.0.5': {}
-
-  '@nodelib/fs.walk@1.2.8':
-    dependencies:
-      '@nodelib/fs.scandir': 2.1.5
-      fastq: 1.19.1
 
   '@pixi/accessibility@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3))(@pixi/events@7.4.3(@pixi/core@7.4.3)(@pixi/display@7.4.3(@pixi/core@7.4.3)))':
     dependencies:
@@ -2733,8 +2375,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       remotion: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  '@remotion/paths@4.0.350': {}
-
   '@remotion/player@4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
@@ -2763,12 +2403,6 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
-
-  '@remotion/shapes@4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@remotion/paths': 4.0.350
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   '@remotion/streaming@4.0.350': {}
 
@@ -2824,14 +2458,6 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@remotion/transitions@4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@remotion/paths': 4.0.350
-      '@remotion/shapes': 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      remotion: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-
   '@remotion/web-renderer@4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
@@ -2847,14 +2473,6 @@ snapshots:
     dependencies:
       remotion: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zod: 3.22.3
-    transitivePeerDependencies:
-      - react
-      - react-dom
-
-  '@remotion/zod-types@4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@4.1.11)':
-    dependencies:
-      remotion: 4.0.350(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      zod: 4.1.11
     transitivePeerDependencies:
       - react
       - react-dom
@@ -3044,10 +2662,6 @@ snapshots:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
-
-  braces@3.0.3:
-    dependencies:
-      fill-range: 7.1.1
 
   browserslist@4.26.0:
     dependencies:
@@ -3327,23 +2941,11 @@ snapshots:
 
   fast-deep-equal@3.1.3: {}
 
-  fast-glob@3.3.3:
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.8
-
   fast-json-stable-stringify@2.1.0: {}
 
   fast-levenshtein@2.0.6: {}
 
   fast-uri@3.1.0: {}
-
-  fastq@1.19.1:
-    dependencies:
-      reusify: 1.1.0
 
   fd-slicer@1.1.0:
     dependencies:
@@ -3352,10 +2954,6 @@ snapshots:
   file-entry-cache@8.0.0:
     dependencies:
       flat-cache: 4.0.1
-
-  fill-range@7.1.1:
-    dependencies:
-      to-regex-range: 5.0.1
 
   find-up@5.0.0:
     dependencies:
@@ -3404,10 +3002,6 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  glob-parent@5.1.2:
-    dependencies:
-      is-glob: 4.0.3
-
   glob-parent@6.0.2:
     dependencies:
       is-glob: 4.0.3
@@ -3452,8 +3046,6 @@ snapshots:
   is-glob@4.0.3:
     dependencies:
       is-extglob: 2.1.1
-
-  is-number@7.0.0: {}
 
   is-stream@2.0.1: {}
 
@@ -3541,13 +3133,6 @@ snapshots:
 
   merge-stream@2.0.0: {}
 
-  merge2@1.4.1: {}
-
-  micromatch@4.0.8:
-    dependencies:
-      braces: 3.0.3
-      picomatch: 2.3.1
-
   mime-db@1.52.0: {}
 
   mime-types@2.1.35:
@@ -3620,8 +3205,6 @@ snapshots:
   pend@1.2.0: {}
 
   picocolors@1.1.1: {}
-
-  picomatch@2.3.1: {}
 
   pixi.js@7.4.3:
     dependencies:
@@ -3712,8 +3295,6 @@ snapshots:
     dependencies:
       side-channel: 1.1.0
 
-  queue-microtask@1.2.3: {}
-
   randombytes@2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -3760,12 +3341,6 @@ snapshots:
   resolve-from@4.0.0: {}
 
   resolve-pkg-maps@1.0.0: {}
-
-  reusify@1.1.0: {}
-
-  run-parallel@1.2.0:
-    dependencies:
-      queue-microtask: 1.2.3
 
   safe-buffer@5.2.1: {}
 
@@ -3897,10 +3472,6 @@ snapshots:
 
   tiny-invariant@1.3.3: {}
 
-  to-regex-range@5.0.1:
-    dependencies:
-      is-number: 7.0.0
-
   tr46@1.0.1:
     dependencies:
       punycode: 2.3.1
@@ -4004,8 +3575,6 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zod@3.22.3: {}
-
-  zod@4.1.11: {}
 
   zustand@3.7.2(react@18.3.1):
     optionalDependencies:

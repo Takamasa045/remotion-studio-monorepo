@@ -72,6 +72,14 @@ pnpm dev
 - ffmpeg が未インストールの場合は導入してください（macOS: `brew install ffmpeg` / Windows: `choco install ffmpeg` / Linux: 各ディストリのパッケージマネージャ）。
 - サブモジュールの取得状況は `git submodule status` で確認できます。HTTPS でクローンした場合に権限エラーが出るときは、SSH 設定を行うか `.gitmodules` の URL を HTTPS に変更して `git submodule sync --recursive` を実行してください。
 
+任意: apps サブモジュールをスパースチェックアウト（_template と demo のみ展開）
+
+```
+pnpm run sparse:apps
+# 後で 3D-template も展開したい場合:
+#   cd apps && git sparse-checkout set _template demo-showcase 3D-template
+```
+
 各アプリの起動・ビルド例（公開リポは `_template` と `demo-showcase` と `3D-template` を同梱。初期設定では `3D-template` はワークスペース対象外）
 ```
 # demo アプリの起動

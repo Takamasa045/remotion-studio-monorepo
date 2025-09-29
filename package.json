@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write .",
     "create:project": "tsx scripts/create-project.ts",
+    "sparse:apps": "bash scripts/setup-sparse-apps.sh",
     "dev": "echo 'Use: pnpm -C apps/<name> run dev'",
     "preview": "echo 'Use: pnpm -C apps/<name> run preview'",
     "build:app": "echo 'Use: pnpm -C apps/<name> run build'"
