@@ -3,6 +3,20 @@
 
 Remotion + React の「テンプレート専用」リポジトリです。`apps/_template` を元に新規プロジェクトを作成し、各アプリ内で開発・レンダリングを行います。
 
+## クイックスタート（最短3コマンド）
+
+```bash
+# 1) クローン（サブモジュール込み・SSH）
+git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
+cd remotion-studio
+
+# 2) （任意）apps は _template と 3D のみ展開
+pnpm run sparse:apps
+
+# 3) 依存インストール
+pnpm install
+```
+
 ## クイックスタート（セットアップ）
 
 このリポジトリは Git サブモジュール（`apps`）を利用しています。クローン時は必ずサブモジュールも取得してください。
