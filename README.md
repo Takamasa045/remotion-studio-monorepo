@@ -2,6 +2,8 @@
 
 # Remotion Studio Monorepo
 
+![Remotion Studio Monorepo](./docs/images/hero.jpg)
+
 A template‑only repository for **Remotion + React**. Create new projects from `apps/_template`, then develop & render **inside each app**.
 
 ## Shortest Guide
