@@ -137,6 +137,10 @@ remotion-studio/
 
 > This repo ships **minimal template** parts: `apps/_template` plus minimal `scripts/` and `docs/`. Add others as needed.
 
+External dependencies (official `@remotion/*`)
+- Added at the repo root `package.json` as workspace-wide devDependencies.
+- They do not appear as folders in this tree; import them from apps as needed.
+
 ---
 
 ## More Docs
