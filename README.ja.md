@@ -123,6 +123,10 @@ remotion-studio/
 
 注記: 現在のリポジトリは「テンプレ最小構成」のため、実体としては `apps/_template` と `apps/3D-template`、および最小限の `scripts`/`docs` を含みます。他は必要に応じて追加・生成してください。
 
+外部依存（公式 `@remotion/*`）について
+- リポジトリ直下の `package.json` に「ワークスペース共通の devDependencies」として追加済みです。
+- これらはディレクトリ構造としては現れません（各アプリで必要に応じて import して利用）。
+
 ## 要件（詳細は省略）
 - Node.js 18+（推奨: 20）
 - pnpm 8+（推奨: 最新）
