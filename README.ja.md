@@ -298,28 +298,31 @@ PeerDependencies（注意）
 - ビルド時にエラーが出る場合は、`remotion.config.ts` で `overrideWebpackConfig` による調整（`alias` 追加、ブラウザ向けビルドを指すようにする等）を検討してください。
 
 #### 3D/R3F 導入メモ
-- インストール（アプリ配下）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350`
-- またはルートから（workspace filter）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
-- 互換性: Remotion v4.0.350 に対して `@remotion/three@^4.0.350` を推奨
+- インストール（アプリ配下）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@4.0.351`
+- またはルートから（workspace filter）: `pnpm add three @react-three/fiber @react-three/drei @remotion/three@4.0.351 --filter @studio/<app>`
+- 互換性: Remotion v4.0.351 に対して `@remotion/three@4.0.351` を推奨
 - WebGL の安定化（必要時）: 各アプリの `remotion.config.ts` で `Config.setChromiumOpenGlRenderer('angle')` 等を指定可能
 - アセット読み込み: `public/` にモデル/テクスチャを置き、`staticFile('/assets/...')` の URL を `useGLTF()` などへ渡す
 
 ### どんな人が入れるといいのか（使用例）
-このモノレポは全部入りではなく、必要な機能だけを組み合わせる設計になっています。
-用途に応じて、以下のようにライブラリ（peerDependencies）を追加してください。
+このモノレポは全部入りではなく、必要な機能だけを組み合わせる設計です。用途に応じて、必要なパッケージを「各アプリ」に追加してください。
 
 - 🎞 シンプルに動画を作りたい
-  - `apps/hello` か `apps/_template` でOK（最小構成）
+  - `apps/_template` でOK（最小構成）
 - ✨ フェードやイージングを付けたい
-  - `@studio/transitions`, `@studio/easings` を import すれば追加インストール不要
+  - 公式: `pnpm -C apps/<name> add @remotion/transitions @remotion/animation-utils`
+  - 使い方例: `import {TransitionSeries} from '@remotion/transitions'`
 - 🌀 滑らかなトゥイーンや細かい動きを付けたい
-  - `pnpm add animejs --filter @studio/<app>` を実行し、`@studio/anime-bridge` を使用
+  - `pnpm -C apps/<name> add animejs`
+  - 備考: 本テンプレには `@studio/anime-bridge` は含まれていません。直接 Anime.js を使うか、必要に応じて自作フックを追加してください。
 - 🎨 2D グラフィックス（Pixi / Konva）を使いたい
-  - `pnpm add pixi.js konva --filter @studio/<app>` の上で `@studio/visual-canvas2d` を利用
+  - `pnpm -C apps/<name> add pixi.js konva`
+  - 備考: `@studio/visual-canvas2d` はテンプレ未同梱。直接ライブラリを利用してください。
 - 🏔 3D 表現（Three.js + React Three Fiber）を使いたい
-  - `pnpm add three @react-three/fiber @react-three/drei @remotion/three@^4.0.350 --filter @studio/<app>`
+  - `pnpm -C apps/<name> add three @react-three/fiber @react-three/drei @remotion/three@4.0.351`
 - 🎵 音声や歌詞同期（LRC）を扱いたい
-  - `@studio/timing`, `@studio/core-hooks` を利用（追加インストール不要）。歌詞ファイルは `assets/audio/` に配置
+  - 追加インストール不要。`public/assets/audio` に `.lrc` を置き、`fetch` で読み込み → パースして利用
+  - 公式パッケージでの字幕処理（SRT等）には `@remotion/captions` も検討可
 
 <!-- Studio Lite セクションは削除（混乱防止のため） -->
 
