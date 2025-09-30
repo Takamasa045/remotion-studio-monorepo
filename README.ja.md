@@ -143,6 +143,62 @@ command = "npx"
 args = ["@remotion/mcp@latest"]
 ```
 
+## 公式 @remotion/* パッケージ（用途別）
+
+バージョンはすべて揃えるのが推奨です（`remotion` と全 `@remotion/*`）。`^` は外し、`npx remotion versions` で整合性チェック可能。
+
+コア / ツールチェーン
+- `@remotion/cli`（CLI 一式）
+- `@remotion/studio`（タイムライン UI・API）
+- `@remotion/player`（任意の React アプリに埋め込み）
+- `@remotion/renderer`（Node/Bun サーバーサイド描画 API）
+- `@remotion/bundler`（SSR 向けバンドル）
+- ESLint: `@remotion/eslint-plugin` / `@remotion/eslint-config`
+
+クラウド描画
+- `@remotion/lambda`（AWS Lambda）
+- `@remotion/cloudrun`（GCP Cloud Run・アルファ）
+
+映像・アニメーション拡張
+- `@remotion/three`（Three.js 連携）
+- `@remotion/skia`（React Native Skia）
+- `@remotion/lottie` / `@remotion/gif` / `@remotion/rive`
+- `@remotion/shapes` / `@remotion/paths`
+- `@remotion/motion-blur` / `@remotion/transitions`
+- `@remotion/animation-utils` / `@remotion/animated-emoji`
+- `@remotion/layout-utils` / `@remotion/noise`
+
+メディア入出力・可視化
+- `@remotion/media` / `@remotion/media-utils` / `@remotion/media-parser`
+- `@remotion/webcodecs`（段階的終了 → 将来は Mediabunny 移行）
+- `@remotion/captions`
+- フォント: `@remotion/fonts` / `@remotion/google-fonts`
+- `@remotion/preload`（画像/動画/音声/フォントの先読み）
+
+音声認識（Whisper 系）
+- `@remotion/install-whisper-cpp`（ローカル Whisper.cpp セットアップ）
+- `@remotion/whisper-web`（ブラウザ WASM・実験的）
+- `@remotion/openai-whisper`（OpenAI Whisper API → キャプション）
+
+スタイリング
+- `@remotion/tailwind`（Tailwind v3） / `@remotion/tailwind-v4`（v4）
+- `@remotion/enable-scss`（SCSS/SASS 有効化）
+
+型 / ライセンス補助
+- `@remotion/zod-types`（UI 連動型）
+- `@remotion/licensing`（企業ライセンス使用計測 API）
+
+インストール例（任意アプリに追加）
+```bash
+pnpm -C apps/<name> add @remotion/transitions @remotion/shapes @remotion/paths
+# Three.js を使うテンプレ向け
+pnpm -C apps/<name> add @remotion/three three
+```
+
+注意
+- WebCodecs / Media Parser は移行中（将来的に差し替え検討）。
+- Cloud Run はアルファ。安定運用は Lambda が定番。
+
 ## 新規プロジェクト作成
 テンプレ（apps/_template）から対話で生成します。
 ```

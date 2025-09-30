@@ -169,6 +169,45 @@ remotion-studio/
 
 ---
 
+## Official @remotion/* Packages (by use)
+
+Keep all versions aligned with `remotion` and remove `^`. Use `npx remotion versions` to verify consistency.
+
+Core / toolchain
+- `@remotion/cli`, `@remotion/studio`, `@remotion/player`, `@remotion/renderer`, `@remotion/bundler`
+- ESLint: `@remotion/eslint-plugin`, `@remotion/eslint-config`
+
+Cloud rendering
+- `@remotion/lambda` (AWS), `@remotion/cloudrun` (GCP alpha)
+
+Video / animation
+- `@remotion/three`, `@remotion/skia`, `@remotion/lottie`, `@remotion/gif`, `@remotion/rive`
+- `@remotion/shapes`, `@remotion/paths`, `@remotion/motion-blur`, `@remotion/transitions`
+- `@remotion/animation-utils`, `@remotion/animated-emoji`, `@remotion/layout-utils`, `@remotion/noise`
+
+Media IO / visualization
+- `@remotion/media`, `@remotion/media-utils`, `@remotion/media-parser`
+- `@remotion/webcodecs` (deprecated → moving to Mediabunny)
+- `@remotion/captions`, `@remotion/fonts`, `@remotion/google-fonts`, `@remotion/preload`
+
+Whisper (speech)
+- `@remotion/install-whisper-cpp`, `@remotion/whisper-web`, `@remotion/openai-whisper`
+
+Styling
+- `@remotion/tailwind` (v3) / `@remotion/tailwind-v4` (v4), `@remotion/enable-scss`
+
+Types / licensing
+- `@remotion/zod-types`, `@remotion/licensing`
+
+Install example (per app)
+```bash
+pnpm -C apps/<name> add @remotion/transitions @remotion/shapes @remotion/paths
+# If using Three.js
+pnpm -C apps/<name> add @remotion/three three
+```
+
+---
+
 ## Remotion Settings (Template)
 
 No settings required. The template works out of the box with minimal `remotion.config.ts`. Edit only if necessary (e.g., aliases).
