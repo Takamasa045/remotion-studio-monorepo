@@ -1,6 +1,8 @@
 [EN](./README.md) | [JA](./README.ja.md)
 # Remotion Studio Monorepo
 
+![Remotion Studio Monorepo](./docs/images/hero.jpg)
+
 Remotion + React の「テンプレート専用」リポジトリです。`apps/_template` を元に新規プロジェクトを作成し、各アプリ内で開発・レンダリングを行います。
 
 ## 最短ガイド
