@@ -1,3 +1,60 @@
 packages:
   - "apps/_template"
   - "apps/3D-template"
+
+catalog:
+  # React 18
+  react18: ^18.3.1
+  react18-dom: ^18.3.1
+
+  # Remotion Core
+  remotion4: 4.0.351
+  remotion-cli: 4.0.351
+
+  # TypeScript & Node Types
+  typescript5: ^5.6.3
+  node-types: ^24.5.2
+
+  # Development Tools
+  eslint9: ^9.8.0
+  prettier3: ^3.3.3
+  tsx: ^4.16.2
+
+  # Remotion Official Packages
+  remotion-studio: 4.0.351
+  remotion-player: 4.0.351
+  remotion-renderer: 4.0.351
+  remotion-bundler: 4.0.351
+  remotion-eslint-plugin: 4.0.351
+  remotion-eslint-config: 4.0.351
+  remotion-lambda: 4.0.351
+  remotion-cloudrun: 4.0.351
+  remotion-three: 4.0.351
+  remotion-skia: 4.0.351
+  remotion-lottie: 4.0.351
+  remotion-gif: 4.0.351
+  remotion-rive: 4.0.351
+  remotion-shapes: 4.0.351
+  remotion-paths: 4.0.351
+  remotion-motion-blur: 4.0.351
+  remotion-transitions: 4.0.351
+  remotion-animation-utils: 4.0.351
+  remotion-animated-emoji: 4.0.351
+  remotion-layout-utils: 4.0.351
+  remotion-noise: 4.0.351
+  remotion-media: 4.0.351
+  remotion-media-utils: 4.0.351
+  remotion-media-parser: 4.0.351
+  remotion-webcodecs: 4.0.351
+  remotion-captions: 4.0.351
+  remotion-fonts: 4.0.351
+  remotion-google-fonts: 4.0.351
+  remotion-preload: 4.0.351
+  remotion-install-whisper-cpp: 4.0.351
+  remotion-whisper-web: 4.0.351
+  remotion-openai-whisper: 4.0.351
+  remotion-tailwind: 4.0.351
+  remotion-tailwind-v4: 4.0.351
+  remotion-enable-scss: 4.0.351
+  remotion-zod-types: 4.0.351
+  remotion-licensing: 4.0.351
