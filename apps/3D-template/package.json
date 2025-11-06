@@ -11,12 +11,12 @@
     "bundle": "remotion bundle src/index.ts --out out/web"
   },
   "dependencies": {
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18-dom",
-    "remotion": "catalog:remotion4",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "remotion": "catalog:",
     "three": "0.169.0"
   },
   "devDependencies": {
-    "@remotion/cli": "catalog:remotion-cli"
+    "@remotion/cli": "catalog:"
   }
 }
