@@ -9,11 +9,11 @@
     "build": "remotion render TemplateMain out/template-main.mp4"
   },
   "dependencies": {
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18-dom",
-    "remotion": "catalog:remotion4"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "remotion": "catalog:"
   },
   "devDependencies": {
-    "@remotion/cli": "catalog:remotion-cli"
+    "@remotion/cli": "catalog:"
   }
 }
