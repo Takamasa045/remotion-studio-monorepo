@@ -111,11 +111,53 @@ pnpm dev
 ## Features
 
 * Monorepo powered by **pnpm workspaces**
+* **Centralized dependency management** via **pnpm Catalog**
 * **Templates** `apps/_template`, `apps/3D-template`
 * **Offline reference**: `docs/remotion-reference.md`
 * **Timeline utilities** (`@studio/timing`), **Anime.js bridge**, transitions, R3F, Pixi/Konva, WebGL effects
 * Productivity scripts (dev/preview/build runners, **batch rendering**, **asset sync**, **template replacement**)
 * Optional CI (lint / build / automatic demo rendering)
+
+---
+
+## Dependency Management (pnpm Catalog)
+
+This monorepo uses **pnpm Catalog** to centrally manage versions of React, Remotion, TypeScript, and other common dependencies.
+
+### How it works
+
+1. **Version definitions** in `pnpm-workspace.yaml`:
+   ```yaml
+   catalog:
+     react: ^18.3.1
+     react-dom: ^18.3.1
+     remotion: 4.0.351
+     typescript: ^5.6.3
+     # ... all @remotion/* packages
+   ```
+
+2. **Reference in `package.json`**:
+   ```json
+   {
+     "dependencies": {
+       "react": "catalog:",
+       "react-dom": "catalog:",
+       "remotion": "catalog:"
+     }
+   }
+   ```
+
+3. **Update versions in one place**: Edit `pnpm-workspace.yaml` catalog, then run:
+   ```bash
+   pnpm install
+   ```
+
+### Benefits
+
+* **Single source of truth**: All packages use the same version across the monorepo
+* **Easy updates**: Change version once in catalog, update everywhere with `pnpm install`
+* **Consistency**: Prevents version mismatches between apps
+* **Type safety**: TypeScript and React versions stay aligned
 
 ---
 
