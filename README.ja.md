@@ -98,11 +98,55 @@ pnpm dev
 
 ## 特徴
 - pnpm workspaces によるモノレポ運用
+- **pnpm Catalog による依存関係の一元管理**
 - テンプレ群（apps/_template と apps/3D-template）
 - オフライン参照（docs/remotion-reference.md）
 - タイムライン/アニメ/2D/3D/WebGL のユーティリティ群
 - 開発スクリプト（ランナー/一括レンダ/アセット同期/テンプレ置換）
 - CI（lint/build/自動レンダリング）
+
+---
+
+## 依存関係の管理（pnpm Catalog）
+
+このモノレポでは **pnpm Catalog** を使用して、React、Remotion、TypeScript などの共通依存関係のバージョンを一元管理しています。
+
+### 仕組み
+
+1. **`pnpm-workspace.yaml` でバージョンを定義**:
+   ```yaml
+   catalog:
+     react: ^18.3.1
+     react-dom: ^18.3.1
+     remotion: 4.0.351
+     typescript: ^5.6.3
+     # ... すべての @remotion/* パッケージ
+   ```
+
+2. **各 `package.json` で参照**:
+   ```json
+   {
+     "dependencies": {
+       "react": "catalog:",
+       "react-dom": "catalog:",
+       "remotion": "catalog:"
+     }
+   }
+   ```
+
+3. **一箇所でバージョンを更新**: `pnpm-workspace.yaml` の catalog を編集後、以下を実行:
+   ```bash
+   pnpm install
+   ```
+
+### メリット
+
+* **単一の信頼できる情報源**: モノレポ全体で同じバージョンを使用
+* **簡単な更新**: catalog で一度変更すれば、`pnpm install` で全体を更新
+* **一貫性**: アプリ間でのバージョン不一致を防止
+* **型安全性**: TypeScript と React のバージョンが常に整合
+
+---
 
 ## 構成（標準ブループリント）
 以下はテンプレ運用の推奨レイアウトです（現状のリポジトリには最小限のみ含まれます）。
