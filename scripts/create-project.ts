@@ -26,6 +26,19 @@ const repoRoot = root; // scripts directory is at <repo>/scripts
 const appsDir = path.resolve(repoRoot, 'apps');
 const defaultTemplateDir = path.join(appsDir, '_template');
 const threeDTemplateDir = path.join(appsDir, '3D-template');
+const rootPkgPath = path.join(repoRoot, 'package.json');
+const rootPkg = JSON.parse(fs.readFileSync(rootPkgPath, 'utf8'));
+
+const remotionVersion =
+  rootPkg.devDependencies?.['@remotion/cli'] ||
+  rootPkg.dependencies?.remotion ||
+  rootPkg.devDependencies?.remotion ||
+  rootPkg.dependencies?.['@remotion/cli'] ||
+  null;
+
+if (!remotionVersion) {
+  console.warn('[create-project] Remotion version not found in root package.json; using template defaults.');
+}
 
 type TemplateKey = 'default' | '3d';
 
@@ -76,6 +89,20 @@ async function copyDir(src: string, dest: string) {
       await fsp.symlink(target, d);
     } else {
       await fsp.copyFile(s, d);
+    }
+  }
+}
+
+function alignRemotionDeps(pkg: Record<string, any>) {
+  if (!remotionVersion) return;
+  const sections: Array<'dependencies' | 'devDependencies' | 'peerDependencies'> = ['dependencies', 'devDependencies', 'peerDependencies'];
+  for (const section of sections) {
+    const block = pkg[section];
+    if (!block) continue;
+    for (const dep of Object.keys(block)) {
+      if (dep === 'remotion' || dep.startsWith('@remotion/')) {
+        block[dep] = remotionVersion;
+      }
     }
   }
 }
@@ -176,6 +203,7 @@ async function main() {
   if (pkg.scripts?.build) {
     pkg.scripts.build = `remotion render ${answers.compositionId} out/${answers.name}.mp4`;
   }
+  alignRemotionDeps(pkg);
   await fsp.writeFile(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
 
   // Replace placeholders in Root.tsx (_template) or constants in 3D-template
