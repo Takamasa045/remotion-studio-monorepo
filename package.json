@@ -4,12 +4,16 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*",
+    "packages/@*/*"
   ],
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write .",
     "create:project": "tsx scripts/create-project.ts",
+    "upgrade:remotion": "tsx scripts/upgrade-remotion.ts",
+    "upgrade:remotion:dry": "tsx scripts/upgrade-remotion.ts --dry-run",
     "dev": "echo 'Use: pnpm -C apps/<name> run dev'",
     "preview": "echo 'Use: pnpm -C apps/<name> run preview'",
     "build:app": "echo 'Use: pnpm -C apps/<name> run build'"
