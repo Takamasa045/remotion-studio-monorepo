@@ -2,17 +2,27 @@ import React, {useEffect, useMemo, useRef} from 'react';
 import {useCurrentFrame, useVideoConfig} from 'remotion';
 import {LinkedParticlesSceneManager} from './LinkedParticlesSceneManager';
 
-export const LinkedParticles: React.FC<{showGUI?: boolean}> = () => {
+type LinkedParticlesProps = {
+  showGUI?: boolean;
+  seed?: string | number;
+};
+
+export const LinkedParticles: React.FC<LinkedParticlesProps> = ({
+  showGUI,
+  seed,
+}) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const frame = useCurrentFrame();
-  const {fps, width, height} = useVideoConfig();
+  const videoConfig = useVideoConfig();
+  const {fps, width, height} = videoConfig;
+  const compositionId = (videoConfig as {id?: string}).id ?? 'LinkedParticles';
+  void showGUI;
 
-  const manager = useMemo(() => new LinkedParticlesSceneManager(width, height), [
-    width,
-    height,
-  ]);
+  const manager = useMemo(
+    () => new LinkedParticlesSceneManager(width, height, {compositionId, seed}),
+    [width, height, compositionId, seed],
+  );
 
-  // mount/unmount
   useEffect(() => {
     const el = mountRef.current;
     if (!el) {
@@ -26,12 +36,10 @@ export const LinkedParticles: React.FC<{showGUI?: boolean}> = () => {
     };
   }, [manager]);
 
-  // resize (frame-agnostic)
   useEffect(() => {
     manager.resize(width, height);
   }, [manager, width, height]);
 
-  // frame-driven update
   useEffect(() => {
     manager.update(frame, fps);
   }, [manager, frame, fps]);
