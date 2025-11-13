@@ -12,6 +12,11 @@ import {
   Texture,
   WebGLRenderer,
 } from 'three';
+import {
+  createSeededRandom,
+  type SeedLike,
+  type SeededRandom,
+} from '../utils/random';
 
 enum GeometryAttributeName {
   Position = 'position',
@@ -20,7 +25,20 @@ enum GeometryAttributeName {
   SeedB = 'seedB',
 }
 
-const createGalaxyTexture = (w: number, h: number): Texture => {
+const DEFAULT_COMPOSITION_ID = 'LinkedParticles';
+const DEFAULT_SEED = 'default';
+const RANDOM_NAMESPACE = 'LinkedParticlesScene';
+
+type LinkedParticlesManagerOptions = {
+  compositionId?: string;
+  seed?: string | number;
+};
+
+const createGalaxyTexture = (
+  w: number,
+  h: number,
+  random: SeededRandom,
+): Texture => {
   const cw = Math.max(1024, Math.floor(w));
   const ch = Math.max(1024, Math.floor(h));
   const canvas = document.createElement('canvas');
@@ -65,22 +83,26 @@ const createGalaxyTexture = (w: number, h: number): Texture => {
   };
 
   const palette = ['#5e2d79', '#1c6ea4', '#2b7a78', '#7f1d8d'];
+  const blobRandom = random.fork('nebula-blobs');
   for (let i = 0; i < 9; i++) {
-    const rx = cx + (Math.random() - 0.5) * cw * 0.35;
-    const ry = cy + (Math.random() - 0.5) * ch * 0.35;
-    const rr = Math.random() * Math.max(cw, ch) * 0.18 + Math.max(cw, ch) * 0.08;
-    const color = palette[(Math.random() * palette.length) | 0];
-    const alpha = 0.12 + Math.random() * 0.12;
+    const rx = cx + (blobRandom.next() - 0.5) * cw * 0.35;
+    const ry = cy + (blobRandom.next() - 0.5) * ch * 0.35;
+    const rr =
+      blobRandom.nextRange(0, Math.max(cw, ch) * 0.18) +
+      Math.max(cw, ch) * 0.08;
+    const color = palette[blobRandom.nextInt(0, palette.length - 1)];
+    const alpha = 0.12 + blobRandom.next() * 0.12;
     blob(rx, ry, rr, color, alpha);
   }
 
   const starCount = Math.floor((cw * ch) / 4000);
   ctx.globalAlpha = 1;
+  const starRandom = random.fork('galaxy-stars');
   for (let i = 0; i < starCount; i++) {
-    const x = Math.random() * cw;
-    const y = Math.random() * ch;
-    const alpha = 0.35 + Math.random() * 0.65;
-    const size = Math.random() * 1.0 + 0.2;
+    const x = starRandom.next() * cw;
+    const y = starRandom.next() * ch;
+    const alpha = 0.35 + starRandom.next() * 0.65;
+    const size = starRandom.next() * 1.0 + 0.2;
     ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -90,9 +112,9 @@ const createGalaxyTexture = (w: number, h: number): Texture => {
   ctx.shadowColor = 'rgba(255,255,255,0.8)';
   ctx.shadowBlur = 8;
   for (let i = 0; i < Math.floor(starCount * 0.05); i++) {
-    const x = Math.random() * cw;
-    const y = Math.random() * ch;
-    const size = Math.random() * 1.2 + 0.6;
+    const x = starRandom.next() * cw;
+    const y = starRandom.next() * ch;
+    const size = starRandom.next() * 1.2 + 0.6;
     ctx.fillStyle = 'rgba(255,255,255,0.95)';
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -122,12 +144,25 @@ export class LinkedParticlesSceneManager {
   private readonly colorAttr: BufferAttribute;
   private readonly seedAAttr: BufferAttribute;
   private readonly seedBAttr: BufferAttribute;
+  private readonly seedArgs: SeedLike[];
   private mountTarget: HTMLElement | null = null;
   private fallbackEl: HTMLDivElement | null = null;
 
-  constructor(width: number, height: number) {
+  constructor(
+    width: number,
+    height: number,
+    options?: LinkedParticlesManagerOptions,
+  ) {
+    const compositionId = options?.compositionId ?? DEFAULT_COMPOSITION_ID;
+    const userSeed = options?.seed ?? DEFAULT_SEED;
+    this.seedArgs = [RANDOM_NAMESPACE, compositionId, userSeed];
+
+    const baseRandom = this.createBaseRandom();
+    const galaxyRandom = baseRandom.fork('galaxy');
+    const starRandom = baseRandom.fork('starfield');
+
     this.scene = new Scene();
-    this.scene.background = createGalaxyTexture(width, height);
+    this.scene.background = createGalaxyTexture(width, height, galaxyRandom);
 
     this.camera = new PerspectiveCamera(60, width / height, 0.1, 200);
     this.camera.position.set(0, 0, 14);
@@ -166,14 +201,14 @@ export class LinkedParticlesSceneManager {
     const seedsB = new Float32Array(starCount);
 
     for (let i = 0; i < starCount; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 6 + Math.random() * 5;
-      const y = (Math.random() - 0.5) * 2.0;
+      const angle = starRandom.nextRange(0, Math.PI * 2);
+      const radius = 6 + starRandom.next() * 5;
+      const y = (starRandom.next() - 0.5) * 2.0;
       positions[i * 3 + 0] = Math.cos(angle) * radius;
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = Math.sin(angle) * radius;
-      seedsA[i] = Math.random();
-      seedsB[i] = Math.random();
+      seedsA[i] = starRandom.next();
+      seedsB[i] = starRandom.next();
       colors[i * 3 + 0] = 0.62;
       colors[i * 3 + 1] = 0.8;
       colors[i * 3 + 2] = 1.0;
@@ -229,7 +264,8 @@ export class LinkedParticlesSceneManager {
     if (background) {
       background.dispose();
     }
-    this.scene.background = createGalaxyTexture(width, height);
+    const galaxyRandom = this.createBaseRandom().fork('galaxy');
+    this.scene.background = createGalaxyTexture(width, height, galaxyRandom);
   }
 
   update(frame: number, fps: number) {
@@ -306,5 +342,9 @@ export class LinkedParticlesSceneManager {
       this.fallbackEl.parentElement.removeChild(this.fallbackEl);
     }
     this.fallbackEl = null;
+  }
+
+  private createBaseRandom(): SeededRandom {
+    return createSeededRandom(...this.seedArgs);
   }
 }
