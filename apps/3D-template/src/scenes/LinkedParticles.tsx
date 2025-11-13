@@ -4,6 +4,13 @@ import * as THREE from 'three';
 // ★ 追加の import（必要最小限）
 import {WebGLRenderer} from 'three';
 
+enum GeometryAttributeName {
+  Position = 'position',
+  Color = 'color',
+  SeedA = 'seedA',
+  SeedB = 'seedB',
+}
+
 // Plan A: Pure WebGL + frame-driven rendering (no rAF, no WebGPU/TSL)
 // - Stable in headless/CLI when WebGL is available (use SwiftShader if needed)
 // - Driven by Remotion frame/fps
@@ -160,11 +167,13 @@ export const LinkedParticles: React.FC<{showGUI?: boolean}> = () => {
     }
     const geo = new THREE.BufferGeometry();
     const posAttr = new THREE.BufferAttribute(positions, 3);
-    geo.setAttribute('position', posAttr);
+    geo.setAttribute(GeometryAttributeName.Position, posAttr);
     posAttrRef.current = posAttr;
     const colAttr = new THREE.BufferAttribute(colors, 3);
-    geo.setAttribute('color', colAttr);
+    geo.setAttribute(GeometryAttributeName.Color, colAttr);
     colAttrRef.current = colAttr;
+    geo.setAttribute(GeometryAttributeName.SeedA, new THREE.BufferAttribute(seedsA, 1));
+    geo.setAttribute(GeometryAttributeName.SeedB, new THREE.BufferAttribute(seedsB, 1));
 
     // material – additive small dots
     const mat = new THREE.PointsMaterial({
@@ -181,9 +190,6 @@ export const LinkedParticles: React.FC<{showGUI?: boolean}> = () => {
     const points = new THREE.Points(geo, mat);
     points.frustumCulled = false;
     pointsRef.current = points;
-    // attach seeds to geometry for per-frame update
-    (points.geometry as any)._seedsA = seedsA;
-    (points.geometry as any)._seedsB = seedsB;
     scene.add(points);
 
     return {scene, camera, renderer};
@@ -211,6 +217,18 @@ export const LinkedParticles: React.FC<{showGUI?: boolean}> = () => {
       try {
         el.removeChild(renderer.domElement);
       } catch {}
+      const points = pointsRef.current;
+      if (points) {
+        points.geometry.dispose();
+        if (Array.isArray(points.material)) {
+          points.material.forEach((material) => material.dispose());
+        } else {
+          points.material.dispose();
+        }
+        pointsRef.current = null;
+      }
+      posAttrRef.current = null;
+      colAttrRef.current = null;
       renderer.dispose();
     };
   }, [renderer]);
@@ -235,8 +253,18 @@ export const LinkedParticles: React.FC<{showGUI?: boolean}> = () => {
 
     const positions = attr.array as Float32Array;
     const colors = colAttr.array as Float32Array;
-    const seedsA = (p.geometry as any)._seedsA as Float32Array;
-    const seedsB = (p.geometry as any)._seedsB as Float32Array;
+    const seedsAAttr = p.geometry.getAttribute(
+      GeometryAttributeName.SeedA,
+    ) as THREE.BufferAttribute | null;
+    const seedsBAttr = p.geometry.getAttribute(
+      GeometryAttributeName.SeedB,
+    ) as THREE.BufferAttribute | null;
+    if (!seedsAAttr || !seedsBAttr) {
+      return;
+    }
+
+    const seedsA = seedsAAttr.array as Float32Array;
+    const seedsB = seedsBAttr.array as Float32Array;
 
     const t = frame / fps; // seconds
     const N = positions.length / 3;
