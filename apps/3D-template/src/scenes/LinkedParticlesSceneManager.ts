@@ -13,6 +13,13 @@ import {
   WebGLRenderer,
 } from 'three';
 
+enum GeometryAttributeName {
+  Position = 'position',
+  Color = 'color',
+  SeedA = 'seedA',
+  SeedB = 'seedB',
+}
+
 const createGalaxyTexture = (w: number, h: number): Texture => {
   const cw = Math.max(1024, Math.floor(w));
   const ch = Math.max(1024, Math.floor(h));
@@ -113,8 +120,8 @@ export class LinkedParticlesSceneManager {
   private readonly points: Points<BufferGeometry, PointsMaterial>;
   private readonly positionAttr: BufferAttribute;
   private readonly colorAttr: BufferAttribute;
-  private readonly seedsA: Float32Array;
-  private readonly seedsB: Float32Array;
+  private readonly seedAAttr: BufferAttribute;
+  private readonly seedBAttr: BufferAttribute;
   private mountTarget: HTMLElement | null = null;
   private fallbackEl: HTMLDivElement | null = null;
 
@@ -155,8 +162,8 @@ export class LinkedParticlesSceneManager {
     const starCount = 6000;
     const positions = new Float32Array(starCount * 3);
     const colors = new Float32Array(starCount * 3);
-    this.seedsA = new Float32Array(starCount);
-    this.seedsB = new Float32Array(starCount);
+    const seedsA = new Float32Array(starCount);
+    const seedsB = new Float32Array(starCount);
 
     for (let i = 0; i < starCount; i++) {
       const angle = Math.random() * Math.PI * 2;
@@ -165,8 +172,8 @@ export class LinkedParticlesSceneManager {
       positions[i * 3 + 0] = Math.cos(angle) * radius;
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = Math.sin(angle) * radius;
-      this.seedsA[i] = Math.random();
-      this.seedsB[i] = Math.random();
+      seedsA[i] = Math.random();
+      seedsB[i] = Math.random();
       colors[i * 3 + 0] = 0.62;
       colors[i * 3 + 1] = 0.8;
       colors[i * 3 + 2] = 1.0;
@@ -174,9 +181,13 @@ export class LinkedParticlesSceneManager {
 
     const geometry = new BufferGeometry();
     this.positionAttr = new BufferAttribute(positions, 3);
-    geometry.setAttribute('position', this.positionAttr);
+    geometry.setAttribute(GeometryAttributeName.Position, this.positionAttr);
     this.colorAttr = new BufferAttribute(colors, 3);
-    geometry.setAttribute('color', this.colorAttr);
+    geometry.setAttribute(GeometryAttributeName.Color, this.colorAttr);
+    this.seedAAttr = new BufferAttribute(seedsA, 1);
+    geometry.setAttribute(GeometryAttributeName.SeedA, this.seedAAttr);
+    this.seedBAttr = new BufferAttribute(seedsB, 1);
+    geometry.setAttribute(GeometryAttributeName.SeedB, this.seedBAttr);
 
     const material = new PointsMaterial({
       color: 0xffffff,
@@ -224,6 +235,8 @@ export class LinkedParticlesSceneManager {
   update(frame: number, fps: number) {
     const positions = this.positionAttr.array as Float32Array;
     const colors = this.colorAttr.array as Float32Array;
+    const seedsA = this.seedAAttr.array as Float32Array;
+    const seedsB = this.seedBAttr.array as Float32Array;
     const t = frame / fps;
     const count = positions.length / 3;
     const baseRadius = 10.5;
@@ -232,8 +245,8 @@ export class LinkedParticlesSceneManager {
     const cy = Math.cos(t * 0.18) * 2.4;
 
     for (let i = 0; i < count; i++) {
-      const sa = this.seedsA[i];
-      const sb = this.seedsB[i];
+      const sa = seedsA[i];
+      const sb = seedsB[i];
       const angle = sa * Math.PI * 2 + t * spin;
       const radius = baseRadius + Math.sin(t * 0.7 + sb * 12.0) * 2.5 + sb * 2.2;
       const y = Math.sin(t * 0.9 + sb * 6.283) * 1.6;
@@ -274,6 +287,8 @@ export class LinkedParticlesSceneManager {
     this.points.geometry.dispose();
     this.positionAttr.dispose();
     this.colorAttr.dispose();
+    this.seedAAttr.dispose();
+    this.seedBAttr.dispose();
     (this.points.material as PointsMaterial).dispose();
     this.renderer.dispose();
 
@@ -293,4 +308,3 @@ export class LinkedParticlesSceneManager {
     this.fallbackEl = null;
   }
 }
-
