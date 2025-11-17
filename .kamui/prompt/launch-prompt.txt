@@ -1,5 +1,0 @@
-起動時プロンプト
-docs/KAMUI-CODE-MODEL-RELEASE-GUIDE.md これを忠実に実装してください。 実装後にmain.goのimport,routing,caseが3つ,log,の４箇所追記を確認し、抜けていたら実装してください。
-
-
-実装完了したら最後にcd 作業環境フルパス && npm run devコマンドを表示するように。基本タスク行なったら日本語でコミットを高頻度にお願いします。
