@@ -1,6 +1,7 @@
 packages:
-  - "apps/_template"
-  - "apps/3D-template"
+  - "apps/*"
+  - "packages/*"
+  - "packages/@*/*"
 
 catalog:
   # React 18
