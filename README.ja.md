@@ -47,11 +47,56 @@ node -v && pnpm -v && ffmpeg -version
 
 ## 特徴
 
-- **pnpm workspaces** によるモノレポ
-- **2D・3D テンプレート** 搭載
-- **生産性スクリプト** (一括レンダリング、アセット同期)
+- **pnpm workspaces** によるモノレポ運用
+- **pnpm Catalog による依存関係の一元管理**
+- **2D・3D テンプレート** 搭載（`apps/_template`、`apps/3D-template`）
+- **生産性スクリプト** (一括レンダリング、アセット同期、テンプレート置換)
 - **オフライン参照** (`docs/remotion-reference.md`)
+- **タイムライン/アニメ/2D/3D/WebGL のユーティリティ群**
 - オプションで **CI/CD ワークフロー**
+
+---
+
+## 依存関係の管理（pnpm Catalog）
+
+このモノレポでは **pnpm Catalog** を使用して、React、Remotion、TypeScript などの共通依存関係のバージョンを一元管理しています。
+
+### 仕組み
+
+1. **`pnpm-workspace.yaml` でバージョンを定義**:
+   ```yaml
+   catalog:
+     react: ^18.3.1
+     react-dom: ^18.3.1
+     remotion: 4.0.351
+     typescript: ^5.6.3
+     # ... すべての @remotion/* パッケージ
+   ```
+
+2. **各 `package.json` で参照**:
+   ```json
+   {
+     "dependencies": {
+       "react": "catalog:",
+       "react-dom": "catalog:",
+       "remotion": "catalog:"
+     }
+   }
+   ```
+
+3. **一箇所でバージョンを更新**: `pnpm-workspace.yaml` の catalog を編集後、以下を実行:
+   ```bash
+   pnpm install
+   ```
+
+### メリット
+
+* **単一の信頼できる情報源**: モノレポ全体で同じバージョンを使用
+* **簡単な更新**: catalog で一度変更すれば、`pnpm install` で全体を更新
+* **一貫性**: アプリ間でのバージョン不一致を防止
+* **型安全性**: TypeScript と React のバージョンが常に整合
+
+---
 
 ## 構成
 

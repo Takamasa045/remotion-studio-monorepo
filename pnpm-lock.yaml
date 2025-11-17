@@ -4,6 +4,147 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@remotion/animated-emoji':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/animation-utils':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/bundler':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/captions':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/cli':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/cloudrun':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/enable-scss':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/eslint-config':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/eslint-plugin':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/fonts':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/gif':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/google-fonts':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/install-whisper-cpp':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/lambda':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/layout-utils':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/licensing':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/lottie':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/media':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/media-parser':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/media-utils':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/motion-blur':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/noise':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/openai-whisper':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/paths':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/player':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/preload':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/renderer':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/rive':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/shapes':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/skia':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/studio':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/tailwind':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/tailwind-v4':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/three':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/transitions':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/webcodecs':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/whisper-web':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@remotion/zod-types':
+      specifier: 4.0.351
+      version: 4.0.351
+    '@types/node':
+      specifier: ^24.5.2
+      version: 24.5.2
+    eslint:
+      specifier: ^9.8.0
+      version: 9.35.0
+    prettier:
+      specifier: ^3.3.3
+      version: 3.6.2
+    react:
+      specifier: ^18.3.1
+      version: 18.3.1
+    react-dom:
+      specifier: ^18.3.1
+      version: 18.3.1
+    remotion:
+      specifier: 4.0.351
+      version: 4.0.351
+    tsx:
+      specifier: ^4.16.2
+      version: 4.20.5
+    typescript:
+      specifier: ^5.6.3
+      version: 5.9.2
+
 importers:
 
   .:
@@ -18,118 +159,118 @@ importers:
         specifier: ^9.0.0
         version: 9.35.0
       '@remotion/animated-emoji':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/animation-utils':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/bundler':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/captions':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/cli':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/cloudrun':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/enable-scss':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(@remotion/bundler@4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(webpack@5.96.1(esbuild@0.25.9))
       '@remotion/eslint-config':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(eslint@9.35.0(jiti@2.6.1))
       '@remotion/eslint-plugin':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(eslint@9.35.0(jiti@2.6.1))(typescript@5.9.2)
       '@remotion/fonts':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/gif':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/google-fonts':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/install-whisper-cpp':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/lambda':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(@remotion/bundler@4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/layout-utils':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/licensing':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/lottie':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(lottie-web@5.13.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/media':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/media-parser':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/media-utils':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/motion-blur':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/noise':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/openai-whisper':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/paths':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/player':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/preload':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/renderer':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/rive':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/shapes':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/skia':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(@shopify/react-native-skia@2.2.21(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/studio':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/tailwind':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(@remotion/bundler@4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.9.2)(webpack@5.96.1(esbuild@0.25.9))
       '@remotion/tailwind-v4':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(@remotion/bundler@4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.9.2)(webpack@5.96.1(esbuild@0.25.9))
       '@remotion/three':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(@react-three/fiber@9.3.0(@types/react@19.1.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(remotion@4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(three@0.169.0)
       '@remotion/transitions':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@remotion/webcodecs':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/whisper-web':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351
       '@remotion/zod-types':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zod@3.22.3)
       '@storybook/addon-essentials':
         specifier: ^8.0.0
@@ -153,7 +294,7 @@ importers:
         specifier: ^16.0.0
         version: 16.3.0(@testing-library/dom@10.4.0)(@types/react@19.1.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/node':
-        specifier: ^24.5.2
+        specifier: 'catalog:'
         version: 24.5.2
       '@vitest/ui':
         specifier: ^2.0.0
@@ -165,7 +306,7 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(@types/node@24.5.2)(typescript@5.9.2)
       eslint:
-        specifier: ^9.8.0
+        specifier: 'catalog:'
         version: 9.35.0(jiti@2.6.1)
       eslint-plugin-react:
         specifier: ^7.35.0
@@ -183,19 +324,19 @@ importers:
         specifier: ^15.0.0
         version: 15.5.2
       prettier:
-        specifier: ^3.3.3
+        specifier: 'catalog:'
         version: 3.6.2
       storybook:
         specifier: ^8.0.0
         version: 8.6.14(prettier@3.6.2)
       tsx:
-        specifier: ^4.16.2
+        specifier: 'catalog:'
         version: 4.20.5
       turbo:
         specifier: ^2.0.0
         version: 2.6.1
       typescript:
-        specifier: ^5.6.3
+        specifier: 'catalog:'
         version: 5.9.2
       typescript-eslint:
         specifier: ^8.0.0
@@ -207,36 +348,36 @@ importers:
   apps/3D-template:
     dependencies:
       react:
-        specifier: ^18.3.1
+        specifier: 'catalog:'
         version: 18.3.1
       react-dom:
-        specifier: ^18.3.1
+        specifier: 'catalog:'
         version: 18.3.1(react@18.3.1)
       remotion:
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       three:
         specifier: 0.169.0
         version: 0.169.0
     devDependencies:
       '@remotion/cli':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   apps/_template:
     dependencies:
       react:
-        specifier: ^18.2.0
+        specifier: 'catalog:'
         version: 18.3.1
       react-dom:
-        specifier: ^18.2.0
+        specifier: 'catalog:'
         version: 18.3.1(react@18.3.1)
       remotion:
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@remotion/cli':
-        specifier: 4.0.351
+        specifier: 'catalog:'
         version: 4.0.351(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   packages/@studio/core-types:
@@ -4250,8 +4391,8 @@ packages:
     resolution: {integrity: sha512-jqdObeR2rxZZbPSGL+3VckHMYtu+f9//KXBsVny6JSX/pa38Fy+bGjuG8eW/H6USNQWhLi8Num++cU2yOCNz4A==}
     engines: {node: '>= 0.12'}
 
-  form-data@4.0.4:
-    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
+  form-data@4.0.5:
+    resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
     engines: {node: '>= 6'}
 
   formdata-polyfill@4.0.10:
@@ -11049,6 +11190,16 @@ snapshots:
       postcss: 8.4.47
       postcss-value-parser: 4.2.0
 
+  autoprefixer@10.4.21(postcss@8.4.47):
+    dependencies:
+      browserslist: 4.26.0
+      caniuse-lite: 1.0.30001741
+      fraction.js: 4.3.7
+      normalize-range: 0.1.2
+      picocolors: 1.1.1
+      postcss: 8.4.47
+      postcss-value-parser: 4.2.0
+
   autoprefixer@10.4.21(postcss@8.5.1):
     dependencies:
       browserslist: 4.26.0
@@ -12312,7 +12463,7 @@ snapshots:
       mime-types: 2.1.35
       safe-buffer: 5.2.1
 
-  form-data@4.0.4:
+  form-data@4.0.5:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
@@ -12978,7 +13129,7 @@ snapshots:
       cssstyle: 4.6.0
       data-urls: 5.0.0
       decimal.js: 10.6.0
-      form-data: 4.0.4
+      form-data: 4.0.5
       html-encoding-sniffer: 4.0.0
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -14028,7 +14179,7 @@ snapshots:
       '@csstools/postcss-text-decoration-shorthand': 2.2.4(postcss@8.4.47)
       '@csstools/postcss-trigonometric-functions': 2.1.1(postcss@8.4.47)
       '@csstools/postcss-unset-value': 2.0.1(postcss@8.4.47)
-      autoprefixer: 10.4.20(postcss@8.4.47)
+      autoprefixer: 10.4.21(postcss@8.4.47)
       browserslist: 4.26.0
       css-blank-pseudo: 5.0.2(postcss@8.4.47)
       css-has-pseudo: 5.0.2(postcss@8.4.47)
