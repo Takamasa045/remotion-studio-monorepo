@@ -69,14 +69,14 @@ remotion-studio/
 
 | ガイド | 説明 |
 |-------|-------------|
-| [Structure](./docs/structure.md) | モノレポ構成 |
-| [Adding Dependencies](./docs/adding-deps.md) | パッケージ追加方法 |
-| [Assets Guide](./docs/assets.md) | アセット管理 |
-| [3D Notes](./docs/3d-notes.md) | Three.js / R3F セットアップ |
-| [MCP Setup](./docs/mcp-setup.md) | Claude / Codex 連携 |
-| [Upgrading](./docs/upgrading-remotion.md) | Remotion バージョン管理 |
-| [Packages](./docs/packages.md) | 利用可能なパッケージ一覧 |
-| [Troubleshooting](./docs/troubleshooting.md) | よくある問題と解決方法 |
+| [Structure](./docs/structure.ja.md) | モノレポ構成 |
+| [Adding Dependencies](./docs/adding-deps.ja.md) | パッケージ追加方法 |
+| [Assets Guide](./docs/assets.ja.md) | アセット管理 |
+| [3D Notes](./docs/3d-notes.ja.md) | Three.js / R3F セットアップ |
+| [MCP Setup](./docs/mcp-setup.ja.md) | Claude / Codex 連携 |
+| [Upgrading](./docs/upgrading-remotion.ja.md) | Remotion バージョン管理 |
+| [Packages](./docs/packages.ja.md) | 利用可能なパッケージ一覧 |
+| [Troubleshooting](./docs/troubleshooting.ja.md) | よくある問題と解決方法 |
 
 ## トラブルシューティング
 
@@ -84,7 +84,7 @@ remotion-studio/
 
 **サブモジュールの問題?** → `git submodule update --init --recursive`
 
-**詳細なヘルプ** → [docs/troubleshooting.md](./docs/troubleshooting.md) 参照
+**詳細なヘルプ** → [docs/troubleshooting.ja.md](./docs/troubleshooting.ja.md) 参照
 
 ## ライセンス
 
