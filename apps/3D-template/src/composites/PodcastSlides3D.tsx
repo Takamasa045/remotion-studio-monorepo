@@ -10,7 +10,7 @@ export const PodcastSlides3D: React.FC<Props> = (props) => {
     <AbsoluteFill>
       {/* Live 3D background */}
       <div style={{position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none'}}>
-        <LinkedParticles showGUI={false} />
+        <LinkedParticles showGUI={false} seed="PodcastSlides3D" />
       </div>
       {/* Scrim overlay to improve foreground readability over 3D background (slightly lighter to let animation pop) */}
       <div

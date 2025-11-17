@@ -25,7 +25,15 @@ export const Root: React.FC = () => {
   return (
     <>
       <Composition id="y" component={TemplateMain} width={WIDTH} height={HEIGHT} fps={FPS} durationInFrames={DURATION} />
-      <Composition id="LinkedParticles" component={LinkedParticles} width={WIDTH} height={HEIGHT} fps={FPS} durationInFrames={DURATION} />
+      <Composition
+        id="LinkedParticles"
+        component={LinkedParticles}
+        width={WIDTH}
+        height={HEIGHT}
+        fps={FPS}
+        durationInFrames={DURATION}
+        defaultProps={{seed: 'LinkedParticles'}}
+      />
     </>
   );
 };

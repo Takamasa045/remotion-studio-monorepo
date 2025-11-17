@@ -6,7 +6,9 @@
   "type": "module",
   "packageManager": "pnpm@10.20.0",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*",
+    "packages/@*/*"
   ],
   "scripts": {
     "build": "turbo run build",
@@ -27,7 +29,11 @@
     "analyze": "tsx scripts/analyze-bundle.ts",
     "benchmark": "tsx scripts/benchmark.ts",
     "commit": "cz",
-    "prepare": "husky"
+    "prepare": "husky",
+    "upgrade:remotion": "tsx scripts/upgrade-remotion.ts",
+    "upgrade:remotion:dry": "tsx scripts/upgrade-remotion.ts --dry-run",
+    "preview": "echo 'Use: pnpm -C apps/<name> run preview'",
+    "build:app": "echo 'Use: pnpm -C apps/<name> run build'"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",

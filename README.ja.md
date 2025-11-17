@@ -140,6 +140,7 @@ remotion-studio/
 - アセット運用: `docs/assets.md`
 - 3D / R3F メモ: `docs/3d-notes.md`
 - MCP 設定（Claude / Codex）: `docs/mcp-setup.md`
+- Remotion バージョン更新手順: `docs/upgrading-remotion.md`（EN）
 `~/.codex/config.toml` に追記:
 
 ```toml
@@ -193,6 +194,12 @@ args = ["@remotion/mcp@latest"]
 型 / ライセンス補助
 - `@remotion/zod-types`（UI 連動型）
 - `@remotion/licensing`（企業ライセンス使用計測 API）
+
+### Remotion バージョンアップ自動化
+
+`pnpm upgrade:remotion` を実行すると、リポジトリ直下・`apps/`・`packages/` 配下のすべての `package.json` に含まれる `remotion` / `@remotion/*` のバージョンが一括更新され、最後に `pnpm install` で `pnpm-lock.yaml` も同期されます。`--dry-run` / `--tag beta` / `--skip-install` などの詳細オプションは `docs/upgrading-remotion.md`（EN）を参照してください。
+
+> `pnpm create:project` はリポジトリ直下の `@remotion/cli` バージョンを読み取り、新規アプリにも同じバージョンを自動で適用します。
 
 インストール例（任意アプリに追加）
 ```bash
