@@ -152,6 +152,7 @@ External dependencies (official `@remotion/*`)
 - Assets guide: `docs/assets.md`
 - 3D / R3F notes: `docs/3d-notes.md`
 - MCP setup (Claude / Codex): `docs/mcp-setup.md`
+- Upgrading Remotion versions: `docs/upgrading-remotion.md`
 * `@studio/core-types`: shared types
 
 **Animation**
@@ -198,6 +199,12 @@ Media IO / visualization
 
 Whisper (speech)
 - `@remotion/install-whisper-cpp`, `@remotion/whisper-web`, `@remotion/openai-whisper`
+
+### Automate Remotion upgrades
+
+Run `pnpm upgrade:remotion` to bump `remotion` and every `@remotion/*` dependency across the repo (root, apps, shared packages, templates). See `docs/upgrading-remotion.md` for optional flags like `--dry-run`, `--tag`, or `--skip-install`.
+
+> `pnpm create:project` automatically reads the repo's pinned Remotion version, so every newly scaffolded app matches whatever version you last upgraded to.
 
 Styling
 - `@remotion/tailwind` (v3) / `@remotion/tailwind-v4` (v4), `@remotion/enable-scss`
