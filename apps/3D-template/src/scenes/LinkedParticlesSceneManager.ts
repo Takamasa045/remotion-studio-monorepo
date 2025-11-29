@@ -11,23 +11,23 @@ import {
   SRGBColorSpace,
   Texture,
   WebGLRenderer,
-} from 'three';
+} from "three";
 import {
   createSeededRandom,
   type SeedLike,
   type SeededRandom,
-} from '../utils/random';
+} from "../utils/random";
 
 enum GeometryAttributeName {
-  Position = 'position',
-  Color = 'color',
-  SeedA = 'seedA',
-  SeedB = 'seedB',
+  Position = "position",
+  Color = "color",
+  SeedA = "seedA",
+  SeedB = "seedB",
 }
 
-const DEFAULT_COMPOSITION_ID = 'LinkedParticles';
-const DEFAULT_SEED = 'default';
-const RANDOM_NAMESPACE = 'LinkedParticlesScene';
+const DEFAULT_COMPOSITION_ID = "LinkedParticles";
+const DEFAULT_SEED = "default";
+const RANDOM_NAMESPACE = "LinkedParticlesScene";
 
 type LinkedParticlesManagerOptions = {
   compositionId?: string;
@@ -41,28 +41,28 @@ const createGalaxyTexture = (
 ): Texture => {
   const cw = Math.max(1024, Math.floor(w));
   const ch = Math.max(1024, Math.floor(h));
-  const canvas = document.createElement('canvas');
+  const canvas = document.createElement("canvas");
   canvas.width = cw;
   canvas.height = ch;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
 
   if (!ctx) {
-    const tex = new CanvasTexture(document.createElement('canvas'));
+    const tex = new CanvasTexture(document.createElement("canvas"));
     tex.needsUpdate = true;
     return tex;
   }
 
-  ctx.fillStyle = '#05070a';
+  ctx.fillStyle = "#05070a";
   ctx.fillRect(0, 0, cw, ch);
 
   const cx = cw * 0.5;
   const cy = ch * 0.5;
   const radius = Math.max(cw, ch) * 0.7;
   const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-  gradient.addColorStop(0.0, '#0d1630');
-  gradient.addColorStop(0.35, '#1a0f2b');
-  gradient.addColorStop(0.7, '#081426');
-  gradient.addColorStop(1.0, '#05070a');
+  gradient.addColorStop(0.0, "#0d1630");
+  gradient.addColorStop(0.35, "#1a0f2b");
+  gradient.addColorStop(0.7, "#081426");
+  gradient.addColorStop(1.0, "#05070a");
   ctx.globalAlpha = 1;
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, cw, ch);
@@ -76,14 +76,14 @@ const createGalaxyTexture = (
   ) => {
     const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
     grad.addColorStop(0, color);
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, "rgba(0,0,0,0)");
     ctx.globalAlpha = alpha;
     ctx.fillStyle = grad;
     ctx.fillRect(x - r, y - r, r * 2, r * 2);
   };
 
-  const palette = ['#5e2d79', '#1c6ea4', '#2b7a78', '#7f1d8d'];
-  const blobRandom = random.fork('nebula-blobs');
+  const palette = ["#5e2d79", "#1c6ea4", "#2b7a78", "#7f1d8d"];
+  const blobRandom = random.fork("nebula-blobs");
   for (let i = 0; i < 9; i++) {
     const rx = cx + (blobRandom.next() - 0.5) * cw * 0.35;
     const ry = cy + (blobRandom.next() - 0.5) * ch * 0.35;
@@ -97,7 +97,7 @@ const createGalaxyTexture = (
 
   const starCount = Math.floor((cw * ch) / 4000);
   ctx.globalAlpha = 1;
-  const starRandom = random.fork('galaxy-stars');
+  const starRandom = random.fork("galaxy-stars");
   for (let i = 0; i < starCount; i++) {
     const x = starRandom.next() * cw;
     const y = starRandom.next() * ch;
@@ -109,13 +109,13 @@ const createGalaxyTexture = (
     ctx.fill();
   }
 
-  ctx.shadowColor = 'rgba(255,255,255,0.8)';
+  ctx.shadowColor = "rgba(255,255,255,0.8)";
   ctx.shadowBlur = 8;
   for (let i = 0; i < Math.floor(starCount * 0.05); i++) {
     const x = starRandom.next() * cw;
     const y = starRandom.next() * ch;
     const size = starRandom.next() * 1.2 + 0.6;
-    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.fillStyle = "rgba(255,255,255,0.95)";
     ctx.beginPath();
     ctx.arc(x, y, size, 0, Math.PI * 2);
     ctx.fill();
@@ -129,10 +129,10 @@ const createGalaxyTexture = (
 };
 
 const FALLBACK_STYLES = {
-  position: 'absolute',
-  inset: '0',
+  position: "absolute",
+  inset: "0",
   background:
-    'radial-gradient(150% 100% at 50% 50%, #0d1630 0%, #1a0f2b 40%, #05070a 100%)',
+    "radial-gradient(150% 100% at 50% 50%, #0d1630 0%, #1a0f2b 40%, #05070a 100%)",
 } as const;
 
 export class LinkedParticlesSceneManager {
@@ -158,8 +158,8 @@ export class LinkedParticlesSceneManager {
     this.seedArgs = [RANDOM_NAMESPACE, compositionId, userSeed];
 
     const baseRandom = this.createBaseRandom();
-    const galaxyRandom = baseRandom.fork('galaxy');
-    const starRandom = baseRandom.fork('starfield');
+    const galaxyRandom = baseRandom.fork("galaxy");
+    const starRandom = baseRandom.fork("starfield");
 
     this.scene = new Scene();
     this.scene.background = createGalaxyTexture(width, height, galaxyRandom);
@@ -167,17 +167,17 @@ export class LinkedParticlesSceneManager {
     this.camera = new PerspectiveCamera(60, width / height, 0.1, 200);
     this.camera.position.set(0, 0, 14);
 
-    const canvas = document.createElement('canvas');
-    const gl2 = canvas.getContext('webgl2', {
+    const canvas = document.createElement("canvas");
+    const gl2 = canvas.getContext("webgl2", {
       alpha: true,
       antialias: true,
       preserveDrawingBuffer: true,
       failIfMajorPerformanceCaveat: false,
-      powerPreference: 'high-performance',
+      powerPreference: "high-performance",
     }) as WebGL2RenderingContext | null;
 
     if (!gl2) {
-      throw new Error('WebGL2 context creation failed');
+      throw new Error("WebGL2 context creation failed");
     }
 
     this.renderer = new WebGLRenderer({
@@ -186,7 +186,7 @@ export class LinkedParticlesSceneManager {
       alpha: true,
       antialias: true,
       preserveDrawingBuffer: true,
-      powerPreference: 'high-performance',
+      powerPreference: "high-performance",
     } as any);
 
     this.renderer.setPixelRatio(1);
@@ -245,8 +245,8 @@ export class LinkedParticlesSceneManager {
     this.disposeFallback();
     try {
       element.appendChild(this.renderer.domElement);
-    } catch (error) {
-      const fallback = document.createElement('div');
+    } catch {
+      const fallback = document.createElement("div");
       fallback.style.position = FALLBACK_STYLES.position;
       fallback.style.inset = FALLBACK_STYLES.inset;
       fallback.style.background = FALLBACK_STYLES.background;
@@ -264,7 +264,7 @@ export class LinkedParticlesSceneManager {
     if (background) {
       background.dispose();
     }
-    const galaxyRandom = this.createBaseRandom().fork('galaxy');
+    const galaxyRandom = this.createBaseRandom().fork("galaxy");
     this.scene.background = createGalaxyTexture(width, height, galaxyRandom);
   }
 
@@ -284,13 +284,15 @@ export class LinkedParticlesSceneManager {
       const sa = seedsA[i];
       const sb = seedsB[i];
       const angle = sa * Math.PI * 2 + t * spin;
-      const radius = baseRadius + Math.sin(t * 0.7 + sb * 12.0) * 2.5 + sb * 2.2;
+      const radius =
+        baseRadius + Math.sin(t * 0.7 + sb * 12.0) * 2.5 + sb * 2.2;
       const y = Math.sin(t * 0.9 + sb * 6.283) * 1.6;
       positions[i * 3 + 0] = Math.cos(angle) * radius + cx;
       positions[i * 3 + 1] = y + cy;
       positions[i * 3 + 2] = Math.sin(angle) * radius;
 
-      const flicker = Math.sin(t * 5.2 + sa * 14.0) * Math.cos(t * 3.7 + sb * 11.0);
+      const flicker =
+        Math.sin(t * 5.2 + sa * 14.0) * Math.cos(t * 3.7 + sb * 11.0);
       const twinkle = Math.max(0, flicker);
       const boost = twinkle > 0.85 ? 1.0 : twinkle * 0.6;
       const baseR = 0.62;
@@ -312,7 +314,7 @@ export class LinkedParticlesSceneManager {
     if (this.mountTarget) {
       try {
         this.mountTarget.removeChild(this.renderer.domElement);
-      } catch (error) {
+      } catch {
         // ignore missing DOM element
       }
     }
@@ -321,10 +323,7 @@ export class LinkedParticlesSceneManager {
 
     this.scene.remove(this.points);
     this.points.geometry.dispose();
-    this.positionAttr.dispose();
-    this.colorAttr.dispose();
-    this.seedAAttr.dispose();
-    this.seedBAttr.dispose();
+    // BufferAttribute には dispose() がないため、geometry.dispose() で解放される
     (this.points.material as PointsMaterial).dispose();
     this.renderer.dispose();
 
