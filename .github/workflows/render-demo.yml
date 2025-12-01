@@ -4,16 +4,16 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/**'
-      - 'packages/**'
+      - "apps/**"
+      - "packages/**"
   workflow_dispatch:
     inputs:
       app:
-        description: 'App to render (leave empty for all)'
+        description: "App to render (leave empty for all)"
         required: false
         type: string
       composition:
-        description: 'Composition ID (leave empty for all)'
+        description: "Composition ID (leave empty for all)"
         required: false
         type: string
 
@@ -28,12 +28,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10
 
       - name: Install FFmpeg
         run: |
