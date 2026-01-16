@@ -5,6 +5,7 @@ packages:
 
 onlyBuiltDependencies:
   - esbuild
+  - protobufjs
 
 strictDepBuilds: true
 
