@@ -16,10 +16,10 @@
     "@studio/transitions": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "remotion": "^4.0.351"
+    "remotion": "catalog:"
   },
   "devDependencies": {
-    "@remotion/cli": "4.0.351",
+    "@remotion/cli": "catalog:",
     "@types/react": "^18.3.0",
     "typescript": "^5.6.3"
   }
