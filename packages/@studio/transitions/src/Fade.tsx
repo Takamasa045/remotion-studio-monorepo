@@ -1,6 +1,6 @@
-import React from 'react';
-import { interpolate, useCurrentFrame } from 'remotion';
-import type { TransitionProps } from './types';
+import React from "react";
+import { interpolate, useCurrentFrame } from "remotion";
+import type { TransitionProps } from "./types";
 
 /**
  * Fade In transition component
@@ -17,9 +17,9 @@ export const FadeIn: React.FC<TransitionProps> = ({
     [startFrame, startFrame + duration],
     [0, 1],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
   );
 
   return <div style={{ opacity }}>{children}</div>;
@@ -40,9 +40,9 @@ export const FadeOut: React.FC<TransitionProps> = ({
     [startFrame, startFrame + duration],
     [1, 0],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
   );
 
   return <div style={{ opacity }}>{children}</div>;
@@ -55,9 +55,9 @@ export const Fade: React.FC<TransitionProps> = ({
   children,
   startFrame,
   duration,
-  type = 'in',
+  type = "in",
 }) => {
-  if (type === 'out') {
+  if (type === "out") {
     return (
       <FadeOut startFrame={startFrame} duration={duration}>
         {children}

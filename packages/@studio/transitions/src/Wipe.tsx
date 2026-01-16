@@ -1,6 +1,6 @@
-import React from 'react';
-import { interpolate, useCurrentFrame } from 'remotion';
-import type { WipeProps } from './types';
+import React from "react";
+import { interpolate, useCurrentFrame } from "remotion";
+import type { WipeProps } from "./types";
 
 /**
  * Wipe In transition component
@@ -9,7 +9,7 @@ export const WipeIn: React.FC<WipeProps> = ({
   children,
   startFrame,
   duration,
-  direction = 'right',
+  direction = "right",
 }) => {
   const frame = useCurrentFrame();
 
@@ -18,23 +18,23 @@ export const WipeIn: React.FC<WipeProps> = ({
     [startFrame, startFrame + duration],
     [0, 100],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
   );
 
   const getClipPath = () => {
     switch (direction) {
-      case 'right':
+      case "right":
         return `inset(0 ${100 - progress}% 0 0)`;
-      case 'left':
+      case "left":
         return `inset(0 0 0 ${100 - progress}%)`;
-      case 'down':
+      case "down":
         return `inset(0 0 ${100 - progress}% 0)`;
-      case 'up':
+      case "up":
         return `inset(${100 - progress}% 0 0 0)`;
       default:
-        return 'none';
+        return "none";
     }
   };
 
@@ -48,7 +48,7 @@ export const WipeOut: React.FC<WipeProps> = ({
   children,
   startFrame,
   duration,
-  direction = 'left',
+  direction = "left",
 }) => {
   const frame = useCurrentFrame();
 
@@ -57,23 +57,23 @@ export const WipeOut: React.FC<WipeProps> = ({
     [startFrame, startFrame + duration],
     [0, 100],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
   );
 
   const getClipPath = () => {
     switch (direction) {
-      case 'left':
+      case "left":
         return `inset(0 ${progress}% 0 0)`;
-      case 'right':
+      case "right":
         return `inset(0 0 0 ${progress}%)`;
-      case 'up':
+      case "up":
         return `inset(0 0 ${progress}% 0)`;
-      case 'down':
+      case "down":
         return `inset(${progress}% 0 0 0)`;
       default:
-        return 'none';
+        return "none";
     }
   };
 
@@ -83,16 +83,20 @@ export const WipeOut: React.FC<WipeProps> = ({
 /**
  * Generic Wipe transition (in or out)
  */
-export const Wipe: React.FC<WipeProps & { type?: 'in' | 'out' }> = ({
+export const Wipe: React.FC<WipeProps & { type?: "in" | "out" }> = ({
   children,
   startFrame,
   duration,
-  direction = 'right',
-  type = 'in',
+  direction = "right",
+  type = "in",
 }) => {
-  if (type === 'out') {
+  if (type === "out") {
     return (
-      <WipeOut startFrame={startFrame} duration={duration} direction={direction}>
+      <WipeOut
+        startFrame={startFrame}
+        duration={duration}
+        direction={direction}
+      >
         {children}
       </WipeOut>
     );

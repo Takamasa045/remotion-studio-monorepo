@@ -3,7 +3,7 @@
 このテンプレートを使用するプロジェクトの概要レイアウトです。
 
 ```
-remotion-studio/
+remotion-studio-monorepo/
   apps/
     _template/        # 基本テンプレート
     3D-template/      # 3Dテンプレート（Three.js; R3Fはオプション）

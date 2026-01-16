@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 /**
  * Base transition props
@@ -10,13 +10,13 @@ export interface TransitionProps {
   /** Duration of the transition in frames */
   duration: number;
   /** Type of transition (in or out) */
-  type?: 'in' | 'out';
+  type?: "in" | "out";
 }
 
 /**
  * Direction for directional transitions
  */
-export type Direction = 'up' | 'down' | 'left' | 'right';
+export type Direction = "up" | "down" | "left" | "right";
 
 /**
  * Slide transition props

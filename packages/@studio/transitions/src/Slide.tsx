@@ -1,6 +1,6 @@
-import React from 'react';
-import { interpolate, useCurrentFrame } from 'remotion';
-import type { SlideProps } from './types';
+import React from "react";
+import { interpolate, useCurrentFrame } from "remotion";
+import type { SlideProps } from "./types";
 
 /**
  * Slide In transition component
@@ -9,7 +9,7 @@ export const SlideIn: React.FC<SlideProps> = ({
   children,
   startFrame,
   duration,
-  direction = 'right',
+  direction = "right",
   distance = 100,
 }) => {
   const frame = useCurrentFrame();
@@ -19,25 +19,25 @@ export const SlideIn: React.FC<SlideProps> = ({
     [startFrame, startFrame + duration],
     [0, 1],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
   );
 
   const getTransform = () => {
     const offset = (1 - progress) * distance;
 
     switch (direction) {
-      case 'left':
+      case "left":
         return `translateX(${offset}%)`;
-      case 'right':
+      case "right":
         return `translateX(-${offset}%)`;
-      case 'up':
+      case "up":
         return `translateY(${offset}%)`;
-      case 'down':
+      case "down":
         return `translateY(-${offset}%)`;
       default:
-        return 'none';
+        return "none";
     }
   };
 
@@ -51,7 +51,7 @@ export const SlideOut: React.FC<SlideProps> = ({
   children,
   startFrame,
   duration,
-  direction = 'left',
+  direction = "left",
   distance = 100,
 }) => {
   const frame = useCurrentFrame();
@@ -61,25 +61,25 @@ export const SlideOut: React.FC<SlideProps> = ({
     [startFrame, startFrame + duration],
     [0, 1],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
   );
 
   const getTransform = () => {
     const offset = progress * distance;
 
     switch (direction) {
-      case 'left':
+      case "left":
         return `translateX(-${offset}%)`;
-      case 'right':
+      case "right":
         return `translateX(${offset}%)`;
-      case 'up':
+      case "up":
         return `translateY(-${offset}%)`;
-      case 'down':
+      case "down":
         return `translateY(${offset}%)`;
       default:
-        return 'none';
+        return "none";
     }
   };
 
@@ -89,15 +89,15 @@ export const SlideOut: React.FC<SlideProps> = ({
 /**
  * Generic Slide transition (in or out)
  */
-export const Slide: React.FC<SlideProps & { type?: 'in' | 'out' }> = ({
+export const Slide: React.FC<SlideProps & { type?: "in" | "out" }> = ({
   children,
   startFrame,
   duration,
-  direction = 'right',
+  direction = "right",
   distance = 100,
-  type = 'in',
+  type = "in",
 }) => {
-  if (type === 'out') {
+  if (type === "out") {
     return (
       <SlideOut
         startFrame={startFrame}

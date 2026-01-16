@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from "vitest";
 import {
   reverseEasing,
   mirrorEasing,
@@ -6,12 +6,12 @@ import {
   combineEasings,
   scaleEasing,
   interpolate,
-} from '../src/utils';
-import { linear } from '../src/presets';
+} from "../src/utils";
+import { linear } from "../src/presets";
 
-describe('easing utils', () => {
-  describe('reverseEasing', () => {
-    it('should reverse an easing function', () => {
+describe("easing utils", () => {
+  describe("reverseEasing", () => {
+    it("should reverse an easing function", () => {
       const reversed = reverseEasing(linear);
       expect(reversed(0)).toBe(1);
       expect(reversed(1)).toBe(0);
@@ -19,8 +19,8 @@ describe('easing utils', () => {
     });
   });
 
-  describe('mirrorEasing', () => {
-    it('should mirror an easing function', () => {
+  describe("mirrorEasing", () => {
+    it("should mirror an easing function", () => {
       const mirrored = mirrorEasing(linear);
       expect(mirrored(0)).toBe(0);
       expect(mirrored(1)).toBe(1);
@@ -28,8 +28,8 @@ describe('easing utils', () => {
     });
   });
 
-  describe('steps', () => {
-    it('should create stepped easing', () => {
+  describe("steps", () => {
+    it("should create stepped easing", () => {
       const stepped = steps(4);
       expect(stepped(0)).toBe(0);
       expect(stepped(0.24)).toBeCloseTo(0, 1);
@@ -38,8 +38,8 @@ describe('easing utils', () => {
     });
   });
 
-  describe('combineEasings', () => {
-    it('should combine two easings', () => {
+  describe("combineEasings", () => {
+    it("should combine two easings", () => {
       const combined = combineEasings(linear, linear, 0.5);
       expect(combined(0)).toBe(0);
       expect(combined(0.5)).toBeCloseTo(0.5, 5);
@@ -47,8 +47,8 @@ describe('easing utils', () => {
     });
   });
 
-  describe('scaleEasing', () => {
-    it('should scale easing to range', () => {
+  describe("scaleEasing", () => {
+    it("should scale easing to range", () => {
       const scaled = scaleEasing(linear, 10, 20);
       expect(scaled(0)).toBe(10);
       expect(scaled(1)).toBe(20);
@@ -56,8 +56,8 @@ describe('easing utils', () => {
     });
   });
 
-  describe('interpolate', () => {
-    it('should interpolate between values', () => {
+  describe("interpolate", () => {
+    it("should interpolate between values", () => {
       expect(interpolate(0, 100, 0, linear)).toBe(0);
       expect(interpolate(0, 100, 1, linear)).toBe(100);
       expect(interpolate(0, 100, 0.5, linear)).toBe(50);

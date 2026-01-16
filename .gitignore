@@ -47,6 +47,10 @@ next-env.d.ts
 !.vscode/tasks.json
 .idea
 
+# Local tooling
+.kamui/
+.worktrees/
+
 # OS
 Thumbs.db
 

@@ -29,11 +29,10 @@ public/
 Lyrics (LRC): place next to the audio file with the same basename.
 
 ```ts
-const lrc = await fetch('/assets/audio/song.lrc').then(r => r.text());
+const lrc = await fetch("/assets/audio/song.lrc").then((r) => r.text());
 ```
 
 ## Tips
 
 - For large binaries, consider Git LFS or external storage/CDN.
 - Some libraries require CSS imports, e.g. `import 'your-lib/dist/styles.css'`.
-

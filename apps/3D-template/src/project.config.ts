@@ -13,4 +13,3 @@ export const projectConfig: ProjectConfig = {
   fps: 30,
   durationInFrames: 180,
 };
-

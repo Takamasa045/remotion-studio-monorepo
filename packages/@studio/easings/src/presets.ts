@@ -1,5 +1,5 @@
-import { cubicBezier } from './cubic-bezier';
-import type { EasingFunction } from './types';
+import { cubicBezier } from "./cubic-bezier";
+import type { EasingFunction } from "./types";
 
 /**
  * Linear easing (no easing)

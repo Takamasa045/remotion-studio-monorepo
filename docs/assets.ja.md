@@ -29,7 +29,7 @@ public/
 歌詞（LRC）：音声ファイルと同じベース名で隣に配置します。
 
 ```ts
-const lrc = await fetch('/assets/audio/song.lrc').then(r => r.text());
+const lrc = await fetch("/assets/audio/song.lrc").then((r) => r.text());
 ```
 
 ## ヒント

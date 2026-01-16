@@ -53,9 +53,9 @@ const opacity = interpolate(frame, [0, 30], [0, 1]);
 
 spring関数
 const scale = spring({
-  frame,
-  fps,
-  config: { damping: 100, stiffness: 200 }
+frame,
+fps,
+config: { damping: 100, stiffness: 200 }
 });
 // 物理ベースの自然な動き
 
@@ -85,8 +85,8 @@ Remotion Studio
 パラメータ調整
 
 CLI
-npx remotion preview  # プレビュー起動
-npx remotion render   # 動画レンダリング
+npx remotion preview # プレビュー起動
+npx remotion render # 動画レンダリング
 
 Remotion Lambda
 

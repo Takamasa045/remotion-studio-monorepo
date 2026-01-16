@@ -142,18 +142,13 @@ import { FadeIn, SlideIn } from '@studio/transitions';
 Use with `@studio/easings` for smoother animations:
 
 ```typescript
-import { interpolate, useCurrentFrame } from 'remotion';
-import { easeOutCubic } from '@studio/easings';
+import { interpolate, useCurrentFrame } from "remotion";
+import { easeOutCubic } from "@studio/easings";
 
 const frame = useCurrentFrame();
-const opacity = interpolate(
-  frame,
-  [0, 30],
-  [0, 1],
-  {
-    easing: easeOutCubic
-  }
-);
+const opacity = interpolate(frame, [0, 30], [0, 1], {
+  easing: easeOutCubic,
+});
 ```
 
 ## Examples

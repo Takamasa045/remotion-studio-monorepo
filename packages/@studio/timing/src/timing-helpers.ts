@@ -54,7 +54,7 @@ export function getLocalFrame(frame: number, segment: TimingSegment): number {
  */
 export function createSequentialSegments(
   durations: number[],
-  startFrame: number = 0
+  startFrame: number = 0,
 ): TimingSegment[] {
   const segments: TimingSegment[] = [];
   let currentStart = startFrame;
@@ -77,7 +77,7 @@ export function createSequentialSegments(
 export function stagger(
   index: number,
   staggerDelay: number,
-  startFrame: number = 0
+  startFrame: number = 0,
 ): number {
   return startFrame + index * staggerDelay;
 }

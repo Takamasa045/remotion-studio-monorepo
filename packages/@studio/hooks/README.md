@@ -13,7 +13,11 @@ pnpm add @studio/hooks
 ### Frame Progress
 
 ```typescript
-import { useFrameProgress, useTimeProgress, useVideoProgress } from '@studio/hooks';
+import {
+  useFrameProgress,
+  useTimeProgress,
+  useVideoProgress,
+} from "@studio/hooks";
 
 // Get progress between specific frames
 const progress = useFrameProgress(0, 100); // 0-1
@@ -28,18 +32,18 @@ const videoProgress = useVideoProgress(); // 0-1
 ### Segments
 
 ```typescript
-import { useSegment, useActiveSegment } from '@studio/hooks';
+import { useSegment, useActiveSegment } from "@studio/hooks";
 
 // Track state within a segment
 const { isActive, localFrame, progress } = useSegment({
   start: 30,
-  duration: 60
+  duration: 60,
 });
 
 // Find active segment from multiple
 const segments = [
   { start: 0, duration: 60 },
-  { start: 60, duration: 120 }
+  { start: 60, duration: 120 },
 ];
 const activeIndex = useActiveSegment(segments);
 ```
@@ -47,7 +51,7 @@ const activeIndex = useActiveSegment(segments);
 ### Delayed Mount
 
 ```typescript
-import { useDelayedMount, useFrameRange } from '@studio/hooks';
+import { useDelayedMount, useFrameRange } from "@studio/hooks";
 
 // Show content after frame 30
 const shouldShow = useDelayedMount(30);
@@ -59,18 +63,11 @@ const isVisible = useFrameRange(30, 90);
 ### Video Metadata
 
 ```typescript
-import { useVideoMetadata, useVideoEdges } from '@studio/hooks';
+import { useVideoMetadata, useVideoEdges } from "@studio/hooks";
 
 // Get all video metadata
-const {
-  currentFrame,
-  currentTime,
-  totalFrames,
-  fps,
-  width,
-  height,
-  progress
-} = useVideoMetadata();
+const { currentFrame, currentTime, totalFrames, fps, width, height, progress } =
+  useVideoMetadata();
 
 // Check if at start/end of video
 const { isStart, isEnd } = useVideoEdges(10); // within 10 frames of edges

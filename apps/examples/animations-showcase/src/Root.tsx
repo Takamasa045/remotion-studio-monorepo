@@ -1,6 +1,6 @@
-import React from 'react';
-import { Composition } from 'remotion';
-import { ShowcaseComposition } from './ShowcaseComposition';
+import React from "react";
+import { Composition } from "remotion";
+import { ShowcaseComposition } from "./ShowcaseComposition";
 
 export const Root: React.FC = () => {
   return (

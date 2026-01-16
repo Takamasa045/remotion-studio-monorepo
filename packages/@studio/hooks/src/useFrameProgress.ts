@@ -1,4 +1,4 @@
-import { useCurrentFrame, useVideoConfig } from 'remotion';
+import { useCurrentFrame, useVideoConfig } from "remotion";
 
 /**
  * Get animation progress (0-1) for current frame within a range
@@ -23,7 +23,7 @@ export function useFrameProgress(startFrame: number, endFrame: number): number {
  */
 export function useTimeProgress(
   startSeconds: number,
-  durationSeconds: number
+  durationSeconds: number,
 ): number {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();

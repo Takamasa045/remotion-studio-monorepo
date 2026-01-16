@@ -7,7 +7,7 @@ const toUint32 = (value: SeedLike): number => {
     return DEFAULT_SEED;
   }
 
-  if (typeof value === 'number' && Number.isFinite(value)) {
+  if (typeof value === "number" && Number.isFinite(value)) {
     const normalized = value >>> 0;
     return normalized === 0 ? DEFAULT_SEED : normalized;
   }
@@ -62,16 +62,16 @@ export const createSeededRandom = (...parts: SeedLike[]): SeededRandom => {
   const next = () => generator();
   const nextRange = (min: number, max: number) => {
     if (max < min) {
-      throw new Error('max must be greater than or equal to min');
+      throw new Error("max must be greater than or equal to min");
     }
     return next() * (max - min) + min;
   };
   const nextInt = (min: number, max: number) => {
     if (!Number.isInteger(min) || !Number.isInteger(max)) {
-      throw new Error('nextInt expects integer bounds');
+      throw new Error("nextInt expects integer bounds");
     }
     if (max < min) {
-      throw new Error('max must be greater than or equal to min');
+      throw new Error("max must be greater than or equal to min");
     }
     if (min === max) {
       return min;

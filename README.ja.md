@@ -10,8 +10,8 @@
 
 ```bash
 # クローン & インストール
-git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
-cd remotion-studio && pnpm install
+git clone git@github.com:Takamasa045/remotion-studio-monorepo.git
+cd remotion-studio-monorepo && pnpm install
 
 # 新規プロジェクト作成
 pnpm create:project
@@ -21,14 +21,15 @@ cd apps/<name> && pnpm dev
 ```
 
 **3Dテンプレート:**
+
 ```bash
 pnpm create:project -- -t 3d
 ```
 
 ## 前提条件
 
-- **Node.js** 18+ (推奨: 20)
-- **pnpm** 8+
+- **Node.js** 20+ (推奨: 22)
+- **pnpm** 10+
 - **ffmpeg** (レンダリングに必要)
 
 <details>
@@ -43,6 +44,7 @@ node -v && pnpm -v && ffmpeg -version
 # Windows: choco install ffmpeg
 # Linux: apt/yum install ffmpeg
 ```
+
 </details>
 
 ## 特徴
@@ -64,16 +66,18 @@ node -v && pnpm -v && ffmpeg -version
 ### 仕組み
 
 1. **`pnpm-workspace.yaml` でバージョンを定義**:
+
    ```yaml
    catalog:
      react: ^18.3.1
      react-dom: ^18.3.1
-     remotion: 4.0.351
+     remotion: 4.0.406
      typescript: ^5.6.3
      # ... すべての @remotion/* パッケージ
    ```
 
 2. **各 `package.json` で参照**:
+
    ```json
    {
      "dependencies": {
@@ -91,17 +95,17 @@ node -v && pnpm -v && ffmpeg -version
 
 ### メリット
 
-* **単一の信頼できる情報源**: モノレポ全体で同じバージョンを使用
-* **簡単な更新**: catalog で一度変更すれば、`pnpm install` で全体を更新
-* **一貫性**: アプリ間でのバージョン不一致を防止
-* **型安全性**: TypeScript と React のバージョンが常に整合
+- **単一の信頼できる情報源**: モノレポ全体で同じバージョンを使用
+- **簡単な更新**: catalog で一度変更すれば、`pnpm install` で全体を更新
+- **一貫性**: アプリ間でのバージョン不一致を防止
+- **型安全性**: TypeScript と React のバージョンが常に整合
 
 ---
 
 ## 構成
 
 ```
-remotion-studio/
+remotion-studio-monorepo/
 ├── apps/
 │   ├── _template/          # 基本テンプレート
 │   └── 3D-template/        # Three.js テンプレート
@@ -112,16 +116,16 @@ remotion-studio/
 
 ## ドキュメント
 
-| ガイド | 説明 |
-|-------|-------------|
-| [Structure](./docs/structure.ja.md) | モノレポ構成 |
-| [Adding Dependencies](./docs/adding-deps.ja.md) | パッケージ追加方法 |
-| [Assets Guide](./docs/assets.ja.md) | アセット管理 |
-| [3D Notes](./docs/3d-notes.ja.md) | Three.js / R3F セットアップ |
-| [MCP Setup](./docs/mcp-setup.ja.md) | Claude / Codex 連携 |
-| [Upgrading](./docs/upgrading-remotion.ja.md) | Remotion バージョン管理 |
-| [Packages](./docs/packages.ja.md) | 利用可能なパッケージ一覧 |
-| [Troubleshooting](./docs/troubleshooting.ja.md) | よくある問題と解決方法 |
+| ガイド                                          | 説明                        |
+| ----------------------------------------------- | --------------------------- |
+| [Structure](./docs/structure.ja.md)             | モノレポ構成                |
+| [Adding Dependencies](./docs/adding-deps.ja.md) | パッケージ追加方法          |
+| [Assets Guide](./docs/assets.ja.md)             | アセット管理                |
+| [3D Notes](./docs/3d-notes.ja.md)               | Three.js / R3F セットアップ |
+| [MCP Setup](./docs/mcp-setup.ja.md)             | Claude / Codex 連携         |
+| [Upgrading](./docs/upgrading-remotion.ja.md)    | Remotion バージョン管理     |
+| [Packages](./docs/packages.ja.md)               | 利用可能なパッケージ一覧    |
+| [Troubleshooting](./docs/troubleshooting.ja.md) | よくある問題と解決方法      |
 
 ## トラブルシューティング
 

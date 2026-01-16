@@ -36,17 +36,12 @@ export const MyComponent = () => {
 ### Custom Cubic Bezier
 
 ```typescript
-import { cubicBezier } from '@studio/easings';
+import { cubicBezier } from "@studio/easings";
 
 // Create custom easing (same as CSS cubic-bezier)
 const customEase = cubicBezier(0.4, 0.0, 0.2, 1.0);
 
-const scale = interpolate(
-  frame,
-  [0, 60],
-  [0, 1],
-  { easing: customEase }
-);
+const scale = interpolate(frame, [0, 60], [0, 1], { easing: customEase });
 ```
 
 ### Utility Functions
@@ -58,8 +53,8 @@ import {
   steps,
   combineEasings,
   easeInCubic,
-  easeOutCubic
-} from '@studio/easings';
+  easeOutCubic,
+} from "@studio/easings";
 
 // Reverse an easing (ease-in becomes ease-out)
 const reversed = reverseEasing(easeInCubic);
@@ -76,34 +71,44 @@ const combined = combineEasings(easeInCubic, easeOutCubic, 0.5);
 ### Standard CSS Easings
 
 **Linear:**
+
 - `linear`
 
 **Ease:**
+
 - `ease` (default CSS ease)
 - `easeIn`, `easeOut`, `easeInOut`
 
 **Sine:**
+
 - `easeInSine`, `easeOutSine`, `easeInOutSine`
 
 **Quad (Power of 2):**
+
 - `easeInQuad`, `easeOutQuad`, `easeInOutQuad`
 
 **Cubic (Power of 3):**
+
 - `easeInCubic`, `easeOutCubic`, `easeInOutCubic`
 
 **Quart (Power of 4):**
+
 - `easeInQuart`, `easeOutQuart`, `easeInOutQuart`
 
 **Quint (Power of 5):**
+
 - `easeInQuint`, `easeOutQuint`, `easeInOutQuint`
 
 **Expo (Exponential):**
+
 - `easeInExpo`, `easeOutExpo`, `easeInOutExpo`
 
 **Circ (Circular):**
+
 - `easeInCirc`, `easeOutCirc`, `easeInOutCirc`
 
 **Back (Overshoot):**
+
 - `easeInBack`, `easeOutBack`, `easeInOutBack`
 
 ### Custom Presets

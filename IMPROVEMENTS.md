@@ -48,6 +48,7 @@
 ### 1.1 ワークスペース構成の最適化
 
 **変更内容**:
+
 ```yaml
 # pnpm-workspace.yaml
 packages:
@@ -56,6 +57,7 @@ packages:
 ```
 
 **効果**:
+
 - 新規作成したアプリが自動的にワークスペースに含まれる
 - パッケージの参照が `workspace:*` で可能に
 - pnpmコマンドで一括操作が可能
@@ -63,16 +65,18 @@ packages:
 ### 1.2 TypeScript設定の修正
 
 **変更内容**:
+
 ```json
 {
   "compilerOptions": {
-    "module": "NodeNext",  // ESNextから変更
+    "module": "NodeNext", // ESNextから変更
     "moduleResolution": "NodeNext"
   }
 }
 ```
 
 **効果**:
+
 - ビルドエラーの解消
 - モダンなモジュール解決
 
@@ -83,39 +87,44 @@ packages:
 ### 2.1 @studio/timing
 
 **機能**:
+
 - フレーム⇔秒の変換
 - タイミングセグメント管理
 - プログレス計算
 - スタガーアニメーション
 
 **主要API**:
+
 ```typescript
-secondsToFrames(seconds, fps)
-framesToSeconds(frames, fps)
-createSegment(start, duration)
-stagger(index, delay, startFrame)
-getProgress(frame, start, end)
+secondsToFrames(seconds, fps);
+framesToSeconds(frames, fps);
+createSegment(start, duration);
+stagger(index, delay, startFrame);
+getProgress(frame, start, end);
 ```
 
 ### 2.2 @studio/hooks
 
 **機能**:
+
 - フレームプログレス取得
 - セグメント管理
 - 遅延マウント
 - ビデオメタデータ取得
 
 **主要API**:
+
 ```typescript
-useFrameProgress(startFrame, endFrame)
-useSegment(segment)
-useDelayedMount(startFrame)
-useVideoMetadata()
+useFrameProgress(startFrame, endFrame);
+useSegment(segment);
+useDelayedMount(startFrame);
+useVideoMetadata();
 ```
 
 ### 2.3 @studio/core-types
 
 **機能**:
+
 - 共通型定義
 - コンポジション型
 - アニメーション型
@@ -124,11 +133,13 @@ useVideoMetadata()
 ### 2.4 @studio/easings
 
 **機能**:
+
 - 38種類のイージングプリセット
 - カスタムベジエ曲線
 - イージングユーティリティ
 
 **主要API**:
+
 ```typescript
 cubicBezier(x1, y1, x2, y2)
 linear, ease, easeInOut...
@@ -140,11 +151,13 @@ reverseEasing(easing)
 ### 2.5 @studio/transitions
 
 **機能**:
+
 - Fade, Slide, Scale, Wipe トランジション
 - 方向制御
 - カスタムパラメータ
 
 **主要API**:
+
 ```typescript
 <FadeIn startFrame={0} duration={30}>
 <SlideIn direction="right" distance={100}>
@@ -159,6 +172,7 @@ reverseEasing(easing)
 ### 3.1 Turborepo導入
 
 **設定**:
+
 ```json
 {
   "pipeline": {
@@ -174,6 +188,7 @@ reverseEasing(easing)
 ```
 
 **効果**:
+
 - ビルド時間を最大85%短縮
 - インクリメンタルビルド
 - 並列タスク実行
@@ -182,27 +197,30 @@ reverseEasing(easing)
 ### 3.2 Vitest テスト環境
 
 **設定**:
+
 ```typescript
 // vitest.config.ts
 export default defineConfig({
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: "jsdom",
     coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html']
-    }
-  }
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+    },
+  },
 });
 ```
 
 **テストファイル**:
+
 - `packages/@studio/timing/test/frame-utils.test.ts`
 - `packages/@studio/timing/test/timing-helpers.test.ts`
 - `packages/@studio/easings/test/cubic-bezier.test.ts`
 - `packages/@studio/easings/test/utils.test.ts`
 
 **コマンド**:
+
 ```bash
 pnpm test              # 全テスト実行
 pnpm test:watch        # ウォッチモード
@@ -212,12 +230,14 @@ turbo run test         # Turborepo経由
 ### 3.3 VSCode ワークスペース設定
 
 **設定ファイル**:
+
 - `.vscode/settings.json` - エディタ設定
 - `.vscode/extensions.json` - 推奨拡張機能
 - `.vscode/launch.json` - デバッグ設定
 - `.vscode/tasks.json` - タスク設定
 
 **推奨拡張機能**:
+
 - ESLint
 - Prettier
 - TypeScript
@@ -225,6 +245,7 @@ turbo run test         # Turborepo経由
 - Vitest Explorer
 
 **特徴**:
+
 - 保存時自動フォーマット
 - ESLint自動修正
 - TypeScript型チェック
@@ -237,9 +258,11 @@ turbo run test         # Turborepo経由
 ### 4.1 サンプルアプリケーション
 
 **作成したアプリ**:
+
 - `apps/examples/animations-showcase`
 
 **デモ内容**:
+
 1. タイトルシーン (Bounce easing)
 2. Fade トランジション
 3. Slide トランジション
@@ -247,12 +270,14 @@ turbo run test         # Turborepo経由
 5. Wipe トランジション
 
 **使用パッケージ**:
+
 - @studio/timing
 - @studio/hooks
 - @studio/easings
 - @studio/transitions
 
 **起動方法**:
+
 ```bash
 cd apps/examples/animations-showcase
 pnpm dev
@@ -261,25 +286,25 @@ pnpm dev
 ### 4.2 Storybook統合
 
 **設定**:
+
 ```typescript
 // .storybook/main.ts
 export default {
   stories: [
-    '../packages/**/*.stories.@(js|jsx|ts|tsx)',
-    '../apps/**/*.stories.@(js|jsx|ts|tsx)',
+    "../packages/**/*.stories.@(js|jsx|ts|tsx)",
+    "../apps/**/*.stories.@(js|jsx|ts|tsx)",
   ],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-  ],
-  framework: '@storybook/react-vite',
+  addons: ["@storybook/addon-essentials", "@storybook/addon-interactions"],
+  framework: "@storybook/react-vite",
 };
 ```
 
 **Storiesファイル**:
+
 - `packages/@studio/transitions/stories/Fade.stories.tsx`
 
 **コマンド**:
+
 ```bash
 pnpm storybook           # 開発サーバー起動
 pnpm build-storybook     # 静的ビルド
@@ -290,16 +315,19 @@ pnpm build-storybook     # 静的ビルド
 ### 4.3 パフォーマンス最適化スクリプト
 
 **scripts/analyze-bundle.ts**:
+
 - パッケージ・アプリのバンドルサイズ分析
 - サイズの大きいパッケージの警告
 - 合計サイズの表示
 
 **scripts/benchmark.ts**:
+
 - パフォーマンスベンチマーク
 - 平均・最小・最大実行時間の計測
 - カスタムベンチマーク追加可能
 
 **コマンド**:
+
 ```bash
 pnpm analyze      # バンドルサイズ分析
 pnpm benchmark    # ベンチマーク実行
@@ -312,6 +340,7 @@ pnpm benchmark    # ベンチマーク実行
 ### 5.1 ESLint設定の完全化
 
 **設定**:
+
 ```javascript
 // eslint.config.js
 export default tseslint.config(
@@ -319,21 +348,25 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
+      "@typescript-eslint": tseslint.plugin,
       react: reactPlugin,
-      'react-hooks': reactHooksPlugin,
+      "react-hooks": reactHooksPlugin,
       remotion: remotionPlugin,
     },
     rules: {
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      'react-hooks/rules-of-hooks': 'error',
-      'remotion/no-mp4-import': 'warn',
-    }
-  }
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "remotion/no-mp4-import": "warn",
+    },
+  },
 );
 ```
 
 **特徴**:
+
 - TypeScript完全対応
 - React Hooksルール
 - Remotion専用ルール
@@ -342,33 +375,39 @@ export default tseslint.config(
 ### 5.2 Commitizen & Commitlint
 
 **設定**:
+
 ```javascript
 // commitlint.config.js
 export default {
-  extends: ['@commitlint/config-conventional'],
+  extends: ["@commitlint/config-conventional"],
   rules: {
-    'type-enum': [
-      2, 'always',
-      ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore']
+    "type-enum": [
+      2,
+      "always",
+      ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
     ],
-    'scope-enum': [
-      2, 'always',
-      ['timing', 'hooks', 'easings', 'transitions', 'scripts', 'docs']
-    ]
-  }
+    "scope-enum": [
+      2,
+      "always",
+      ["timing", "hooks", "easings", "transitions", "scripts", "docs"],
+    ],
+  },
 };
 ```
 
 **Git Hooks**:
+
 - `.husky/pre-commit` - lint-staged実行
 - `.husky/commit-msg` - commitlint検証
 
 **コミット方法**:
+
 ```bash
 pnpm commit    # 対話式コミット
 ```
 
 **コミットメッセージ例**:
+
 ```
 feat(timing): add stagger animation helper
 fix(hooks): resolve useSegment edge case
@@ -488,6 +527,7 @@ pnpm test --coverage
 **症状**: TypeScript型エラー
 
 **解決方法**:
+
 ```bash
 # tsconfig.base.jsonを確認
 # module: "NodeNext" になっているか確認
@@ -501,6 +541,7 @@ pnpm typecheck
 **症状**: `@studio/*` が解決できない
 
 **解決方法**:
+
 ```bash
 # ワークスペース再読み込み
 pnpm install
@@ -516,6 +557,7 @@ pnpm build:packages
 **症状**: 変更が反映されない
 
 **解決方法**:
+
 ```bash
 # キャッシュクリア
 rm -rf .turbo
@@ -530,6 +572,7 @@ pnpm build
 **症状**: pre-commitが実行されない
 
 **解決方法**:
+
 ```bash
 # Husky再インストール
 rm -rf .husky

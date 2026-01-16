@@ -1,4 +1,4 @@
-import { useCurrentFrame, useVideoConfig } from 'remotion';
+import { useCurrentFrame, useVideoConfig } from "remotion";
 
 export interface VideoMetadata {
   currentFrame: number;
