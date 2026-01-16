@@ -5,7 +5,7 @@ Common issues and their solutions for Remotion Studio Monorepo.
 ## Table of Contents
 
 - [Command Issues](#command-issues)
-- [Git & Submodules](#git--submodules)
+- [Git](#git)
 - [Configuration Issues](#configuration-issues)
 - [Dependencies & Installation](#dependencies--installation)
 - [Runtime Errors](#runtime-errors)
@@ -32,7 +32,7 @@ pnpm -w add -D @remotion/cli
 **Solution:**
 
 ```bash
-# Using corepack (Node 18+, recommended)
+# Using corepack (Node 20+ recommended)
 corepack enable
 corepack prepare pnpm@latest --activate
 
@@ -42,39 +42,14 @@ npm i -g pnpm
 
 ---
 
-## Git & Submodules
-
-### Submodule not initialized
-
-**Symptoms:** `apps/` directory is empty or missing content
-
-**Solution:**
-
-```bash
-# Initialize and fetch all submodules
-git submodule update --init --recursive
-
-# Update to latest
-git submodule update --remote --merge
-```
-
-### HTTPS clone permission issues
-
-**Solution:** Switch `.gitmodules` to HTTPS and sync
-
-```bash
-git config -f .gitmodules submodule.apps.url \
-  https://github.com/Takamasa045/remotion-studio-apps.git
-git submodule sync --recursive
-git submodule update --init --recursive
-```
+## Git
 
 ### `fatal: not a git repository`
 
 **Solution:** Ensure you're running commands at the repository root, not inside a subdirectory.
 
 ```bash
-cd /path/to/remotion-studio
+cd /path/to/remotion-studio-monorepo
 git status
 ```
 
@@ -90,8 +65,8 @@ git status
 
 ```ts
 // remotion.config.ts
-import { Config } from '@remotion/cli/config';
-import path from 'path';
+import { Config } from "@remotion/cli/config";
+import path from "path";
 
 // Use process.cwd() instead of import.meta.url
 Config.overrideWebpackConfig((config) => {
@@ -101,7 +76,7 @@ Config.overrideWebpackConfig((config) => {
       ...config.resolve,
       alias: {
         ...config.resolve?.alias,
-        '@': path.resolve(process.cwd(), 'src'),
+        "@": path.resolve(process.cwd(), "src"),
       },
     },
   };
@@ -133,8 +108,8 @@ Config.overrideWebpackConfig((config) => {
 
 ```ts
 // src/index.ts
-import { registerRoot } from 'remotion';
-import { Root } from './Root';
+import { registerRoot } from "remotion";
+import { Root } from "./Root";
 
 registerRoot(Root);
 ```
@@ -142,9 +117,9 @@ registerRoot(Root);
 **Optional:** Explicitly set entry point in `remotion.config.ts`:
 
 ```ts
-import { Config } from '@remotion/cli/config';
+import { Config } from "@remotion/cli/config";
 
-Config.setEntryPoint('src/index.ts');
+Config.setEntryPoint("src/index.ts");
 ```
 
 ---
@@ -245,8 +220,8 @@ Config.overrideWebpackConfig((config) => {
 
 ```ts
 // src/index.ts or component file
-import './styles/app.css';
-import 'your-library/dist/styles.css';
+import "./styles/app.css";
+import "your-library/dist/styles.css";
 ```
 
 ### WebGL / Three.js rendering issues
@@ -254,9 +229,9 @@ import 'your-library/dist/styles.css';
 **Solution:** Configure OpenGL renderer in `remotion.config.ts`:
 
 ```ts
-import { Config } from '@remotion/cli/config';
+import { Config } from "@remotion/cli/config";
 
-Config.setChromiumOpenGlRenderer('angle');
+Config.setChromiumOpenGlRenderer("angle");
 // or 'egl' / 'swiftshader' depending on your environment
 ```
 
@@ -313,7 +288,7 @@ sudo sysctl -p
 1. **Check official Remotion docs:** https://www.remotion.dev/docs
 2. **Search GitHub issues:** https://github.com/remotion-dev/remotion/issues
 3. **Join Remotion Discord:** https://remotion.dev/discord
-4. **Review this repo's issues:** https://github.com/Takamasa045/remotion-studio/issues
+4. **Review this repo's issues:** https://github.com/Takamasa045/remotion-studio-monorepo/issues
 
 ---
 
@@ -333,7 +308,7 @@ REMOTION_LOGGING=verbose pnpm dev
 
 ```bash
 # Ensure all @remotion/* packages have matching versions
-npx remotion versions
+pnpm remotion versions
 ```
 
 ### Clean build

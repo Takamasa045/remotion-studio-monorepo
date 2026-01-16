@@ -3,6 +3,11 @@ packages:
   - "packages/*"
   - "packages/@*/*"
 
+onlyBuiltDependencies:
+  - esbuild
+
+strictDepBuilds: true
+
 catalog:
   # React 18
   react: ^18.3.1

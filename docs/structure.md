@@ -3,7 +3,7 @@
 High‑level layout for projects using this template.
 
 ```
-remotion-studio/
+remotion-studio-monorepo/
   apps/
     _template/        # Minimal template
     3D-template/      # 3D template (Three.js; R3F optional)
@@ -13,4 +13,3 @@ remotion-studio/
 ```
 
 See also: `docs/architecture.md` for more details.
-

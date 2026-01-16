@@ -10,8 +10,8 @@ A **template-only** monorepo for building video projects with **Remotion + React
 
 ```bash
 # Clone & install
-git clone --recurse-submodules git@github.com:Takamasa045/remotion-studio.git
-cd remotion-studio && pnpm install
+git clone git@github.com:Takamasa045/remotion-studio-monorepo.git
+cd remotion-studio-monorepo && pnpm install
 
 # Create new project
 pnpm create:project
@@ -21,14 +21,15 @@ cd apps/<name> && pnpm dev
 ```
 
 **3D Template:**
+
 ```bash
 pnpm create:project -- -t 3d
 ```
 
 ## Prerequisites
 
-- **Node.js** 18+ (recommended: 20)
-- **pnpm** 8+
+- **Node.js** 20+ (recommended: 22)
+- **pnpm** 10+
 - **ffmpeg** (for rendering)
 
 <details>
@@ -43,6 +44,7 @@ node -v && pnpm -v && ffmpeg -version
 # Windows: choco install ffmpeg
 # Linux: apt/yum install ffmpeg
 ```
+
 </details>
 
 ## Features
@@ -64,16 +66,18 @@ This monorepo uses **pnpm Catalog** to centrally manage versions of React, Remot
 ### How it works
 
 1. **Version definitions** in `pnpm-workspace.yaml`:
+
    ```yaml
    catalog:
      react: ^18.3.1
      react-dom: ^18.3.1
-     remotion: 4.0.351
+     remotion: 4.0.406
      typescript: ^5.6.3
      # ... all @remotion/* packages
    ```
 
 2. **Reference in `package.json`**:
+
    ```json
    {
      "dependencies": {
@@ -91,17 +95,17 @@ This monorepo uses **pnpm Catalog** to centrally manage versions of React, Remot
 
 ### Benefits
 
-* **Single source of truth**: All packages use the same version across the monorepo
-* **Easy updates**: Change version once in catalog, update everywhere with `pnpm install`
-* **Consistency**: Prevents version mismatches between apps
-* **Type safety**: TypeScript and React versions stay aligned
+- **Single source of truth**: All packages use the same version across the monorepo
+- **Easy updates**: Change version once in catalog, update everywhere with `pnpm install`
+- **Consistency**: Prevents version mismatches between apps
+- **Type safety**: TypeScript and React versions stay aligned
 
 ---
 
 ## Structure
 
 ```
-remotion-studio/
+remotion-studio-monorepo/
 ├── apps/
 │   ├── _template/          # Base template
 │   └── 3D-template/        # Three.js template
@@ -112,16 +116,16 @@ remotion-studio/
 
 ## Documentation
 
-| Guide | Description |
-|-------|-------------|
-| [Structure](./docs/structure.md) | Monorepo architecture |
-| [Adding Dependencies](./docs/adding-deps.md) | How to add packages |
-| [Assets Guide](./docs/assets.md) | Managing assets |
-| [3D Notes](./docs/3d-notes.md) | Three.js / R3F setup |
-| [MCP Setup](./docs/mcp-setup.md) | Claude / Codex integration |
-| [Upgrading](./docs/upgrading-remotion.md) | Remotion version management |
-| [Packages](./docs/packages.md) | Available packages & libraries |
-| [Troubleshooting](./docs/troubleshooting.md) | Common issues & solutions |
+| Guide                                        | Description                    |
+| -------------------------------------------- | ------------------------------ |
+| [Structure](./docs/structure.md)             | Monorepo architecture          |
+| [Adding Dependencies](./docs/adding-deps.md) | How to add packages            |
+| [Assets Guide](./docs/assets.md)             | Managing assets                |
+| [3D Notes](./docs/3d-notes.md)               | Three.js / R3F setup           |
+| [MCP Setup](./docs/mcp-setup.md)             | Claude / Codex integration     |
+| [Upgrading](./docs/upgrading-remotion.md)    | Remotion version management    |
+| [Packages](./docs/packages.md)               | Available packages & libraries |
+| [Troubleshooting](./docs/troubleshooting.md) | Common issues & solutions      |
 
 ## Troubleshooting
 

@@ -5,6 +5,9 @@
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@10.20.0",
+  "engines": {
+    "node": ">=20"
+  },
   "workspaces": [
     "apps/*",
     "packages/*",

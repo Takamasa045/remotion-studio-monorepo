@@ -5,7 +5,7 @@ Remotion Studio Monorepoでよくある問題とその解決策です。
 ## 目次
 
 - [コマンドの問題](#command-issues)
-- [Git & サブモジュール](#git--submodules)
+- [Git](#git)
 - [設定の問題](#configuration-issues)
 - [依存関係 & インストール](#dependencies--installation)
 - [ランタイムエラー](#runtime-errors)
@@ -32,7 +32,7 @@ pnpm -w add -D @remotion/cli
 **解決策:**
 
 ```bash
-# corepackを使用（Node 18+、推奨）
+# corepackを使用（Node 20+ 推奨）
 corepack enable
 corepack prepare pnpm@latest --activate
 
@@ -42,39 +42,14 @@ npm i -g pnpm
 
 ---
 
-## Git & サブモジュール
-
-### サブモジュールが初期化されていない
-
-**症状:** `apps/` ディレクトリが空または内容が不足している
-
-**解決策:**
-
-```bash
-# すべてのサブモジュールを初期化して取得
-git submodule update --init --recursive
-
-# 最新版に更新
-git submodule update --remote --merge
-```
-
-### HTTPSクローンの権限問題
-
-**解決策:** `.gitmodules` をHTTPSに切り替えて同期
-
-```bash
-git config -f .gitmodules submodule.apps.url \
-  https://github.com/Takamasa045/remotion-studio-apps.git
-git submodule sync --recursive
-git submodule update --init --recursive
-```
+## Git
 
 ### `fatal: not a git repository`
 
 **解決策:** サブディレクトリ内ではなく、リポジトリのルートでコマンドを実行していることを確認してください。
 
 ```bash
-cd /path/to/remotion-studio
+cd /path/to/remotion-studio-monorepo
 git status
 ```
 
@@ -90,8 +65,8 @@ git status
 
 ```ts
 // remotion.config.ts
-import { Config } from '@remotion/cli/config';
-import path from 'path';
+import { Config } from "@remotion/cli/config";
+import path from "path";
 
 // import.meta.url の代わりに process.cwd() を使用
 Config.overrideWebpackConfig((config) => {
@@ -101,7 +76,7 @@ Config.overrideWebpackConfig((config) => {
       ...config.resolve,
       alias: {
         ...config.resolve?.alias,
-        '@': path.resolve(process.cwd(), 'src'),
+        "@": path.resolve(process.cwd(), "src"),
       },
     },
   };
@@ -133,8 +108,8 @@ Config.overrideWebpackConfig((config) => {
 
 ```ts
 // src/index.ts
-import { registerRoot } from 'remotion';
-import { Root } from './Root';
+import { registerRoot } from "remotion";
+import { Root } from "./Root";
 
 registerRoot(Root);
 ```
@@ -142,9 +117,9 @@ registerRoot(Root);
 **オプション:** `remotion.config.ts` でエントリポイントを明示的に設定：
 
 ```ts
-import { Config } from '@remotion/cli/config';
+import { Config } from "@remotion/cli/config";
 
-Config.setEntryPoint('src/index.ts');
+Config.setEntryPoint("src/index.ts");
 ```
 
 ---
@@ -245,8 +220,8 @@ Config.overrideWebpackConfig((config) => {
 
 ```ts
 // src/index.ts またはコンポーネントファイル
-import './styles/app.css';
-import 'your-library/dist/styles.css';
+import "./styles/app.css";
+import "your-library/dist/styles.css";
 ```
 
 ### WebGL / Three.jsレンダリングの問題
@@ -254,9 +229,9 @@ import 'your-library/dist/styles.css';
 **解決策:** `remotion.config.ts` でOpenGLレンダラーを設定：
 
 ```ts
-import { Config } from '@remotion/cli/config';
+import { Config } from "@remotion/cli/config";
 
-Config.setChromiumOpenGlRenderer('angle');
+Config.setChromiumOpenGlRenderer("angle");
 // または環境に応じて 'egl' / 'swiftshader'
 ```
 
@@ -313,7 +288,7 @@ sudo sysctl -p
 1. **公式Remotionドキュメントを確認:** https://www.remotion.dev/docs
 2. **GitHubのissueを検索:** https://github.com/remotion-dev/remotion/issues
 3. **Remotion Discordに参加:** https://remotion.dev/discord
-4. **このリポジトリのissueを確認:** https://github.com/Takamasa045/remotion-studio/issues
+4. **このリポジトリのissueを確認:** https://github.com/Takamasa045/remotion-studio-monorepo/issues
 
 ---
 
@@ -333,7 +308,7 @@ REMOTION_LOGGING=verbose pnpm dev
 
 ```bash
 # すべての @remotion/* パッケージのバージョンが一致していることを確認
-npx remotion versions
+pnpm remotion versions
 ```
 
 ### クリーンビルド
