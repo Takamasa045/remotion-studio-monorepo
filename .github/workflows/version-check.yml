@@ -37,35 +37,66 @@ jobs:
 
       - name: Check Remotion versions consistency
         run: |
-          echo "Checking @remotion/* package versions..."
+          echo "Checking Remotion catalog versions..."
 
-          # Get all @remotion packages from root package.json
-          remotion_packages=$(cat package.json | grep -E '"@remotion/[^"]+":' | sed 's/.*"@remotion\/\([^"]*\)": "\([^"]*\)".*/\1:\2/')
+          node - <<'NODE'
+          const fs = require('fs');
 
-          # Extract unique versions
-          versions=$(echo "$remotion_packages" | cut -d: -f2 | sort -u)
-          version_count=$(echo "$versions" | wc -l)
+          const workspaceYaml = fs.readFileSync('pnpm-workspace.yaml', 'utf8');
 
-          echo "Found $version_count unique version(s):"
-          echo "$versions"
+          const remotionCoreMatch = workspaceYaml.match(/^\s*remotion:\s*([^\s#]+)\s*(?:#.*)?$/m);
+          if (!remotionCoreMatch) {
+            console.error('Could not find `remotion:` in pnpm-workspace.yaml.');
+            process.exit(1);
+          }
+          const remotionCore = remotionCoreMatch[1];
 
-          if [ "$version_count" -gt 1 ]; then
-            echo ""
-            echo "⚠️  WARNING: Multiple Remotion versions detected!"
-            echo ""
-            echo "All @remotion/* packages should use the same version."
-            echo ""
-            echo "Packages by version:"
-            for version in $versions; do
-              echo ""
-              echo "Version $version:"
-              echo "$remotion_packages" | grep ":$version$" | cut -d: -f1 | sed 's/^/  - @remotion\//'
-            done
-            exit 1
-          else
-            echo ""
-            echo "✓ All @remotion/* packages use the same version: $versions"
-          fi
+          const remotionPackages = [];
+          for (const line of workspaceYaml.split(/\r?\n/)) {
+            const match = line.match(/^\s*['"]?(@remotion\/[^'"]+)['"]?\s*:\s*([^\s#]+)\s*(?:#.*)?$/);
+            if (match) remotionPackages.push({name: match[1], version: match[2]});
+          }
+
+          if (remotionPackages.length === 0) {
+            console.error('Could not find any `@remotion/*` entries in pnpm-workspace.yaml.');
+            process.exit(1);
+          }
+
+          const versions = new Set(remotionPackages.map((pkg) => pkg.version));
+          versions.add(remotionCore);
+          const uniqueVersions = Array.from(versions).sort();
+
+          console.log(`Found ${uniqueVersions.length} unique version(s):`);
+          console.log(uniqueVersions.join('\n'));
+
+          if (uniqueVersions.length > 1) {
+            console.log('');
+            console.log('⚠️  WARNING: Multiple Remotion versions detected in pnpm catalog!');
+            console.log('');
+            console.log(`remotion: ${remotionCore}`);
+            console.log('');
+            console.log('Packages by version:');
+
+            const byVersion = new Map();
+            for (const pkg of remotionPackages) {
+              if (!byVersion.has(pkg.version)) byVersion.set(pkg.version, []);
+              byVersion.get(pkg.version).push(pkg.name);
+            }
+
+            for (const [version, names] of Array.from(byVersion.entries()).sort((a, b) => a[0].localeCompare(b[0]))) {
+              console.log('');
+              console.log(`Version ${version}:`);
+              for (const name of names.sort()) {
+                console.log(`  - ${name}`);
+              }
+            }
+
+            process.exit(1);
+          }
+
+          console.log('');
+          console.log(`✓ Remotion catalog is aligned: ${uniqueVersions[0]}`);
+          NODE
 
       - name: Check for Remotion updates
         id: check-updates
@@ -73,7 +104,7 @@ jobs:
         run: |
           echo "Checking for Remotion updates..."
 
-          current_version=$(cat package.json | grep '"@remotion/cli":' | sed 's/.*": "\([^"]*\)".*/\1/')
+          current_version=$(node -e "const fs=require('fs');const y=fs.readFileSync('pnpm-workspace.yaml','utf8');const m=y.match(/^\\s*remotion:\\s*([^\\s#]+)\\s*(?:#.*)?$/m);if(!m) process.exit(1);process.stdout.write(m[1]);")
           echo "Current version: $current_version"
 
           latest_version=$(npm view remotion version)
@@ -128,8 +159,8 @@ jobs:
                     `- **Latest version:** ${latest}\n\n` +
                     `### Update instructions\n\n` +
                     `\`\`\`bash\n` +
-                    `# Update all @remotion/* packages\n` +
-                    `pnpm up -r "@remotion/*@${latest}"\n\n` +
+                    `# Update Remotion (pnpm catalog)\n` +
+                    `pnpm upgrade:remotion ${latest}\n\n` +
                     `# Verify versions\n` +
                     `pnpm remotion versions\n` +
                     `\`\`\`\n\n` +
