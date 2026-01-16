@@ -36,4 +36,3 @@ type = "stdio"
 command = "npx"
 args = ["@remotion/mcp@latest"]
 ```
-

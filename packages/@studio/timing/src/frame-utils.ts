@@ -45,7 +45,11 @@ export function frameToMs(frame: number, fps: number): number {
  * @param max - Maximum frame
  * @returns Clamped frame number
  */
-export function clampFrame(frame: number, min: number = 0, max: number): number {
+export function clampFrame(
+  frame: number,
+  min: number = 0,
+  max: number,
+): number {
   return Math.max(min, Math.min(max, frame));
 }
 

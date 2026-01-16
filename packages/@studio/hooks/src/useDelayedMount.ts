@@ -1,4 +1,4 @@
-import { useCurrentFrame } from 'remotion';
+import { useCurrentFrame } from "remotion";
 
 /**
  * Delay mounting of a component until a specific frame
@@ -29,7 +29,7 @@ export function useFrameRange(startFrame: number, endFrame: number): boolean {
  */
 export function useDelayedMountByTime(
   startSeconds: number,
-  fps: number
+  fps: number,
 ): boolean {
   const frame = useCurrentFrame();
   return frame >= startSeconds * fps;

@@ -17,4 +17,3 @@ pnpm add three @react-three/fiber @react-three/drei @remotion/three --filter @st
 
 `PodcastSlides3D` references an optional alias `@app/remotion3`. It is disabled by default;
 enable only if the alias points to a valid app `src/`.
-

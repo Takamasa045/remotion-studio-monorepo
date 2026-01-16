@@ -33,10 +33,10 @@ pnpm render AnimationsShowcase out/showcase.mp4
 ### @studio/easings
 
 ```typescript
-import { easeOutCubic, easeInOutBack, bounce } from '@studio/easings';
+import { easeOutCubic, easeInOutBack, bounce } from "@studio/easings";
 
 const y = interpolate(frame, [0, 30], [0, 100], {
-  easing: bounce
+  easing: bounce,
 });
 ```
 
@@ -53,7 +53,7 @@ import { FadeIn, SlideIn, ScaleIn } from '@studio/transitions';
 ### @studio/hooks
 
 ```typescript
-import { useFrameProgress, useVideoMetadata } from '@studio/hooks';
+import { useFrameProgress, useVideoMetadata } from "@studio/hooks";
 
 const progress = useFrameProgress(0, 60);
 const { fps, width, height } = useVideoMetadata();
@@ -62,7 +62,7 @@ const { fps, width, height } = useVideoMetadata();
 ### @studio/timing
 
 ```typescript
-import { secondsToFrames, createSegment } from '@studio/timing';
+import { secondsToFrames, createSegment } from "@studio/timing";
 
 const frames = secondsToFrames(2.5, 30); // 75 frames
 const segment = createSegment(0, 60);

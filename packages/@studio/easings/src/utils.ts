@@ -1,4 +1,4 @@
-import type { EasingFunction } from './types';
+import type { EasingFunction } from "./types";
 
 /**
  * Reverse an easing function (mirror on Y axis)
@@ -29,7 +29,10 @@ export function mirrorEasing(easing: EasingFunction): EasingFunction {
  * @param jumpStart - Whether to jump at the start of each step
  * @returns Stepped easing function
  */
-export function steps(steps: number, jumpStart: boolean = false): EasingFunction {
+export function steps(
+  steps: number,
+  jumpStart: boolean = false,
+): EasingFunction {
   return (t: number) => {
     const stepSize = 1 / steps;
     const step = Math.floor(t / stepSize);
@@ -48,7 +51,7 @@ export function steps(steps: number, jumpStart: boolean = false): EasingFunction
 export function combineEasings(
   easing1: EasingFunction,
   easing2: EasingFunction,
-  split: number = 0.5
+  split: number = 0.5,
 ): EasingFunction {
   return (t: number) => {
     if (t < split) {
@@ -68,7 +71,7 @@ export function combineEasings(
 export function scaleEasing(
   easing: EasingFunction,
   min: number,
-  max: number
+  max: number,
 ): EasingFunction {
   return (t: number) => {
     const easedValue = easing(t);
@@ -88,7 +91,7 @@ export function interpolate(
   from: number,
   to: number,
   progress: number,
-  easing: EasingFunction
+  easing: EasingFunction,
 ): number {
   const easedProgress = easing(progress);
   return from + (to - from) * easedProgress;

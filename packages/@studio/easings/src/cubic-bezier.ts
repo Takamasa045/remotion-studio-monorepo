@@ -1,4 +1,4 @@
-import type { EasingFunction, BezierPoints } from './types';
+import type { EasingFunction, BezierPoints } from "./types";
 
 /**
  * Create a cubic bezier easing function
@@ -14,11 +14,11 @@ export function cubicBezier(
   x1: number,
   y1: number,
   x2: number,
-  y2: number
+  y2: number,
 ): EasingFunction {
   // Validate input
   if (x1 < 0 || x1 > 1 || x2 < 0 || x2 > 1) {
-    throw new Error('x1 and x2 must be between 0 and 1');
+    throw new Error("x1 and x2 must be between 0 and 1");
   }
 
   return (t: number): number => {
@@ -26,8 +26,6 @@ export function cubicBezier(
     if (t >= 1) return 1;
 
     // Binary search for the correct t value
-    let _start = 0;
-    let _end = 1;
     let mid = t;
 
     // Newton-Raphson iteration for better performance
@@ -49,21 +47,33 @@ export function cubicBezier(
  * Sample the X value of the cubic bezier curve at time t
  */
 function sampleCurveX(t: number, x1: number, x2: number): number {
-  return ((1 - t) ** 3 * 0 + 3 * (1 - t) ** 2 * t * x1 + 3 * (1 - t) * t ** 2 * x2 + t ** 3 * 1);
+  return (
+    (1 - t) ** 3 * 0 +
+    3 * (1 - t) ** 2 * t * x1 +
+    3 * (1 - t) * t ** 2 * x2 +
+    t ** 3 * 1
+  );
 }
 
 /**
  * Sample the Y value of the cubic bezier curve at time t
  */
 function sampleCurveY(t: number, y1: number, y2: number): number {
-  return ((1 - t) ** 3 * 0 + 3 * (1 - t) ** 2 * t * y1 + 3 * (1 - t) * t ** 2 * y2 + t ** 3 * 1);
+  return (
+    (1 - t) ** 3 * 0 +
+    3 * (1 - t) ** 2 * t * y1 +
+    3 * (1 - t) * t ** 2 * y2 +
+    t ** 3 * 1
+  );
 }
 
 /**
  * Sample the derivative of the X curve at time t
  */
 function sampleCurveDerivativeX(t: number, x1: number, x2: number): number {
-  return (3 * (1 - t) ** 2 * x1 + 6 * (1 - t) * t * (x2 - x1) + 3 * t ** 2 * (1 - x2));
+  return (
+    3 * (1 - t) ** 2 * x1 + 6 * (1 - t) * t * (x2 - x1) + 3 * t ** 2 * (1 - x2)
+  );
 }
 
 /**

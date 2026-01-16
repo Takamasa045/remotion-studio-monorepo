@@ -3,25 +3,24 @@
  * Build all applications and packages in the monorepo
  */
 
-import { execSync } from 'child_process';
-import { readdirSync, statSync, existsSync } from 'fs';
-import { join } from 'path';
+import { execSync } from "child_process";
+import { readdirSync, statSync, existsSync, readFileSync } from "fs";
+import { join } from "path";
 
 interface BuildOptions {
   packages?: boolean;
   apps?: boolean;
-  parallel?: boolean;
 }
 
 const COLORS = {
-  reset: '\x1b[0m',
-  green: '\x1b[32m',
-  blue: '\x1b[34m',
-  yellow: '\x1b[33m',
-  red: '\x1b[31m',
+  reset: "\x1b[0m",
+  green: "\x1b[32m",
+  blue: "\x1b[34m",
+  yellow: "\x1b[33m",
+  red: "\x1b[31m",
 };
 
-function log(message: string, color: keyof typeof COLORS = 'reset') {
+function log(message: string, color: keyof typeof COLORS = "reset") {
   console.log(`${COLORS[color]}${message}${COLORS.reset}`);
 }
 
@@ -30,57 +29,54 @@ function getDirectories(path: string): string[] {
 
   return readdirSync(path).filter((name) => {
     const fullPath = join(path, name);
-    return statSync(fullPath).isDirectory() && !name.startsWith('.');
+    return statSync(fullPath).isDirectory() && !name.startsWith(".");
   });
 }
 
 function hasPackageJson(path: string): boolean {
-  return existsSync(join(path, 'package.json'));
+  return existsSync(join(path, "package.json"));
 }
 
-function hasBuildScript(path: string): boolean {
-  if (!hasPackageJson(path)) return false;
+function hasBuildScript(pkgPath: string): boolean {
+  if (!hasPackageJson(pkgPath)) return false;
 
   try {
-    const packageJson = require(join(process.cwd(), path, 'package.json'));
-    return !!packageJson.scripts?.build;
+    const raw = readFileSync(join(pkgPath, "package.json"), "utf8");
+    const packageJson = JSON.parse(raw) as { scripts?: { build?: string } };
+    return Boolean(packageJson.scripts?.build);
   } catch {
     return false;
   }
 }
 
 function buildPackage(name: string, path: string): boolean {
-  log(`\n📦 Building ${name}...`, 'blue');
+  log(`\n📦 Building ${name}...`, "blue");
 
   try {
-    execSync('pnpm run build', {
+    execSync("pnpm run build", {
       cwd: path,
-      stdio: 'inherit',
+      stdio: "inherit",
     });
-    log(`✓ ${name} built successfully`, 'green');
+    log(`✓ ${name} built successfully`, "green");
     return true;
-  } catch (error) {
-    log(`✗ ${name} build failed`, 'red');
+  } catch {
+    log(`✗ ${name} build failed`, "red");
     return false;
   }
 }
 
 function buildAll(options: BuildOptions = {}) {
-  const {
-    packages: buildPackages = true,
-    apps: buildApps = true,
-    parallel = false,
-  } = options;
+  const { packages: buildPackages = true, apps: buildApps = true } = options;
 
-  log('🚀 Starting monorepo build...', 'blue');
+  log("🚀 Starting monorepo build...", "blue");
 
   const failures: string[] = [];
 
   // Build packages first (dependencies)
   if (buildPackages) {
-    log('\n📦 Building packages...', 'yellow');
+    log("\n📦 Building packages...", "yellow");
 
-    const packagesDir = join(process.cwd(), 'packages');
+    const packagesDir = join(process.cwd(), "packages");
     const packageScopes = getDirectories(packagesDir);
 
     for (const scope of packageScopes) {
@@ -99,11 +95,11 @@ function buildAll(options: BuildOptions = {}) {
 
   // Build apps
   if (buildApps) {
-    log('\n🎬 Building apps...', 'yellow');
+    log("\n🎬 Building apps...", "yellow");
 
-    const appsDir = join(process.cwd(), 'apps');
+    const appsDir = join(process.cwd(), "apps");
     const apps = getDirectories(appsDir).filter(
-      (name) => !name.startsWith('_') && !name.includes('template')
+      (name) => !name.startsWith("_") && !name.includes("template"),
     );
 
     for (const app of apps) {
@@ -116,12 +112,12 @@ function buildAll(options: BuildOptions = {}) {
   }
 
   // Summary
-  log('\n' + '='.repeat(50), 'blue');
+  log("\n" + "=".repeat(50), "blue");
   if (failures.length === 0) {
-    log('✓ All builds completed successfully!', 'green');
+    log("✓ All builds completed successfully!", "green");
   } else {
-    log(`✗ ${failures.length} build(s) failed:`, 'red');
-    failures.forEach((name) => log(`  - ${name}`, 'red'));
+    log(`✗ ${failures.length} build(s) failed:`, "red");
+    failures.forEach((name) => log(`  - ${name}`, "red"));
     process.exit(1);
   }
 }
@@ -129,16 +125,15 @@ function buildAll(options: BuildOptions = {}) {
 // Parse CLI arguments
 const args = process.argv.slice(2);
 const options: BuildOptions = {
-  packages: !args.includes('--no-packages'),
-  apps: !args.includes('--no-apps'),
-  parallel: args.includes('--parallel'),
+  packages: !args.includes("--no-packages"),
+  apps: !args.includes("--no-apps"),
 };
 
-if (args.includes('--packages-only')) {
+if (args.includes("--packages-only")) {
   options.apps = false;
 }
 
-if (args.includes('--apps-only')) {
+if (args.includes("--apps-only")) {
   options.packages = false;
 }
 

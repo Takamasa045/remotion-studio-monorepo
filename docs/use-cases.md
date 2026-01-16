@@ -236,9 +236,9 @@ const products = await fetchProducts();
 
 for (const product of products) {
   await renderVideo({
-    compositionId: 'ProductVideo',
+    compositionId: "ProductVideo",
     inputProps: { product },
-    outputLocation: `videos/${product.id}.mp4`
+    outputLocation: `videos/${product.id}.mp4`,
   });
 }
 ```

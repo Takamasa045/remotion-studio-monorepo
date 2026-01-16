@@ -30,12 +30,12 @@ export interface SpringConfig {
  * Transition types
  */
 export type TransitionType =
-  | 'fade'
-  | 'slide'
-  | 'zoom'
-  | 'wipe'
-  | 'dissolve'
-  | 'none';
+  | "fade"
+  | "slide"
+  | "zoom"
+  | "wipe"
+  | "dissolve"
+  | "none";
 
 /**
  * Transition configuration
@@ -50,12 +50,12 @@ export interface TransitionConfig {
  * Animation direction
  */
 export type AnimationDirection =
-  | 'normal'
-  | 'reverse'
-  | 'alternate'
-  | 'alternate-reverse';
+  | "normal"
+  | "reverse"
+  | "alternate"
+  | "alternate-reverse";
 
 /**
  * Animation state
  */
-export type AnimationState = 'idle' | 'running' | 'paused' | 'finished';
+export type AnimationState = "idle" | "running" | "paused" | "finished";

@@ -15,22 +15,22 @@ import type {
   CompositionMetadata,
   AnimationConfig,
   TimingSegment,
-  Theme
-} from '@studio/core-types';
+  Theme,
+} from "@studio/core-types";
 
 // Use in your components
 const metadata: CompositionMetadata = {
-  id: 'MyComp',
+  id: "MyComp",
   width: 1920,
   height: 1080,
   fps: 30,
-  durationInFrames: 300
+  durationInFrames: 300,
 };
 
 const animation: AnimationConfig = {
   duration: 60,
   delay: 10,
-  easing: 'easeInOut'
+  easing: "easeInOut",
 };
 ```
 

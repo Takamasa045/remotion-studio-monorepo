@@ -1,4 +1,4 @@
-import { useCurrentFrame } from 'remotion';
+import { useCurrentFrame } from "remotion";
 
 export interface SegmentConfig {
   start: number;
@@ -41,6 +41,6 @@ export function useActiveSegment(segments: SegmentConfig[]): number {
 
   return segments.findIndex(
     (segment) =>
-      frame >= segment.start && frame < segment.start + segment.duration
+      frame >= segment.start && frame < segment.start + segment.duration,
   );
 }

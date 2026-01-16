@@ -25,4 +25,3 @@ Not used by default. Create under `packages/` when needed and include in the wor
 - 3D (R3F): `three`, `@react-three/fiber`, `@react-three/drei`, `@remotion/three`
 
 Install these in the apps that use them.
-

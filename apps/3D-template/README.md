@@ -5,18 +5,15 @@ This is a minimal Remotion project template.
 ## How to use
 
 1. Generate a new project using the workspace CLI:
-
    - From monorepo root: `pnpm tsx scripts/create-project.ts`
    - Follow the prompts (project name, resolution, FPS, duration)
 
 2. Start developing:
-
    - `pnpm -F @studio/<your-project> run dev` to open Remotion Studio
    - `pnpm -F @studio/<your-project> run preview` for preview server
    - `pnpm -F @studio/<your-project> run build` to render the default composition
 
 3. Assets (images / audio / video)
-
    - Each app exposes `public/` as static root. Create subfolders for assets as needed:
 
    ```bash
@@ -33,7 +30,7 @@ This is a minimal Remotion project template.
      - Example: `/assets/audio/song.mp3` ↔ `/assets/audio/song.lrc`
      - Fetch example:
        ```ts
-       const text = await fetch('/assets/audio/song.lrc').then(r => r.text());
+       const text = await fetch("/assets/audio/song.lrc").then((r) => r.text());
        ```
 
    - To reuse shared design assets, link/copy from the monorepo package `@design/assets/assets`:
@@ -58,16 +55,16 @@ The `PodcastSlides3D` composite references an optional external app alias `@app/
 
 To enable it:
 
-1) Provide the alias in your workspace (e.g. map `@app/remotion3` to another app’s `src/`). In `remotion.config.ts`, the alias is added automatically if `../remotion3/src` exists.
+1. Provide the alias in your workspace (e.g. map `@app/remotion3` to another app’s `src/`). In `remotion.config.ts`, the alias is added automatically if `../remotion3/src` exists.
 
-2) Re‑add the composition to `src/Root.tsx`:
+2. Re‑add the composition to `src/Root.tsx`:
 
 ```tsx
 // import {PodcastSlides3D} from './composites/PodcastSlides3D';
 // <Composition id="PodcastSlides3D" component={PodcastSlides3D} ... />
 ```
 
-3) If you need GPU/WebGL flags for stability, see `remotion.config.ts` and pass Chromium flags via CLI as needed.
+3. If you need GPU/WebGL flags for stability, see `remotion.config.ts` and pass Chromium flags via CLI as needed.
 
 ## Customization
 

@@ -16,8 +16,8 @@ import {
   getProgress,
   createSegment,
   stagger,
-  FPS
-} from '@studio/timing';
+  FPS,
+} from "@studio/timing";
 
 // Convert seconds to frames
 const frames = secondsToFrames(2.5, FPS.WEB); // 75 frames at 30fps
