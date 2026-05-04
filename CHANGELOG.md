@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1](https://github.com/Takamasa045/remotion-studio-monorepo/compare/v0.2.0...v0.2.1) (2026-05-04)
+
+
+### Documentation
+
+* add multilingual readmes ([d49e8d6](https://github.com/Takamasa045/remotion-studio-monorepo/commit/d49e8d6a09d3361dcf99acaed9114c4fb5b84a8e))
+* add Spanish and French readmes ([c1648da](https://github.com/Takamasa045/remotion-studio-monorepo/commit/c1648da6e0c3f7a0d67664ccd28d7e59358fa10d))
+
 ## [0.2.0](https://github.com/Takamasa045/remotion-studio-monorepo/compare/v0.1.2...v0.2.0) (2026-05-04)
 
 ### ⚠ BREAKING CHANGES
